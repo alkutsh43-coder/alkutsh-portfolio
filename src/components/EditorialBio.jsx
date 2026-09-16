@@ -14,12 +14,12 @@ export const EditorialBio = ({ lang }) => {
 
       <div className="max-w-4xl mx-auto px-5 sm:px-12 text-center space-y-5 sm:space-y-8 relative z-10">
         
-        {/* Header: ABOUT / عن المصمم in prominent clear typeface */}
+        {/* Header: STATEMENT & VISION / الرؤية والخبرة الإنتاجية */}
         <h2 
           className={`text-2xl xs:text-3xl sm:text-5xl md:text-6xl font-extrabold text-white drop-shadow-md ${isAr ? 'tracking-normal' : 'tracking-[0.15em] uppercase'}`}
           style={{ fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : '"A Nefel Sereke", sans-serif' }}
         >
-          {isAr ? 'عـن الـمـصـمـم' : 'ABOUT'}
+          {isAr ? 'الرؤية والخبرة الإنتاجية' : 'STATEMENT & PRODUCTION VISION'}
         </h2>
 
         {/* Narrative Paragraph with comfortable, readable typography */}

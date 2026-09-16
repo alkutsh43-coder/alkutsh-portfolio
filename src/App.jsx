@@ -3,6 +3,8 @@ import { AlkutshHero } from './components/AlkutshHero';
 import { EditorialAbout } from './components/EditorialAbout';
 import { EditorialProjects } from './components/EditorialProjects';
 import { EditorialBio } from './components/EditorialBio';
+import { EditorialServices } from './components/EditorialServices';
+import { EditorialProcess } from './components/EditorialProcess';
 import { EditorialFooter } from './components/EditorialFooter';
 import { EditorialCaseStudy } from './components/EditorialCaseStudy';
 
@@ -37,7 +39,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#071610] text-white font-sans selection:bg-botanical-lime selection:text-[#071610]">
+    <div className="min-h-screen w-full overflow-x-hidden bg-[#071610] text-white font-sans selection:bg-botanical-lime selection:text-[#071610]">
       
       {/* 1. Full-Screen Cinematic Homepage Hero matching user's exact uploaded design */}
       <AlkutshHero
@@ -47,7 +49,7 @@ export function App() {
       />
 
       {/* Main Content Sections */}
-      <main>
+      <main className="w-full overflow-x-hidden">
         {/* 2. About Ahmed Maher (Alkutsh), Executive Portrait & Practice */}
         <EditorialAbout
           lang={lang}
@@ -59,7 +61,17 @@ export function App() {
           onSelectProject={setSelectedProject}
         />
 
-        {/* 4. About Ahmed Maher - Experience & Print Production Perspective */}
+        {/* 4. Specialized Design Disciplines & Capabilities */}
+        <EditorialServices
+          lang={lang}
+        />
+
+        {/* 5. 4-Stage Creative & Prepress Production Workflow */}
+        <EditorialProcess
+          lang={lang}
+        />
+
+        {/* 6. Statement & Production Experience Perspective */}
         <EditorialBio 
           lang={lang}
         />

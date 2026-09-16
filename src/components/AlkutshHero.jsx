@@ -75,6 +75,13 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
             </button>
 
             <button
+              onClick={() => handleNavClick('services')}
+              className="text-white/90 hover:text-[#82E16B] transition-colors py-1 tracking-wide drop-shadow cursor-pointer"
+            >
+              {isAr ? 'الخدمات' : 'SERVICES'}
+            </button>
+
+            <button
               onClick={() => handleNavClick('contact')}
               className="text-white/90 hover:text-[#82E16B] transition-colors py-1 tracking-wide drop-shadow cursor-pointer"
             >
@@ -159,6 +166,12 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
               className="flex items-center justify-between text-base font-bold text-white/90 hover:text-[#82E16B] py-2 border-b border-[#143224] text-start transition-colors cursor-pointer"
             >
               <span>{isAr ? 'الأعمال المختارة' : 'PORTFOLIO'}</span>
+            </button>
+            <button
+              onClick={() => handleNavClick('services')}
+              className="flex items-center justify-between text-base font-bold text-white/90 hover:text-[#82E16B] py-2 border-b border-[#143224] text-start transition-colors cursor-pointer"
+            >
+              <span>{isAr ? 'خدمات التصميم' : 'SERVICES'}</span>
             </button>
             <button
               onClick={() => handleNavClick('contact')}
