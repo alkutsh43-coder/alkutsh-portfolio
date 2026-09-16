@@ -15,6 +15,13 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [animTrigger, setAnimTrigger] = useState(0);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 640);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Active Client & its designs
   const activeClient = clientsData.find(c => c.id === selectedClientId) || clientsData[0];
@@ -215,6 +222,79 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
   const [centeredInstanceKey, setCenteredInstanceKey] = useState(null);
   const glideTimerRef = useRef(null);
 
+  // Client Logos Ribbon Pointer, Touch & Mouse Drag Physics
+  const [isRibbonDragging, setIsRibbonDragging] = useState(false);
+  const [ribbonDragOffset, setRibbonDragOffset] = useState(0);
+  const ribbonDragStartRef = useRef({ x: 0, y: 0, time: 0, isHorizontal: null });
+  const ribbonHasDraggedFarRef = useRef(false);
+
+  const handleRibbonPointerDown = (e) => {
+    if (e.button !== undefined && e.button !== 0) return;
+    try { e.currentTarget.setPointerCapture(e.pointerId); } catch (_) {}
+    ribbonDragStartRef.current = {
+      x: e.clientX,
+      y: e.clientY,
+      time: Date.now(),
+      isHorizontal: null,
+    };
+    ribbonHasDraggedFarRef.current = false;
+    setIsRibbonDragging(true);
+    setRibbonDragOffset(0);
+    setIsCentering(true);
+    if (glideTimerRef.current) clearTimeout(glideTimerRef.current);
+  };
+
+  const handleRibbonPointerMove = (e) => {
+    if (!ribbonDragStartRef.current || !isRibbonDragging) return;
+    const dx = e.clientX - ribbonDragStartRef.current.x;
+    const dy = e.clientY - ribbonDragStartRef.current.y;
+
+    if (ribbonDragStartRef.current.isHorizontal === null) {
+      if (Math.abs(dx) > 6 || Math.abs(dy) > 6) {
+        ribbonDragStartRef.current.isHorizontal = Math.abs(dx) >= Math.abs(dy);
+      }
+    }
+
+    if (ribbonDragStartRef.current.isHorizontal) {
+      if (Math.abs(dx) > 8) {
+        ribbonHasDraggedFarRef.current = true;
+      }
+      setRibbonDragOffset(dx);
+    }
+  };
+
+  const handleRibbonPointerUp = (e) => {
+    try { e.currentTarget.releasePointerCapture(e.pointerId); } catch (_) {}
+    setIsRibbonDragging(false);
+    const offset = ribbonDragOffset;
+    const dt = Date.now() - (ribbonDragStartRef.current?.time || Date.now());
+    setRibbonDragOffset(0);
+
+    if (ribbonHasDraggedFarRef.current) {
+      // Apply smooth inertia velocity fling
+      const velocity = dt > 0 ? offset / dt : 0;
+      let inertia = 0;
+      if (Math.abs(velocity) > 0.3) {
+        inertia = Math.max(Math.min(velocity * 160, 450), -450);
+      }
+      const totalShift = offset + inertia;
+      setCenterShift((prev) => prev + totalShift);
+      setCenteredInstanceKey(null);
+      setTimeout(() => {
+        ribbonHasDraggedFarRef.current = false;
+      }, 60);
+    }
+  };
+
+  const handleRibbonWheel = (e) => {
+    // Horizontal wheel / precision trackpad support
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+    if (Math.abs(delta) > 2) {
+      setIsCentering(true);
+      setCenterShift((prev) => prev - delta);
+    }
+  };
+
   const handleResumeMarquee = () => {
     if (glideTimerRef.current) clearTimeout(glideTimerRef.current);
     setCenteredInstanceKey(null);
@@ -222,6 +302,8 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
   };
 
   const handleClientLogoClick = (e, clientId, instanceKey) => {
+    // Suppress click if the user was dragging the ribbon
+    if (ribbonHasDraggedFarRef.current) return;
     if (!e || !e.currentTarget || !ribbonContainerRef.current) return;
 
     // Toggle: clicking the currently centered logo resumes marquee
@@ -285,6 +367,18 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
       ? 'none' 
       : 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
 
+    // On mobile devices, hide cards beyond immediate neighbors so they don't pile up or overlap
+    if (isMobile && Math.abs(diff) > 1) {
+      return {
+        transform: `translate(calc(-50% + ${diff * 140}% + ${dragPx}px), -50%) scale(0.5)`,
+        opacity: 0,
+        zIndex: 0,
+        pointerEvents: 'none',
+        visibility: 'hidden',
+        transition,
+      };
+    }
+
     if (Math.abs(diff) > 2) {
       return {
         transform: `translate(calc(-50% + ${diff * 135}% + ${dragPx}px), -50%) scale(0.6)`,
@@ -298,10 +392,10 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
 
     if (diff === 0) {
       return {
-        transform: `translate(calc(-50% + ${dragPx}px), -50%) scale(1.15)`,
+        transform: `translate(calc(-50% + ${dragPx}px), -50%) scale(${isMobile ? 1.06 : 1.15})`,
         opacity: 1,
         zIndex: 25,
-        filter: 'drop-shadow(0 25px 35px rgba(0,0,0,0.85))',
+        filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.85))',
         cursor: isCarouselDragging ? 'grabbing' : 'default',
         transition,
       };
@@ -309,10 +403,10 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
 
     if (Math.abs(diff) === 1) {
       return {
-        transform: `translate(calc(-50% + ${diff * 105}% + ${dragPx}px), -50%) scale(0.92)`,
-        opacity: 0.75,
+        transform: `translate(calc(-50% + ${diff * (isMobile ? 112 : 105)}% + ${dragPx}px), -50%) scale(${isMobile ? 0.82 : 0.92})`,
+        opacity: isMobile ? 0.45 : 0.75,
         zIndex: 15,
-        filter: 'brightness(0.8) drop-shadow(0 15px 25px rgba(0,0,0,0.6))',
+        filter: 'brightness(0.75) drop-shadow(0 15px 25px rgba(0,0,0,0.6))',
         cursor: isCarouselDragging ? 'grabbing' : 'pointer',
         transition,
       };
@@ -374,13 +468,13 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
       </div>
 
       {/* Two Navigation Buttons Side by Side (بمحاذاة بعضهما في العرض) */}
-      <div className="flex flex-row items-center gap-3 sm:gap-4 pt-1">
+      <div className="flex flex-row items-center gap-2 sm:gap-4 pt-1">
         {/* Prev Button */}
         <button
           onClick={handlePrev}
-          className="group flex-1 sm:flex-initial inline-flex items-center justify-center gap-2.5 sm:gap-3 px-4 sm:px-8 py-3.5 rounded-full border border-white/30 hover:border-[#82E16B] bg-[#071610]/90 hover:bg-[#0E261B] transition-all duration-300 shadow-xl cursor-pointer min-w-0 sm:min-w-[180px]"
+          className="group flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-3 px-3 sm:px-8 py-2.5 sm:py-3.5 rounded-full border border-white/30 hover:border-[#82E16B] bg-[#071610]/90 hover:bg-[#0E261B] transition-all duration-300 shadow-xl cursor-pointer min-w-0 sm:min-w-[180px]"
         >
-          <span className="text-[#82E16B] text-base sm:text-xl font-bold group-hover:-translate-x-1.5 transition-transform duration-300">
+          <span className="text-[#82E16B] text-sm sm:text-xl font-bold group-hover:-translate-x-1.5 transition-transform duration-300">
             {isAr ? '➔' : '⬅'}
           </span>
           <span 
@@ -394,7 +488,7 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
         {/* Next Button */}
         <button
           onClick={handleNext}
-          className="group flex-1 sm:flex-initial inline-flex items-center justify-center gap-2.5 sm:gap-3 px-4 sm:px-8 py-3.5 rounded-full border border-white/30 hover:border-[#82E16B] bg-[#071610]/90 hover:bg-[#0E261B] transition-all duration-300 shadow-xl cursor-pointer min-w-0 sm:min-w-[180px]"
+          className="group flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-3 px-3 sm:px-8 py-2.5 sm:py-3.5 rounded-full border border-white/30 hover:border-[#82E16B] bg-[#071610]/90 hover:bg-[#0E261B] transition-all duration-300 shadow-xl cursor-pointer min-w-0 sm:min-w-[180px]"
         >
           <span 
             className="text-white text-xs sm:text-base font-bold tracking-wider whitespace-nowrap"
@@ -402,7 +496,7 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
           >
             {isAr ? 'التصميم التالي' : 'NEXT DESIGN'}
           </span>
-          <span className="text-[#82E16B] text-base sm:text-xl font-bold group-hover:translate-x-1.5 transition-transform duration-300">
+          <span className="text-[#82E16B] text-sm sm:text-xl font-bold group-hover:translate-x-1.5 transition-transform duration-300">
             {isAr ? '⬅' : '➔'}
           </span>
         </button>
@@ -421,28 +515,58 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
       <div className="max-w-[1520px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10 space-y-14 sm:space-y-18">
         
         {/* ======================================================== */}
-        {/* 1. CONTINUOUS INFINITE LOGOS STREAM (الشريط المتحرك الأصلي مع التكبير والتمركز) */}
+        {/* 1. CONTINUOUS INFINITE LOGOS STREAM (الشريط التفاعلي مع السحب الحر 1:1 والتمركز) */}
         {/* ======================================================== */}
         <div className="relative py-4 sm:py-6 select-none">
           
-          {/* Borderless Stream Container */}
+          {/* Interactive Guide Bar */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-2 px-2 pb-3 mb-1">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#82E16B] shadow-[0_0_10px_rgba(130,225,107,0.8)] animate-pulse"></span>
+              <span 
+                className="text-xs uppercase tracking-widest text-[#82E16B] font-bold"
+                style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'inherit' }}
+              >
+                {isAr ? 'شركاء النجاح والعملاء السابقين' : 'Valued Clients & Partners'}
+              </span>
+            </div>
+            <div 
+              className="flex items-center gap-1.5 text-[11px] sm:text-xs text-white/40 font-medium select-none"
+              style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'inherit' }}
+            >
+              <span className="text-[#82E16B]/70">⟵</span>
+              <span>{isAr ? 'اسحب لتحريك اللوجوهات بحرية أو اضغط لاختيار عميل' : 'Drag logos freely or tap to choose client'}</span>
+              <span className="text-[#82E16B]/70">⟶</span>
+            </div>
+          </div>
+
+          {/* Borderless Stream Container with 1:1 Touch & Drag Physics */}
           <div 
             ref={ribbonContainerRef}
-            className="relative overflow-hidden py-4 sm:py-6"
+            onPointerDown={handleRibbonPointerDown}
+            onPointerMove={handleRibbonPointerMove}
+            onPointerUp={handleRibbonPointerUp}
+            onPointerCancel={handleRibbonPointerUp}
+            onWheel={handleRibbonWheel}
+            className={`relative overflow-hidden py-4 sm:py-6 select-none ${isRibbonDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+            style={{ touchAction: 'pan-y' }}
             dir="ltr"
           >
             {/* Cinematic Edge Fade Masks */}
             <div className="pointer-events-none absolute left-0 inset-y-0 w-20 sm:w-48 bg-gradient-to-r from-[#071610] via-[#071610]/80 to-transparent z-20"></div>
             <div className="pointer-events-none absolute right-0 inset-y-0 w-20 sm:w-48 bg-gradient-to-l from-[#071610] via-[#071610]/80 to-transparent z-20"></div>
 
-            {/* Shift Wrapper for Smooth Centering Glide */}
+            {/* Shift Wrapper for Smooth Centering Glide with Zero-Lag 1:1 Drag Tracking */}
             <div 
-              className="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center"
-              style={{ transform: `translate3d(${centerShift}px, 0, 0)` }}
+              className={`${isRibbonDragging ? '' : 'transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]'} flex items-center`}
+              style={{ 
+                transform: `translate3d(${centerShift + ribbonDragOffset}px, 0, 0)`,
+                willChange: 'transform',
+              }}
             >
               {/* Infinite Gliding Track: Pure Logos to Infinity */}
               <div 
-                className={`client-marquee-track flex items-center ${isCentering ? 'client-marquee-paused' : ''}`}
+                className={`client-marquee-track flex items-center ${(isCentering || isRibbonDragging) ? 'client-marquee-paused' : ''}`}
                 style={{ direction: 'ltr' }}
               >
                 {infiniteClients.map((client, idx) => {
@@ -452,22 +576,25 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
                     <button
                       key={instanceKey}
                       onClick={(e) => handleClientLogoClick(e, client.id, instanceKey)}
-                      className={`group/client relative flex-shrink-0 flex items-center justify-center cursor-pointer select-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                      draggable={false}
+                      onDragStart={(e) => e.preventDefault()}
+                      className={`group/client relative flex-shrink-0 flex items-center justify-center select-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                         isCentered
-                          ? 'mx-8 sm:mx-12 z-30 scale-[1.55] sm:scale-[1.7] opacity-100'
-                          : 'mx-5 sm:mx-7 z-10 scale-[0.88] sm:scale-[0.92] opacity-45 hover:opacity-100 hover:scale-[1.05]'
+                          ? 'mx-4 sm:mx-12 z-30 scale-[1.28] sm:scale-[1.7] opacity-100 cursor-pointer'
+                          : 'mx-3 sm:mx-7 z-10 scale-[0.85] sm:scale-[0.92] opacity-45 hover:opacity-100 hover:scale-[1.05] cursor-pointer'
                       }`}
                       style={{
-                        minWidth: '130px',
+                        minWidth: isMobile ? '95px' : '130px',
                       }}
                       title={client.name[lang] || client.name.ar}
                       aria-label={client.name[lang] || client.name.ar}
                     >
-                      {/* Standardized Uniform Height Pure Logo - Noticeably Larger */}
+                      {/* Standardized Uniform Height Pure Logo */}
                       <img
                         src={client.logoUrl}
                         alt={client.name[lang] || client.name.ar}
-                        className={`h-14 sm:h-17 md:h-20 w-auto max-w-[200px] sm:max-w-[260px] object-contain transition-all duration-500 pointer-events-none ${
+                        draggable={false}
+                        className={`h-11 sm:h-17 md:h-20 w-auto max-w-[150px] sm:max-w-[260px] object-contain transition-all duration-500 pointer-events-none select-none ${
                           isCentered
                             ? 'filter drop-shadow-[0_0_30px_rgba(130,225,107,0.95)] brightness-125'
                             : 'filter drop-shadow-sm grayscale-[15%] hover:grayscale-0'
@@ -477,8 +604,8 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
 
                       {/* Active Glowing Emerald Accent below the selected logo */}
                       {isCentered && (
-                        <span className="absolute -bottom-4 sm:-bottom-5 left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-none animate-fadeIn">
-                          <span className="w-12 sm:w-16 h-1 sm:h-1.5 bg-[#82E16B] rounded-full shadow-[0_0_16px_rgba(130,225,107,1)] animate-pulse"></span>
+                        <span className="absolute -bottom-3 sm:-bottom-5 left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-none animate-fadeIn">
+                          <span className="w-10 sm:w-16 h-1 sm:h-1.5 bg-[#82E16B] rounded-full shadow-[0_0_16px_rgba(130,225,107,1)] animate-pulse"></span>
                         </span>
                       )}
                     </button>
@@ -509,7 +636,7 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
         {/* ======================================================== */}
         <div className="text-center pt-2">
           <h2 
-            className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-[0.12em] uppercase drop-shadow-md"
+            className="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-[0.06em] sm:tracking-[0.12em] uppercase drop-shadow-md"
             style={{ fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : '"A Nefel Sereke", sans-serif' }}
           >
             {isAr ? 'صحيفة اعمالي السابقة' : 'INTERACTIVE SHOWCASE STAGE'}
@@ -520,17 +647,17 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
         {/* 3. TOP STAGE CONTAINER (Visual Left, Narrative & Buttons Right) */}
         {/* ======================================================== */}
         <div 
-          className="relative rounded-[32px] sm:rounded-[44px] bg-[#0A1D15]/85 border border-[#1A4031] shadow-2xl p-6 sm:p-10 lg:p-12 transition-all duration-500 overflow-hidden"
+          className="relative rounded-[24px] sm:rounded-[44px] bg-[#0A1D15]/85 border border-[#1A4031] shadow-2xl p-4 sm:p-10 lg:p-12 transition-all duration-500 overflow-hidden"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-14 items-center">
             
             {/* Visual Column - Artwork with Touch Flip & Mobile Controls Placed Underneath */}
             <div className="lg:col-span-5 flex flex-col items-center">
               <div 
                 key={`stage-visual-${selectedClientId}-${currentIndex}-${animTrigger}`}
-                className={`w-full max-w-[460px] aspect-[4/5] rounded-[28px] sm:rounded-[36px] overflow-hidden relative shadow-2xl border-2 border-[#1A4031] group animate-stage-slide hover:border-[#82E16B]/60 transition-colors select-none ${
+                className={`w-full max-w-[460px] aspect-[4/5] rounded-[22px] sm:rounded-[36px] overflow-hidden relative shadow-2xl border-2 border-[#1A4031] group animate-stage-slide hover:border-[#82E16B]/60 transition-colors select-none ${
                   isStageDragging ? 'cursor-grabbing' : 'cursor-grab'
                 }`}
                 onClick={() => {
@@ -578,19 +705,19 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
                 <button
                   type="button"
                   onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                  className="lg:hidden absolute start-2.5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/75 backdrop-blur-md border border-white/25 text-[#82E16B] hover:text-white flex items-center justify-center transition-all shadow-2xl active:scale-90 cursor-pointer"
+                  className="lg:hidden absolute start-2.5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/75 backdrop-blur-md border border-white/25 text-[#82E16B] hover:text-white flex items-center justify-center transition-all shadow-2xl active:scale-90 cursor-pointer"
                   aria-label="Previous Design"
                 >
-                  <span className="text-base font-black">{isAr ? '➔' : '⬅'}</span>
+                  <span className="text-sm sm:text-base font-black">{isAr ? '➔' : '⬅'}</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                  className="lg:hidden absolute end-2.5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/75 backdrop-blur-md border border-white/25 text-[#82E16B] hover:text-white flex items-center justify-center transition-all shadow-2xl active:scale-90 cursor-pointer"
+                  className="lg:hidden absolute end-2.5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/75 backdrop-blur-md border border-white/25 text-[#82E16B] hover:text-white flex items-center justify-center transition-all shadow-2xl active:scale-90 cursor-pointer"
                   aria-label="Next Design"
                 >
-                  <span className="text-base font-black">{isAr ? '⬅' : '➔'}</span>
+                  <span className="text-sm sm:text-base font-black">{isAr ? '⬅' : '➔'}</span>
                 </button>
               </div>
 
@@ -603,20 +730,20 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
             {/* Narrative & Scroll Buttons Column */}
             <div 
               key={`stage-details-${selectedClientId}-${currentIndex}-${animTrigger}`}
-              className="lg:col-span-7 flex flex-col justify-between space-y-6 sm:space-y-8 animate-details-reveal"
+              className="lg:col-span-7 flex flex-col justify-between space-y-4 sm:space-y-8 animate-details-reveal"
             >
               
               {/* Top Row: Year and Brand Name with Clear Contrast */}
-              <div className="flex items-center justify-between border-b border-[#1A4031] pb-3 sm:pb-4">
+              <div className="flex items-center justify-between border-b border-[#1A4031] pb-2.5 sm:pb-4">
                 <span 
-                  className="text-white text-xl sm:text-2xl font-bold tracking-widest"
+                  className="text-white text-base sm:text-2xl font-bold tracking-widest"
                   style={{ fontFamily: 'Netron, sans-serif' }}
                 >
                   {currentDesign.year || activeClient.year}
                 </span>
-                <div className="flex-1 mx-6 h-[1px] bg-[#1A4031]/60"></div>
+                <div className="flex-1 mx-4 sm:mx-6 h-[1px] bg-[#1A4031]/60"></div>
                 <span 
-                  className="text-[#82E16B] text-2xl sm:text-3xl font-extrabold tracking-wide"
+                  className="text-[#82E16B] text-xl sm:text-3xl font-extrabold tracking-wide"
                   style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : '"29LT Kaff", sans-serif' }}
                 >
                   {activeClient.shortName[lang] || activeClient.shortName.ar}
@@ -624,15 +751,15 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
               </div>
 
               {/* Block 1: طلب العميل / Client Request */}
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 <h3 
-                  className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight"
+                  className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white leading-tight"
                   style={{ fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : '"A Nefel Sereke", sans-serif' }}
                 >
                   {isAr ? 'طلب العميل' : 'Client Request'}
                 </h3>
                 <p 
-                  className="text-lg sm:text-xl lg:text-[1.2rem] text-[#E2F5E8] leading-[1.85] font-normal"
+                  className="text-sm sm:text-base lg:text-[1.15rem] text-[#E2F5E8] leading-[1.75] sm:leading-[1.85] font-normal"
                   style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : '"A Nefel Sereke", sans-serif' }}
                 >
                   {activeClient.clientRequest[lang] || activeClient.clientRequest.ar}
@@ -640,15 +767,15 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
               </div>
 
               {/* Block 2: الفكرة التصميمية / Design Concept */}
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 <h3 
-                  className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight"
+                  className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white leading-tight"
                   style={{ fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : '"A Nefel Sereke", sans-serif' }}
                 >
                   {isAr ? 'الفكرة التصميمية' : 'Design Concept'}
                 </h3>
                 <p 
-                  className="text-lg sm:text-xl lg:text-[1.2rem] text-[#E2F5E8] leading-[1.85] font-normal"
+                  className="text-sm sm:text-base lg:text-[1.15rem] text-[#E2F5E8] leading-[1.75] sm:leading-[1.85] font-normal"
                   style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : '"A Nefel Sereke", sans-serif' }}
                 >
                   {currentDesign.concept?.[lang] || currentDesign.concept?.ar}
@@ -669,7 +796,7 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
         {/* 4. CENTER-LOCKED 5-CARD CAROUSEL (Selected Client Designs) */}
         {/* ======================================================== */}
         <div 
-          className="relative pt-6 pb-6 select-none"
+          className="relative pt-4 sm:pt-6 pb-4 sm:pb-6 select-none"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -677,11 +804,11 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
           {/* Overlay Navigation Chevron: Left (<) */}
           <button
             onClick={handlePrev}
-            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-40 p-3 text-[#82E16B] hover:text-white hover:scale-125 transition-all duration-300 cursor-pointer drop-shadow-[0_0_15px_rgba(130,225,107,0.9)]"
+            className="absolute left-1 sm:left-6 top-1/2 -translate-y-1/2 z-40 p-1.5 sm:p-3 text-[#82E16B] hover:text-white hover:scale-110 transition-all duration-300 cursor-pointer drop-shadow-[0_0_12px_rgba(130,225,107,0.8)]"
             title="Previous"
             aria-label="Previous Design"
           >
-            <svg className="w-10 h-10 sm:w-14 sm:h-14 stroke-[2.8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-7 h-7 sm:w-14 sm:h-14 stroke-[2.8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
@@ -689,22 +816,22 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
           {/* Overlay Navigation Chevron: Right (>) */}
           <button
             onClick={handleNext}
-            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-40 p-3 text-[#82E16B] hover:text-white hover:scale-125 transition-all duration-300 cursor-pointer drop-shadow-[0_0_15px_rgba(130,225,107,0.9)]"
+            className="absolute right-1 sm:right-6 top-1/2 -translate-y-1/2 z-40 p-1.5 sm:p-3 text-[#82E16B] hover:text-white hover:scale-110 transition-all duration-300 cursor-pointer drop-shadow-[0_0_12px_rgba(130,225,107,0.8)]"
             title="Next"
             aria-label="Next Design"
           >
-            <svg className="w-10 h-10 sm:w-14 sm:h-14 stroke-[2.8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-7 h-7 sm:w-14 sm:h-14 stroke-[2.8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
             </svg>
           </button>
 
           {/* Edge Vignettes for Cinematic Depth */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-[#071610] to-transparent z-30"></div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-[#071610] to-transparent z-30"></div>
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-28 bg-gradient-to-r from-[#071610] to-transparent z-30"></div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-28 bg-gradient-to-l from-[#071610] to-transparent z-30"></div>
 
           {/* Mathematical Center-Stage Carousel Track with Real-Time Drag */}
           <div 
-            className={`relative w-full h-[380px] sm:h-[440px] md:h-[480px] overflow-hidden flex items-center justify-center select-none ${
+            className={`relative w-full h-[310px] xs:h-[350px] sm:h-[440px] md:h-[480px] overflow-hidden flex items-center justify-center select-none ${
               isCarouselDragging ? 'cursor-grabbing' : 'cursor-grab'
             }`}
             style={{ direction: 'ltr', touchAction: 'pan-y' }}
@@ -729,9 +856,9 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
                       handleSelect(idx);
                     }
                   }}
-                  className={`absolute top-1/2 left-1/2 w-[200px] sm:w-[240px] md:w-[270px] lg:w-[300px] aspect-[4/5] rounded-[24px] sm:rounded-[28px] overflow-hidden select-none transition-all duration-500 cursor-pointer ${
+                  className={`absolute top-1/2 left-1/2 w-[155px] xs:w-[180px] sm:w-[240px] md:w-[270px] lg:w-[300px] aspect-[4/5] rounded-[20px] sm:rounded-[28px] overflow-hidden select-none transition-all duration-500 cursor-pointer ${
                     isCenter
-                      ? 'border-2 border-[#82E16B] ring-4 ring-[#82E16B]/40 shadow-2xl glow-botanical-lg'
+                      ? 'border-2 border-[#82E16B] ring-2 sm:ring-4 ring-[#82E16B]/40 shadow-2xl glow-botanical-lg'
                       : 'border border-[#1A4031] hover:border-[#82E16B]/70'
                   }`}
                   style={cardStyle}

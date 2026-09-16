@@ -8,7 +8,7 @@ export const clientsData = [
     shortName: { ar: "نـبـتـة", en: "NABTA" },
     category: { ar: "نباتات داخلية • هوية ومطبوعات وسوشيال", en: "Indoor Botany • Branding, Print & Social" },
     year: "2025",
-    logoUrl: "/assets/clients/nabta_logo.png",
+    logoUrl: "./assets/clients/nabta_logo.png",
     clientRequest: {
       ar: 'كان الهدف من المشروع بناء حملة إعلانية ومطبوعات وهوية بصرية متكاملة للعلامة التجارية "نبتة". طلب العميل تصاميم تبرز جمال النباتات الداخلية، وتعكس مشاعر النقاء والحيوية التي تضفيها على المكان، مع مراعاة كافة التطبيقات من سوشيال ميديا، مطبوعات وأدلة رعاية، وهوية العلامة.',
       en: 'The project objective was to create a high-impact multi-channel campaign, editorial packaging, and brand collateral for Nabta botany brand. The client requested visual systems highlighting the aesthetics of indoor plants, evoking purity and vitality across social media, print, and corporate identity.'
@@ -165,7 +165,7 @@ export const clientsData = [
     shortName: { ar: "جولدن تيراس", en: "GOLDEN TERRACE" },
     category: { ar: "ضيافة وتصميم مطبوعات فاخرة", en: "Hospitality & Luxury Print" },
     year: "2025",
-    logoUrl: "/assets/clients/golden_terrace_gold.png",
+    logoUrl: "./assets/clients/golden_terrace_gold.png",
     clientRequest: {
       ar: 'طلب العميل بناء هوية بصرية وتصميم مطبوعات فاخرة لمشروع "جولدن تيراس" للضيافة، تشمل تصميم قوائم الطعام (Menu) الجلدية المحفورة بالذهب، وأغلفة الحساب، واللوحات الإرشادية للمكان، مع التركيز على خامات تجمع بين اللون الذهبي الملكي والأسود الفاحم لإبراز الفخامة والرقي.',
       en: 'Client commissioned a bespoke luxury brand system for Golden Terrace hospitality lounge, including gold-embossed leather menus, bill presentation folders, and architectural signage blending regal gold with midnight black.'
@@ -212,7 +212,7 @@ export const clientsData = [
     shortName: { ar: "التقنيات المتكاملة", en: "INTEGRATED TECHNICS" },
     category: { ar: "حلول الأنظمة الأمنية والأتمتة", en: "Security, Automation & Networks" },
     year: "2025",
-    logoUrl: "/assets/clients/integrated_technics.png",
+    logoUrl: "./assets/clients/integrated_technics.png",
     clientRequest: {
       ar: 'طلب العميل تصميم بروفايل شركة شامل (Company Profile) وكتالوج تعريفي للخدمات والأنظمة المتكاملة، وتصميم مواد تسويقية وليبلات تقنية للشبكات وغرف التحكم، تعكس الاحترافية الهندسية والدقة التقنية التي تقدمها الشركة للمشاريع الكبرى.',
       en: 'Client commissioned a comprehensive corporate profile, technical systems catalog, and control room schematics highlighting security, smart automation, network infrastructure, and audiovisual installations.'
@@ -259,7 +259,7 @@ export const clientsData = [
     shortName: { ar: "كيميت وين UPVC", en: "KEMET WIN" },
     category: { ar: "قطاعات الأبواب والشبابيك العازلة", en: "UPVC Doors & Windows Profiles" },
     year: "2025",
-    logoUrl: "/assets/clients/kemet_win_upvc.png",
+    logoUrl: "./assets/clients/kemet_win_upvc.png",
     clientRequest: {
       ar: 'طلب العميل إطلاق هوية دعائية متكاملة لقطاعات UPVC المقاومة للعوامل الجوية وعازلة للصوت والحرارة، تشمل تصميم عينات القطاعات التسويقية (Sample Swatch Box)، وكتالوج المواصفات الهندسية للمهندسين والمقاولين، وبوسترات الحملات الترويجية.',
       en: 'Client requested an industrial brand marketing campaign and architectural specification binder for weather-resistant, thermal & sound insulated UPVC door and window profiles tailored for architects and contractors.'
@@ -306,7 +306,7 @@ export const clientsData = [
     shortName: { ar: "عيادات د. سيد درويش", en: "SAYED DARWESH CLINIC" },
     category: { ar: "طب وجراحة وتجميل الأسنان", en: "Dental Surgery & Aesthetics" },
     year: "2025",
-    logoUrl: "/assets/clients/sayed_darwesh.png",
+    logoUrl: "./assets/clients/sayed_darwesh.png",
     clientRequest: {
       ar: 'طلب العميل تصميم هوية طبية عصرية ومطمئنة لعيادات طب وجراحة الأسنان، تشمل تصميم ملفات وسجلات المرضى، وبطاقات المواعيد، وفولدرات التقارير الطبية، وبوسترات التوعية الداخلية التي تعكس النظافة، والدقة، وأحدث تكنولوجيا زراعة وتجميل الابتسامة.',
       en: 'Client commissioned a reassuring modern clinical identity for dental aesthetics and surgical care, encompassing patient record folders, appointment collateral, clinical forms, and interior smile aesthetic campaigns.'

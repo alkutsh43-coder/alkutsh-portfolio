@@ -27,6 +27,8 @@ dist-ssr
 scratch_page_*.png
 slice_*.png
 section*_preview.png
+mobile_preview*.png
+screenshot*.png
 arabic_spans.txt
 pdf_text_dump.txt
 extract_svg.py

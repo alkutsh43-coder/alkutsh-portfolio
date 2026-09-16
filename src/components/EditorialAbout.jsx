@@ -147,7 +147,7 @@ export const EditorialAbout = ({ lang }) => {
 
             {/* Headline with subtle, clean line-height and simple gap matching user request */}
             <div 
-              className={`text-3xl sm:text-4xl md:text-[44px] lg:text-[48px] font-black text-white tracking-tight transition-all duration-800 ${
+              className={`text-2xl xs:text-3xl sm:text-4xl md:text-[44px] lg:text-[48px] font-black text-white tracking-tight transition-all duration-800 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ 
@@ -157,7 +157,7 @@ export const EditorialAbout = ({ lang }) => {
               }}
             >
               {isAr ? (
-                <div className="space-y-0.5 sm:space-y-1 leading-[1.18] sm:leading-[1.22]">
+                <div className="space-y-0.5 sm:space-y-1 leading-[1.22] sm:leading-[1.22]">
                   <div>
                     مصمم <span className="text-[#82E16B] inline-block tracking-wider">هـويـات بـصـريـة</span>
                   </div>
@@ -177,12 +177,12 @@ export const EditorialAbout = ({ lang }) => {
               )}
             </div>
 
-            {/* 3 Paragraphs with enlarged font size & Noto Sans Arabic 'Black' weight (900) */}
+            {/* 3 Paragraphs with comfortable readability & balanced font weight */}
             <div 
-              className="space-y-4 sm:space-y-5 text-white text-[16.5px] sm:text-[17.5px] lg:text-[18.5px] leading-[1.85] sm:leading-[1.9] max-w-2xl" 
+              className="space-y-3.5 sm:space-y-5 text-white/95 text-[14.5px] xs:text-[15.5px] sm:text-[16.5px] lg:text-[17.5px] leading-[1.8] sm:leading-[1.88] max-w-2xl" 
               style={{ 
                 fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : '"A Nefel Sereke", serif',
-                fontWeight: isAr ? 900 : 400
+                fontWeight: isAr ? 500 : 400
               }}
             >
               
@@ -230,9 +230,9 @@ export const EditorialAbout = ({ lang }) => {
 
             </div>
 
-            {/* Stats Grid matching media_1789554728026.png (No top border, 45+ with plus on right, Noto Sans Arabic labels) */}
+            {/* Stats Grid */}
             <div 
-              className={`pt-8 sm:pt-10 grid grid-cols-3 gap-6 sm:gap-10 max-w-xl transition-all duration-800 ${
+              className={`pt-6 sm:pt-10 grid grid-cols-3 gap-3 sm:gap-8 lg:gap-10 max-w-xl transition-all duration-800 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ 
@@ -242,50 +242,50 @@ export const EditorialAbout = ({ lang }) => {
             >
               
               {/* Stat 1: 45+ */}
-              <div className="group cursor-default">
+              <div className="group cursor-default text-center sm:text-start">
                 <div 
-                  className="text-5xl sm:text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#82E16B] to-[#2B6645] tracking-tight leading-none group-hover:scale-105 transition-transform duration-300 inline-block" 
+                  className="text-3xl xs:text-4xl sm:text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#82E16B] to-[#2B6645] tracking-tight leading-none group-hover:scale-105 transition-transform duration-300 inline-block" 
                   dir="ltr"
                   style={{ fontFamily: '"A Nefel Sereke", sans-serif' }}
                 >
                   {counts.p1}+
                 </div>
                 <div 
-                  className="text-sm sm:text-base text-white font-bold mt-3" 
+                  className="text-xs sm:text-base text-white font-bold mt-2 sm:mt-3 leading-snug" 
                   style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : '"A Nefel Sereke", sans-serif' }}
                 >
-                  {isAr ? 'مشروعات مستقله' : 'Freelance Projects'}
+                  {isAr ? 'مشروعات مستقلة' : 'Freelance Projects'}
                 </div>
               </div>
 
               {/* Stat 2: 20 */}
-              <div className="group cursor-default">
+              <div className="group cursor-default text-center sm:text-start">
                 <div 
-                  className="text-5xl sm:text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#82E16B] to-[#2B6645] tracking-tight leading-none group-hover:scale-105 transition-transform duration-300 inline-block" 
+                  className="text-3xl xs:text-4xl sm:text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#82E16B] to-[#2B6645] tracking-tight leading-none group-hover:scale-105 transition-transform duration-300 inline-block" 
                   dir="ltr"
                   style={{ fontFamily: '"A Nefel Sereke", sans-serif' }}
                 >
                   {counts.p2}
                 </div>
                 <div 
-                  className="text-sm sm:text-base text-white font-bold mt-3" 
+                  className="text-xs sm:text-base text-white font-bold mt-2 sm:mt-3 leading-snug" 
                   style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : '"A Nefel Sereke", sans-serif' }}
                 >
-                  {isAr ? 'اعمال مختاره' : 'Featured Works'}
+                  {isAr ? 'أعمال مختارة' : 'Featured Works'}
                 </div>
               </div>
 
               {/* Stat 3: 3 */}
-              <div className="group cursor-default">
+              <div className="group cursor-default text-center sm:text-start">
                 <div 
-                  className="text-5xl sm:text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#82E16B] to-[#2B6645] tracking-tight leading-none group-hover:scale-105 transition-transform duration-300 inline-block" 
+                  className="text-3xl xs:text-4xl sm:text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#82E16B] to-[#2B6645] tracking-tight leading-none group-hover:scale-105 transition-transform duration-300 inline-block" 
                   dir="ltr"
                   style={{ fontFamily: '"A Nefel Sereke", sans-serif' }}
                 >
                   {counts.p3}
                 </div>
                 <div 
-                  className="text-sm sm:text-base text-white font-bold mt-3" 
+                  className="text-xs sm:text-base text-white font-bold mt-2 sm:mt-3 leading-snug" 
                   style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : '"A Nefel Sereke", sans-serif' }}
                 >
                   {isAr ? 'تخصصات أساسية' : 'Disciplines'}

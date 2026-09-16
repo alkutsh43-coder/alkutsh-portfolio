@@ -6,25 +6,25 @@ export const EditorialBio = ({ lang }) => {
   return (
     <section 
       id="bio" 
-      className="py-24 sm:py-32 bg-[#071610] text-white border-t border-[#143224]/60 relative overflow-hidden"
+      className="py-14 sm:py-28 bg-[#071610] text-white border-t border-[#143224]/60 relative overflow-hidden"
       dir={isAr ? 'rtl' : 'ltr'}
     >
       {/* Subtle Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#82E16B]/5 rounded-full blur-3xl pointer-events-none"></div>
 
-      <div className="max-w-4xl mx-auto px-6 sm:px-12 text-center space-y-8 relative z-10">
+      <div className="max-w-4xl mx-auto px-5 sm:px-12 text-center space-y-5 sm:space-y-8 relative z-10">
         
         {/* Header: ABOUT / عن المصمم in prominent clear typeface */}
         <h2 
-          className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-[0.2em] uppercase drop-shadow-md"
+          className={`text-2xl xs:text-3xl sm:text-5xl md:text-6xl font-extrabold text-white drop-shadow-md ${isAr ? 'tracking-normal' : 'tracking-[0.15em] uppercase'}`}
           style={{ fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : '"A Nefel Sereke", sans-serif' }}
         >
           {isAr ? 'عـن الـمـصـمـم' : 'ABOUT'}
         </h2>
 
-        {/* Narrative Paragraph with large, comfortable, crystal-clear typography */}
+        {/* Narrative Paragraph with comfortable, readable typography */}
         <p 
-          className="text-lg sm:text-xl md:text-2xl text-white/95 leading-[2.0] sm:leading-[2.1] font-normal drop-shadow"
+          className="text-sm xs:text-[15.5px] sm:text-lg md:text-xl text-white/90 leading-[1.85] sm:leading-[2.0] font-normal drop-shadow"
           style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : '"A Nefel Sereke", sans-serif' }}
         >
           {isAr ? (
