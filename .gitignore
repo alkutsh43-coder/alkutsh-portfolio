@@ -1,0 +1,36 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary scratch and raw preparation assets (excluded to keep repo fast & lightweight)
+scratch_page_*.png
+slice_*.png
+section*_preview.png
+arabic_spans.txt
+pdf_text_dump.txt
+extract_svg.py
+make_*.py
+الصور المستخدمه/
+extracted_pdf_assets/
+*.bat
