@@ -24,7 +24,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
           alt="Ahmed Maher - Al Kutsh Designer"
           loading="eager"
           decoding="sync"
-          className="w-full h-full object-cover object-[70%_center] sm:object-[68%_center] lg:object-[65%_center] select-none"
+          className="hero-bg-photo w-full h-full object-cover object-[70%_center] sm:object-[68%_center] lg:object-[65%_center] select-none"
           style={{ 
             imageRendering: 'high-quality',
             WebkitBackfaceVisibility: 'hidden',
@@ -179,14 +179,14 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
       {/* 3. الصندوق الرئيسي لنصوص الهيرو (Hero Typography Container)                */}
       {/* ========================================================================= */}
       <div 
-        className="relative z-20 w-full max-w-[1520px] mx-auto px-6 sm:px-10 lg:px-14 my-auto -mt-6 sm:-mt-12 lg:-mt-20 py-4 sm:py-6"
+        className="hero-text-container relative z-20 w-full max-w-[1520px] mx-auto px-6 sm:px-10 lg:px-14 my-auto -mt-6 sm:-mt-12 lg:-mt-20 py-4 sm:py-6"
         style={{ 
           direction: 'ltr',
           /* 📌 [1] تحريك كتلة النصوص كلها مع بعضها:
              - رقم أكبر (مثلاً 220px أو 250px) ينزل الكتلة كلها لتحت.
              - رقم أصغر (مثلاً 150px أو 100px أو 50px) يرفع الكتلة كلها لفوق.
           */
-          transform: 'translateY(200px)' 
+          transform: 'translateY(170px)' 
         }}
       >
         <div className="flex justify-start">
@@ -200,18 +200,18 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
             {/* ------------------------------------------------------------- */}
             <div 
               /* حجم خط كلمة مصمم جرافيك: تقدر تغير md:text-[30px] لأي مقاس */
-              className="text-white font-medium text-sm sm:text-base md:text-[30px] text-white/95"
+              className="hero-eyebrow text-white font-medium text-sm sm:text-base md:text-[30px] text-white/95"
               style={{ 
                 fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : 'inherit',
                 /* لضبط التباعد بين الحروف: كبّر الرقم (مثلاً 0.4em) أو صغّره (0.2em) */
-                letterSpacing: isAr ? '0.35em' : '0.22em',
+                letterSpacing: isAr ? '.2em' : '0em',
                 /* لرفع أو تنزيل هذا السطر بمفرده (سالب = لفوق، موجب = لتحت): */
-                transform: 'translateY(0px)',
+                transform: 'translateY(10px)',
                 /* مسافة فراغ تحته: */
-                marginBottom: '0px'
+                marginBottom: '10px'
               }}
             >
-              {isAr ? 'مـصـمـم   جـرافـيـــــك' : 'GRAPHIC   DESIGNER'}
+              {isAr ? 'مـصـمـم   جـــرافـــــيــــــــك' : 'GRAPHIC   DESIGNER'}
             </div>
 
             {/* ------------------------------------------------------------- */}
@@ -219,7 +219,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
             {/* ------------------------------------------------------------- */}
             <h1 
               /* حجم الخط في الشاشات: تقدر تعدل lg:text-[80px] */
-              className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[80px] xl:text-[88px] font-black leading-[1.08] tracking-tight select-none"
+              className="hero-title text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[80px] xl:text-[88px] font-black leading-[1.08] tracking-tight select-none"
               style={{ 
                 fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : '"29LT Kaff", sans-serif',
                 /* لرفع أو تنزيل العنوان بالكامل بمفرده (سالب = لفوق، موجب = لتحت): */
@@ -231,10 +231,10 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
                 className="block text-white font-extrabold"
                 style={{
                   /* لرفع أو تنزيل كلمة "أحمد ماهر" وحدها (سالب = لفوق، موجب = لتحت): */
-                  transform: 'translateY(0px)'
+                  transform: 'translateY(10px)'
                 }}
               >
-                {isAr ? 'أحمد ماهر' : 'Ahmed Maher'}
+                {isAr ? 'أحمد مــاهــر' : 'Ahmed Maher'}
               </span>
 
               {/* سطر (2): "الكوتش ديزاين" */}
@@ -242,12 +242,12 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
                 className="block text-[#82E16B] font-extrabold"
                 style={{
                   /* المسافة الرأسية بين "أحمد ماهر" و "الكوتش ديزاين" (مثلاً 4px أو 8px أو 14px): */
-                  marginTop: '8px',
+                  marginTop: '10px',
                   /* لرفع أو تنزيل كلمة "الكوتش ديزاين" وحدها (سالب = لفوق، موجب = لتحت): */
                   transform: 'translateY(0px)'
                 }}
               >
-                {isAr ? 'الكوتش ديزاين' : 'Alkutsh Design'}
+                {isAr ? 'الكوتـش ديـزايــن' : 'Al Kutsh Design'}
               </span>
             </h1>
 
@@ -256,11 +256,11 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
             {/* ------------------------------------------------------------- */}
             <p 
               /* حجم خط الفقرة: تقدر تغير lg:text-[18px] */
-              className="text-white/95 text-sm sm:text-base md:text-[17px] lg:text-[18px] font-normal leading-relaxed max-w-lg"
+              className="hero-desc text-white/95 text-sm sm:text-base md:text-[17px] lg:text-[18px] font-normal leading-relaxed max-w-lg"
               style={{ 
                 fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'sans-serif',
                 /* المسافة بين الفقرة والعنوان اللي فوقها: */
-                marginTop: '12px',
+                marginTop: '20px',
                 /* لرفع أو تنزيل الفقرة وحدها (سالب = لفوق، موجب = لتحت): */
                 transform: 'translateY(0px)'
               }}
@@ -275,7 +275,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
             {/* ------------------------------------------------------------- */}
             <div 
               /* w-12 هو طول الخط، h-[3.5px] هو سمكه */
-              className="w-12 sm:w-14 h-[3.5px] bg-[#82E16B] rounded-full"
+              className="hero-line w-12 sm:w-14 h-[3.5px] bg-[#82E16B] rounded-full"
               style={{
                 /* المسافة بين الخط الأخضر والفقرة فوقه: */
                 marginTop: '16px',
