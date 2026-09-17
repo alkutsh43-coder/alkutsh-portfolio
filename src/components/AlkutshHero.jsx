@@ -175,10 +175,20 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
         </div>
       )}
 
-      {/* 3. Hero Typography strictly aligned to the LEFT, matching the exact left edge of the logo */}
+      {/* ========================================================================= */}
+      {/* 3. الصندوق الرئيسي لنصوص الهيرو (Hero Typography Container)                */}
+      {/* ========================================================================= */}
       <div 
         className="relative z-20 w-full max-w-[1520px] mx-auto px-6 sm:px-10 lg:px-14 my-auto -mt-6 sm:-mt-12 lg:-mt-20 py-4 sm:py-6"
-        style={{ direction: 'ltr', transform: 'translateY(200px)' }}
+        style={{ 
+          direction: 'ltr',
+          /* 📌 [1] تحريك كتلة النصوص كلها مع بعضها:
+             - رقم أكبر (مثلاً 200px أو 250px) ينزل الكتلة كلها لتحت.
+             - رقم أصغر (مثلاً 120px أو 80px أو 0px) يرفع الكتلة كلها لفوق.
+             - تقدر كمان تضيف تحريك أفقي يميناً أو يساراً: transform: 'translateY(200px) translateX(0px)'
+          */
+          transform: 'translateY(200px)' 
+        }}
       >
         <div className="flex justify-start">
           <div 
@@ -186,44 +196,95 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
             style={{ direction: 'ltr', textAlign: 'left' }}
           >
             
-            {/* Eyebrow: مصمم جرافيك */}
+            {/* ------------------------------------------------------------- */}
+            {/* 📌 [2] السطر التمهيدي: "مـصـمـم جـرافـيـك"                     */}
+            {/* ------------------------------------------------------------- */}
             <div 
-              className="text-white font-medium text-sm sm:text-base md:text-[18px] text-white/95"
+              /* حجم خط كلمة مصمم جرافيك: تقدر تغير md:text-[30px] لأي مقاس تحبه */
+              className="text-white font-medium text-sm sm:text-base md:text-[30px] text-white/95"
               style={{ 
                 fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : 'inherit',
+                /* لضبط التباعد بين الحروف: كبّر الرقم (مثلاً 0.4em) أو صغّره (0.2em) */
                 letterSpacing: isAr ? '0.35em' : '0.22em',
+                /* لرفع أو تنزيل هذا السطر بمفرده:
+                   غيّر رقم translateY (رقم سالب = يرتفع لفوق، رقم موجب = ينزل لتحت) */
+                transform: 'translateY(0px)',
+                /* مسافة فراغ تحته: */
+                marginBottom: '0px'
               }}
             >
-              {isAr ? 'مـصـمـم   جـرافـيـك' : 'G R A P H I C   D E S I G N E R'}
+              {isAr ? 'مـصـمـم   جـرافـيـــــك' : 'GRAPHIC   DESIGNER'}
             </div>
 
-            {/* Main Headline: أحمد ماهر / الكوتش ديزاين (Zain Length 1, pure crisp colors without glow) */}
+            {/* ------------------------------------------------------------- */}
+            {/* 📌 [3] العنوان الرئيسي: "أحمد ماهر" و "الكوتش ديزاين"         */}
+            {/* ------------------------------------------------------------- */}
             <h1 
+              /* حجم الخط في الشاشات: تقدر تعدل lg:text-[80px] */
               className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[80px] xl:text-[88px] font-black leading-[1.08] tracking-tight select-none"
               style={{ 
-                fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : '"29LT Kaff", sans-serif' 
+                fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : '"29LT Kaff", sans-serif',
+                /* لرفع أو تنزيل العنوان بالكامل بمفرده (سالب = لفوق، موجب = لتحت): */
+                transform: 'translateY(0px)'
               }}
             >
-              <span className="block text-white font-extrabold">
+              {/* سطر (1): "أحمد ماهر" */}
+              <span 
+                className="block text-white font-extrabold"
+                style={{
+                  /* لرفع أو تنزيل كلمة "أحمد ماهر" وحدها (سالب = لفوق، موجب = لتحت): */
+                  transform: 'translateY(0px)'
+                }}
+              >
                 {isAr ? 'أحمد ماهر' : 'Ahmed Maher'}
               </span>
-              <span className="block text-[#82E16B] mt-1 sm:mt-2 font-extrabold">
+
+              {/* سطر (2): "الكوتش ديزاين" */}
+              <span 
+                className="block text-[#82E16B] font-extrabold"
+                style={{
+                  /* المسافة الرأسية بين "أحمد ماهر" و "الكوتش ديزاين" (مثلاً 4px أو 8px أو 14px): */
+                  marginTop: '8px',
+                  /* لرفع أو تنزيل كلمة "الكوتش ديزاين" وحدها (سالب = لفوق، موجب = لتحت): */
+                  transform: 'translateY(0px)'
+                }}
+              >
                 {isAr ? 'الكوتش ديزاين' : 'Alkutsh Design'}
               </span>
             </h1>
 
-            {/* Description Paragraph */}
+            {/* ------------------------------------------------------------- */}
+            {/* 📌 [4] الفقرة الوصفية: "حلول تصميمية حديثة ومتقنة..."         */}
+            {/* ------------------------------------------------------------- */}
             <p 
-              className="text-white/95 text-sm sm:text-base md:text-[17px] lg:text-[18px] font-normal leading-relaxed max-w-lg pt-2"
-              style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'sans-serif' }}
+              /* حجم خط الفقرة: تقدر تغير lg:text-[18px] */
+              className="text-white/95 text-sm sm:text-base md:text-[17px] lg:text-[18px] font-normal leading-relaxed max-w-lg"
+              style={{ 
+                fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'sans-serif',
+                /* المسافة بين الفقرة والعنوان اللي فوقها: */
+                marginTop: '12px',
+                /* لرفع أو تنزيل الفقرة وحدها (سالب = لفوق، موجب = لتحت): */
+                transform: 'translateY(0px)'
+              }}
             >
               {isAr 
                 ? 'حلول تصميمية حديثة ومتقنة توازن بدقة بين البساطة والأثر البصري القوي'
                 : 'Modern, refined design solutions that balance simplicity with strong visual impact.'}
             </p>
 
-            {/* Decorative Accent Line (NO glow, clean lime green) */}
-            <div className="w-12 sm:w-14 h-[3.5px] bg-[#82E16B] rounded-full mt-4 sm:mt-5"></div>
+            {/* ------------------------------------------------------------- */}
+            {/* 📌 [5] الخط الأخضر الديكوري (—)                                */}
+            {/* ------------------------------------------------------------- */}
+            <div 
+              /* w-12 هو طول الخط، h-[3.5px] هو سمكه */
+              className="w-12 sm:w-14 h-[3.5px] bg-[#82E16B] rounded-full"
+              style={{
+                /* المسافة بين الخط الأخضر والفقرة فوقه: */
+                marginTop: '16px',
+                /* لرفع أو تنزيل الخط الأخضر بمفرده (سالب = لفوق، موجب = لتحت): */
+                transform: 'translateY(0px)'
+              }}
+            ></div>
 
           </div>
         </div>
