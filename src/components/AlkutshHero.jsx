@@ -17,30 +17,30 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
       className="relative min-h-screen w-full bg-[#071610] text-white flex flex-col justify-between overflow-hidden"
     >
       
-      {/* 1. Background Photo: Ultra-HD 2K (2730x1536) - Pure crisp lighting, Ahmed Maher at executive desk */}
+      {/* 1. Background Photo: Ultra-HD 2K (2730x1536) - Ahmed Maher on the right, plant & dark space on the left */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img
           src="./assets/alkutsh_raw_bg_hd.png"
           alt="Ahmed Maher - Al Kutsh Designer"
           loading="eager"
           decoding="sync"
-          className="w-full h-full object-cover object-[72%_center] sm:object-[68%_center] lg:object-[64%_center] select-none"
+          className="w-full h-full object-cover object-[70%_center] sm:object-[68%_center] lg:object-[65%_center] select-none"
           style={{ 
             imageRendering: 'high-quality',
             WebkitBackfaceVisibility: 'hidden',
             transform: 'translateZ(0)'
           }}
         />
-        {/* Soft mobile contrast veil */}
-        <div className="absolute inset-0 bg-[#071610]/40 sm:bg-[#071610]/20 lg:bg-transparent pointer-events-none"></div>
+        {/* Mobile ambient gradient veil */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#071610] via-[#071610]/30 to-transparent lg:hidden pointer-events-none"></div>
         {/* Seamless bottom vignette blend into page */}
         <div className="absolute bottom-0 inset-x-0 h-32 sm:h-44 lg:h-52 bg-gradient-to-t from-[#071610] via-[#071610]/75 to-transparent pointer-events-none"></div>
       </div>
 
-      {/* 2. Top Navigation Bar matching user's exact mockup */}
+      {/* 2. Top Navigation Bar */}
       <header 
         className="relative z-30 w-full max-w-[1520px] mx-auto px-6 sm:px-10 lg:px-14 pt-6 sm:pt-9 flex items-center justify-between" 
-        dir="ltr"
+        style={{ direction: 'ltr' }}
       >
         
         {/* Left Side: Alkutsh Designs Emblem + Typography */}
@@ -74,7 +74,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
             {/* نبذه عني */}
             <button
               onClick={() => handleNavClick('about')}
-              className="text-white/90 hover:text-white hover:text-[#82E16B] transition-colors py-1 cursor-pointer"
+              className="text-white/90 hover:text-[#82E16B] transition-colors py-1 cursor-pointer"
             >
               {isAr ? 'نبذه عني' : 'About'}
             </button>
@@ -82,7 +82,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
             {/* الاعمال */}
             <button
               onClick={() => handleNavClick('portfolio')}
-              className="text-white/90 hover:text-white hover:text-[#82E16B] transition-colors py-1 cursor-pointer"
+              className="text-white/90 hover:text-[#82E16B] transition-colors py-1 cursor-pointer"
             >
               {isAr ? 'الاعمال' : 'Portfolio'}
             </button>
@@ -90,7 +90,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
             {/* الخدمات */}
             <button
               onClick={() => handleNavClick('services')}
-              className="text-white/90 hover:text-white hover:text-[#82E16B] transition-colors py-1 cursor-pointer"
+              className="text-white/90 hover:text-[#82E16B] transition-colors py-1 cursor-pointer"
             >
               {isAr ? 'الخدمات' : 'Services'}
             </button>
@@ -98,7 +98,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
             {/* التواصل */}
             <button
               onClick={() => handleNavClick('contact')}
-              className="text-white/90 hover:text-white hover:text-[#82E16B] transition-colors py-1 cursor-pointer"
+              className="text-white/90 hover:text-[#82E16B] transition-colors py-1 cursor-pointer"
             >
               {isAr ? 'التواصل' : 'Contact'}
             </button>
@@ -175,36 +175,39 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
         </div>
       )}
 
-      {/* 3. Hero Center Typography matching user's exact mockup */}
-      <div className="relative z-20 w-full max-w-[1520px] mx-auto px-6 sm:px-10 lg:px-14 my-auto py-8 sm:py-12">
-        <div className="w-full flex justify-start">
+      {/* 3. Hero Typography strictly positioned on the LEFT side of the screen (in the empty dark wall space above the plant, keeping Ahmed's portrait completely clear on the right) */}
+      <div 
+        className="relative z-20 w-full max-w-[1520px] mx-auto px-6 sm:px-10 lg:px-14 my-auto py-8 sm:py-12"
+        style={{ direction: 'ltr' }}
+      >
+        <div className="flex justify-start">
           <div 
             className="w-full max-w-xl sm:max-w-2xl space-y-3 sm:space-y-4 text-right"
-            dir="rtl"
+            style={{ direction: 'rtl' }}
           >
             
             {/* Eyebrow: مصمم جرافيك */}
             <div 
               className="text-white font-medium text-sm sm:text-base md:text-[18px] text-white/95"
               style={{ 
-                fontFamily: isAr ? '"29LT Kaff", "Noto Sans Arabic", sans-serif' : 'inherit',
+                fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : 'inherit',
                 letterSpacing: isAr ? '0.35em' : '0.22em',
               }}
             >
               {isAr ? 'مـصـمـم   جـرافـيـك' : 'G R A P H I C   D E S I G N E R'}
             </div>
 
-            {/* Main Headline: أحمد ماهر / الكوتش ديزينر */}
+            {/* Main Headline: أحمد ماهر / الكوتش ديزينر (using Zain Length 1) */}
             <h1 
-              className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[76px] xl:text-[84px] font-black text-white leading-[1.08] tracking-tight drop-shadow-xl select-none"
+              className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[80px] xl:text-[88px] font-black text-white leading-[1.08] tracking-tight drop-shadow-xl select-none"
               style={{ 
-                fontFamily: isAr ? '"A Nefel Sereke", "A Nefel Sereke Qelew", "Zain Length 1", sans-serif' : '"A Nefel Sereke", sans-serif' 
+                fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : '"29LT Kaff", sans-serif' 
               }}
             >
-              <span className="block text-white">
+              <span className="block text-white font-extrabold">
                 {isAr ? 'أحمد ماهر' : 'Ahmed Maher'}
               </span>
-              <span className="block text-[#82E16B] mt-1 sm:mt-2 drop-shadow-[0_4px_24px_rgba(130,225,107,0.35)]">
+              <span className="block text-[#82E16B] mt-1 sm:mt-2 font-extrabold drop-shadow-[0_4px_24px_rgba(130,225,107,0.35)]">
                 {isAr ? 'الكوتش ديزينر' : 'Alkutsh Designer'}
               </span>
             </h1>
@@ -212,7 +215,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
             {/* Description Paragraph */}
             <p 
               className="text-white/95 text-sm sm:text-base md:text-[17px] lg:text-[18px] font-normal leading-relaxed max-w-lg pt-2 drop-shadow"
-              style={{ fontFamily: isAr ? '"TS Safaa", "Noto Sans Arabic", sans-serif' : 'sans-serif' }}
+              style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'sans-serif' }}
             >
               {isAr 
                 ? 'حلول تصميمية حديثة ومتقنة توازن بدقة بين البساطة والأثر البصري القوي'
@@ -229,7 +232,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
       {/* 4. Bottom Controls: [انتقل لأسفل] on Left & [مصر / العاشر من رمضان] on Right */}
       <footer 
         className="relative z-20 w-full max-w-[1520px] mx-auto px-6 sm:px-10 lg:px-14 pb-6 sm:pb-10 flex items-center justify-between" 
-        dir="ltr"
+        style={{ direction: 'ltr' }}
       >
         
         {/* Bottom Left: Scroll Down Button */}
