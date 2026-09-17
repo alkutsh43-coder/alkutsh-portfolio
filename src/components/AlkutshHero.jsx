@@ -183,9 +183,8 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
         style={{ 
           direction: 'ltr',
           /* 📌 [1] تحريك كتلة النصوص كلها مع بعضها:
-             - رقم أكبر (مثلاً 200px أو 250px) ينزل الكتلة كلها لتحت.
-             - رقم أصغر (مثلاً 120px أو 80px أو 0px) يرفع الكتلة كلها لفوق.
-             - تقدر كمان تضيف تحريك أفقي يميناً أو يساراً: transform: 'translateY(200px) translateX(0px)'
+             - رقم أكبر (مثلاً 220px أو 250px) ينزل الكتلة كلها لتحت.
+             - رقم أصغر (مثلاً 150px أو 100px أو 50px) يرفع الكتلة كلها لفوق.
           */
           transform: 'translateY(200px)' 
         }}
@@ -200,14 +199,13 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
             {/* 📌 [2] السطر التمهيدي: "مـصـمـم جـرافـيـك"                     */}
             {/* ------------------------------------------------------------- */}
             <div 
-              /* حجم خط كلمة مصمم جرافيك: تقدر تغير md:text-[30px] لأي مقاس تحبه */
+              /* حجم خط كلمة مصمم جرافيك: تقدر تغير md:text-[30px] لأي مقاس */
               className="text-white font-medium text-sm sm:text-base md:text-[30px] text-white/95"
               style={{ 
                 fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : 'inherit',
                 /* لضبط التباعد بين الحروف: كبّر الرقم (مثلاً 0.4em) أو صغّره (0.2em) */
                 letterSpacing: isAr ? '0.35em' : '0.22em',
-                /* لرفع أو تنزيل هذا السطر بمفرده:
-                   غيّر رقم translateY (رقم سالب = يرتفع لفوق، رقم موجب = ينزل لتحت) */
+                /* لرفع أو تنزيل هذا السطر بمفرده (سالب = لفوق، موجب = لتحت): */
                 transform: 'translateY(0px)',
                 /* مسافة فراغ تحته: */
                 marginBottom: '0px'
