@@ -177,7 +177,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
 
       {/* 3. Hero Typography strictly aligned to the LEFT, matching the exact left edge of the logo */}
       <div 
-        className="relative z-20 w-full max-w-[1520px] mx-auto px-6 sm:px-10 lg:px-14 my-auto py-8 sm:py-12"
+        className="relative z-20 w-full max-w-[1520px] mx-auto px-6 sm:px-10 lg:px-14 my-auto -mt-6 sm:-mt-12 lg:-mt-20 py-4 sm:py-6"
         style={{ direction: 'ltr' }}
       >
         <div className="flex justify-start">
@@ -197,7 +197,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
               {isAr ? 'مـصـمـم   جـرافـيـك' : 'G R A P H I C   D E S I G N E R'}
             </div>
 
-            {/* Main Headline: أحمد ماهر / الكوتش ديزينر (Zain Length 1, pure crisp colors without glow) */}
+            {/* Main Headline: أحمد ماهر / الكوتش ديزاين (Zain Length 1, pure crisp colors without glow) */}
             <h1 
               className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[80px] xl:text-[88px] font-black leading-[1.08] tracking-tight select-none"
               style={{ 
@@ -208,7 +208,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
                 {isAr ? 'أحمد ماهر' : 'Ahmed Maher'}
               </span>
               <span className="block text-[#82E16B] mt-1 sm:mt-2 font-extrabold">
-                {isAr ? 'الكوتش ديزينر' : 'Alkutsh Designer'}
+                {isAr ? 'الكوتش ديزاين' : 'Alkutsh Design'}
               </span>
             </h1>
 
