@@ -178,7 +178,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
       {/* 3. Hero Typography strictly aligned to the LEFT, matching the exact left edge of the logo */}
       <div 
         className="relative z-20 w-full max-w-[1520px] mx-auto px-6 sm:px-10 lg:px-14 my-auto -mt-6 sm:-mt-12 lg:-mt-20 py-4 sm:py-6"
-        style={{ direction: 'ltr' }}
+        style={{ direction: 'ltr', transform: 'translateY(100px)' }}
       >
         <div className="flex justify-start">
           <div 
