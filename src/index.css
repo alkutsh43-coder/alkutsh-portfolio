@@ -266,49 +266,88 @@
 }
 
 /* ========================================================================= */
-/* 📱 [شاشات 950px أو أقل]: التحكم في نصوص وموضع الهيرو عند تصغير الشاشة    */
+/* 📱 [شاشات 950px أو أقل]: توسيط النصوص بالكامل وتنزيلها تحت الصورة        */
 /* ========================================================================= */
 @media (max-width: 950px) {
-  /* 📌 [1] موضع كتلة النصوص كلها عند 950px:
-     - غيّر رقم translateY لرفعها (مثلاً 80px أو 100px) أو تنزيلها (140px)
+
+  /* 📌 [1] تموضع صورتك في الجزء العلوي لتكون واضحة والنصوص تحتها */
+  .hero-bg-photo {
+    object-position: 74% 15% !important;
+  }
+
+  /* 📌 [2] موضع كتلة النصوص وتنزيلها تحت صورتك:
+     - كبّر رقم translateY (مثلاً 240px أو 260px أو 280px) لتنزيلها تحت الصورة أكتر.
+     - صغّر الرقم (مثلاً 180px أو 150px) لرفعها لفوق.
   */
   .hero-text-container {
-    transform: translateY(120px) !important;
-    padding-left: 24px !important;
-    padding-right: 24px !important;
+    transform: translateY(220px) !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
-  /* 📌 [2] سطر "مـصـمـم جـرافـيـك" عند 950px */
+  /* 📌 [3] توسيط المحاذاة الأفقية في المنتصف */
+  .hero-text-wrapper {
+    justify-content: center !important;
+    width: 100% !important;
+    display: flex !important;
+  }
+
+  /* 📌 [4] توسيط صندوق النصوص الداخلي */
+  .hero-text-inner {
+    align-items: center !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* 📌 [5] سطر "مـصـمـم جـرافـيـك" في المنتصف */
   .hero-eyebrow {
-    font-size: 20px !important;
+    font-size: 18px !important;
     letter-spacing: 0.25em !important;
     margin-bottom: 2px !important;
+    text-align: center !important;
+    width: 100% !important;
+    transform: none !important;
   }
 
-  /* 📌 [3] عنوان "أحمد ماهر" و "الكوتش ديزاين" عند 950px */
+  /* 📌 [6] عنوان "أحمد ماهر" و "الكوتش ديزاين" في المنتصف */
   .hero-title {
-    font-size: 52px !important;
+    font-size: 45px !important;
     line-height: 1.08 !important;
+    text-align: center !important;
+    width: 100% !important;
+    transform: none !important;
   }
 
-  /* 📌 [4] الفقرة الوصفية عند 950px */
+  .hero-title span {
+    text-align: center !important;
+    display: block !important;
+    width: 100% !important;
+    transform: none !important;
+  }
+
+  /* 📌 [7] الفقرة الوصفية في المنتصف */
   .hero-desc {
     font-size: 15px !important;
-    max-width: 380px !important;
+    max-width: 440px !important;
     line-height: 1.6 !important;
     margin-top: 10px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+    transform: none !important;
   }
 
-  /* 📌 [5] الخط الأخضر الديكوري عند 950px */
+  /* 📌 [8] الخط الأخضر الديكوري في المنتصف */
   .hero-line {
     width: 44px !important;
     height: 3px !important;
     margin-top: 14px !important;
-  }
-
-  /* 📌 [6] تموضع صورتك في الخلفية عند 950px */
-  .hero-bg-photo {
-    object-position: 74% center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    transform: none !important;
   }
 }
 

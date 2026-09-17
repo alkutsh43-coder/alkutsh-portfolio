@@ -189,9 +189,9 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
           transform: 'translateY(170px)' 
         }}
       >
-        <div className="flex justify-start">
+        <div className="hero-text-wrapper flex justify-start">
           <div 
-            className="w-full max-w-xl sm:max-w-2xl space-y-3 sm:space-y-4 text-left flex flex-col items-start"
+            className="hero-text-inner w-full max-w-xl sm:max-w-2xl space-y-3 sm:space-y-4 text-left flex flex-col items-start"
             style={{ direction: 'ltr', textAlign: 'left' }}
           >
             
