@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowDown, Menu, X } from 'lucide-react';
+import { ArrowDown, Globe, Menu, X } from 'lucide-react';
 import { AlkutshLogo } from './AlkutshLogo';
 
 export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
@@ -12,32 +12,38 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen w-full bg-[#071610] text-white flex flex-col justify-between overflow-hidden">
+    <section 
+      id="home" 
+      className="relative min-h-screen w-full bg-[#071610] text-white flex flex-col justify-between overflow-hidden"
+    >
       
-      {/* 1. Background Photo: Ultra-HD 2K (2560x1440) - Full-bleed, edge-to-edge, zero frame, pure crisp natural lighting */}
+      {/* 1. Background Photo: Ultra-HD 2K (2730x1536) - Pure crisp lighting, Ahmed Maher at executive desk */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img
-          src="./assets/alkutsh_raw_bg_hd.png?v=5"
-          alt="Ahmed Maher - Al Kutsh Design"
+          src="./assets/alkutsh_raw_bg_hd.png"
+          alt="Ahmed Maher - Al Kutsh Designer"
           loading="eager"
           decoding="sync"
-          className="w-full h-[50vh] sm:h-[56vh] lg:h-full object-cover object-[70%_14%] sm:object-[68%_14%] lg:object-right-top select-none"
+          className="w-full h-full object-cover object-[72%_center] sm:object-[68%_center] lg:object-[64%_center] select-none"
           style={{ 
             imageRendering: 'high-quality',
             WebkitBackfaceVisibility: 'hidden',
             transform: 'translateZ(0)'
           }}
         />
-        {/* Seamless gradient fade at the bottom of the photo into the #071610 background */}
-        <div className="absolute top-[36vh] sm:top-[42vh] lg:top-auto lg:bottom-0 inset-x-0 h-36 sm:h-44 lg:h-48 bg-gradient-to-t from-[#071610] via-[#071610]/85 to-transparent pointer-events-none"></div>
+        {/* Soft mobile contrast veil */}
+        <div className="absolute inset-0 bg-[#071610]/40 sm:bg-[#071610]/20 lg:bg-transparent pointer-events-none"></div>
+        {/* Seamless bottom vignette blend into page */}
+        <div className="absolute bottom-0 inset-x-0 h-32 sm:h-44 lg:h-52 bg-gradient-to-t from-[#071610] via-[#071610]/75 to-transparent pointer-events-none"></div>
       </div>
 
-      {/* 2. Top Navigation Bar */}
+      {/* 2. Top Navigation Bar matching user's exact mockup */}
       <header 
-        className="relative z-30 w-full max-w-[1520px] mx-auto px-4 sm:px-8 lg:px-12 pt-4 sm:pt-10 flex items-center justify-between" 
+        className="relative z-30 w-full max-w-[1520px] mx-auto px-6 sm:px-10 lg:px-14 pt-6 sm:pt-9 flex items-center justify-between" 
+        dir="ltr"
       >
         
-        {/* Clickable Logo */}
+        {/* Left Side: Alkutsh Designs Emblem + Typography */}
         <a
           href="#home"
           onClick={(e) => {
@@ -45,97 +51,83 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
             handleNavClick('home');
           }}
           className="group cursor-pointer select-none drop-shadow-md flex items-center"
+          aria-label="Alkutsh Designs Home"
         >
-          <AlkutshLogo className="h-8 sm:h-12" light={true} />
+          <AlkutshLogo className="h-9 sm:h-12" light={true} />
         </a>
 
-        {/* Desktop Navigation Links & Language Switcher */}
-        <div className="hidden md:flex items-center gap-6 lg:gap-8">
-          <nav className="flex items-center gap-5 lg:gap-7 text-sm lg:text-base font-bold tracking-wider" style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : '"A Nefel Sereke", sans-serif' }}>
+        {/* Right Side: Navigation Links & Language Switcher Pill */}
+        <div className="hidden md:flex items-center gap-7 lg:gap-9">
+          <nav 
+            className="flex items-center gap-6 lg:gap-8 text-base lg:text-[17px] font-semibold select-none"
+            style={{ fontFamily: isAr ? '"Noto Sans Arabic", "29LT Kaff", sans-serif' : 'sans-serif' }}
+          >
+            {/* الرئيسية (Active Tab with Lime Green Accent & Underline) */}
             <button
               onClick={() => handleNavClick('home')}
-              className="text-[#82E16B] font-extrabold relative py-1 hover:text-white transition-colors tracking-wide drop-shadow cursor-pointer"
+              className="relative text-[#82E16B] font-bold py-1 hover:text-[#9df288] transition-colors cursor-pointer"
             >
-              {isAr ? 'الرئيسية' : 'HOME'}
-              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#82E16B] rounded-full"></span>
+              {isAr ? 'الرئيسية' : 'Home'}
+              <span className="absolute -bottom-1 inset-x-0 h-[2.5px] bg-[#82E16B] rounded-full shadow-[0_0_8px_rgba(130,225,107,0.8)]"></span>
             </button>
 
+            {/* نبذه عني */}
             <button
               onClick={() => handleNavClick('about')}
-              className="text-white/90 hover:text-[#82E16B] transition-colors py-1 tracking-wide drop-shadow cursor-pointer"
+              className="text-white/90 hover:text-white hover:text-[#82E16B] transition-colors py-1 cursor-pointer"
             >
-              {isAr ? 'عن المصمم' : 'ABOUT'}
+              {isAr ? 'نبذه عني' : 'About'}
             </button>
 
+            {/* الاعمال */}
             <button
               onClick={() => handleNavClick('portfolio')}
-              className="text-white/90 hover:text-[#82E16B] transition-colors py-1 tracking-wide drop-shadow cursor-pointer"
+              className="text-white/90 hover:text-white hover:text-[#82E16B] transition-colors py-1 cursor-pointer"
             >
-              {isAr ? 'الأعمال' : 'PORTFOLIO'}
+              {isAr ? 'الاعمال' : 'Portfolio'}
             </button>
 
+            {/* الخدمات */}
             <button
               onClick={() => handleNavClick('services')}
-              className="text-white/90 hover:text-[#82E16B] transition-colors py-1 tracking-wide drop-shadow cursor-pointer"
+              className="text-white/90 hover:text-white hover:text-[#82E16B] transition-colors py-1 cursor-pointer"
             >
-              {isAr ? 'الخدمات' : 'SERVICES'}
+              {isAr ? 'الخدمات' : 'Services'}
             </button>
 
+            {/* التواصل */}
             <button
               onClick={() => handleNavClick('contact')}
-              className="text-white/90 hover:text-[#82E16B] transition-colors py-1 tracking-wide drop-shadow cursor-pointer"
+              className="text-white/90 hover:text-white hover:text-[#82E16B] transition-colors py-1 cursor-pointer"
             >
-              {isAr ? 'تواصل' : 'CONTACT'}
+              {isAr ? 'التواصل' : 'Contact'}
             </button>
           </nav>
 
-          {/* Language Toggle (العربية / EN) */}
-          <div className="flex items-center bg-black/60 backdrop-blur-md rounded-full border border-white/25 p-1 shadow-lg text-xs sm:text-sm font-bold">
-            <button
-              onClick={() => setLang('ar')}
-              className={`px-3 py-1 rounded-full transition-all duration-300 cursor-pointer ${
-                isAr ? 'bg-[#82E16B] text-[#071610] shadow-sm font-extrabold' : 'text-white/80 hover:text-white'
-              }`}
-            >
-              العربية
-            </button>
-            <button
-              onClick={() => setLang('en')}
-              className={`px-3 py-1 rounded-full transition-all duration-300 cursor-pointer ${
-                !isAr ? 'bg-[#82E16B] text-[#071610] shadow-sm font-extrabold' : 'text-white/80 hover:text-white'
-              }`}
-            >
-              EN
-            </button>
-          </div>
+          {/* Language Pill Switcher: (🌐 EN) */}
+          <button
+            onClick={() => setLang(isAr ? 'en' : 'ar')}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/40 hover:border-[#82E16B] bg-black/40 hover:bg-black/60 backdrop-blur-md text-white text-xs sm:text-sm font-bold transition-all shadow-md cursor-pointer"
+            title={isAr ? 'Switch to English' : 'التحويل للعربية'}
+          >
+            <Globe className="w-3.5 h-3.5 text-[#82E16B]" />
+            <span>{isAr ? 'EN' : 'عربي'}</span>
+          </button>
         </div>
 
-        {/* Mobile Right Controls: Language Switcher + Hamburger Toggle */}
-        <div className="flex md:hidden items-center gap-2.5">
-          {/* Compact Language Toggle */}
-          <div className="flex items-center bg-black/70 backdrop-blur-md rounded-full border border-white/20 p-0.5 shadow-md text-xs font-bold">
-            <button
-              onClick={() => setLang('ar')}
-              className={`px-2.5 py-1 rounded-full transition-all duration-200 cursor-pointer ${
-                isAr ? 'bg-[#82E16B] text-[#071610] font-extrabold shadow-sm' : 'text-white/70'
-              }`}
-            >
-              عربي
-            </button>
-            <button
-              onClick={() => setLang('en')}
-              className={`px-2.5 py-1 rounded-full transition-all duration-200 cursor-pointer ${
-                !isAr ? 'bg-[#82E16B] text-[#071610] font-extrabold shadow-sm' : 'text-white/70'
-              }`}
-            >
-              EN
-            </button>
-          </div>
+        {/* Mobile Controls: Language Switcher + Hamburger Menu Toggle */}
+        <div className="flex md:hidden items-center gap-3">
+          <button
+            onClick={() => setLang(isAr ? 'en' : 'ar')}
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/30 bg-black/60 backdrop-blur-md text-white text-xs font-bold shadow-md cursor-pointer"
+          >
+            <Globe className="w-3 h-3 text-[#82E16B]" />
+            <span>{isAr ? 'EN' : 'عربي'}</span>
+          </button>
 
-          {/* Hamburger Menu Toggle Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="w-10 h-10 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-[#82E16B] hover:text-white flex items-center justify-center transition-colors shadow-lg cursor-pointer"
+            className="w-9 h-9 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-[#82E16B] hover:text-white flex items-center justify-center transition-colors shadow-lg cursor-pointer"
             aria-label="Toggle navigation menu"
           >
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -144,123 +136,119 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
 
       </header>
 
-      {/* Mobile Menu Dropdown Drawer */}
+      {/* Mobile Drawer */}
       {isMobileMenuOpen && (
         <div className="md:hidden relative z-40 bg-[#071610]/98 backdrop-blur-xl border-b border-[#1A4031] px-6 py-6 space-y-4 shadow-2xl animate-fadeIn">
-          <nav className="flex flex-col space-y-3" style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : '"A Nefel Sereke", sans-serif' }}>
+          <nav className="flex flex-col space-y-3" style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'sans-serif' }}>
             <button
               onClick={() => handleNavClick('home')}
               className="flex items-center justify-between text-base font-extrabold text-[#82E16B] py-2 border-b border-[#143224] text-start cursor-pointer"
             >
-              <span>{isAr ? 'الرئيسية' : 'HOME'}</span>
+              <span>{isAr ? 'الرئيسية' : 'Home'}</span>
               <span className="w-2 h-2 rounded-full bg-[#82E16B]"></span>
             </button>
             <button
               onClick={() => handleNavClick('about')}
               className="flex items-center justify-between text-base font-bold text-white/90 hover:text-[#82E16B] py-2 border-b border-[#143224] text-start transition-colors cursor-pointer"
             >
-              <span>{isAr ? 'عن المصمم' : 'ABOUT'}</span>
+              <span>{isAr ? 'نبذه عني' : 'About'}</span>
             </button>
             <button
               onClick={() => handleNavClick('portfolio')}
               className="flex items-center justify-between text-base font-bold text-white/90 hover:text-[#82E16B] py-2 border-b border-[#143224] text-start transition-colors cursor-pointer"
             >
-              <span>{isAr ? 'الأعمال المختارة' : 'PORTFOLIO'}</span>
+              <span>{isAr ? 'الاعمال' : 'Portfolio'}</span>
             </button>
             <button
               onClick={() => handleNavClick('services')}
               className="flex items-center justify-between text-base font-bold text-white/90 hover:text-[#82E16B] py-2 border-b border-[#143224] text-start transition-colors cursor-pointer"
             >
-              <span>{isAr ? 'خدمات التصميم' : 'SERVICES'}</span>
+              <span>{isAr ? 'الخدمات' : 'Services'}</span>
             </button>
             <button
               onClick={() => handleNavClick('contact')}
               className="flex items-center justify-between text-base font-bold text-white/90 hover:text-[#82E16B] py-2 text-start transition-colors cursor-pointer"
             >
-              <span>{isAr ? 'تواصل معي' : 'CONTACT'}</span>
+              <span>{isAr ? 'التواصل' : 'Contact'}</span>
             </button>
           </nav>
         </div>
       )}
 
-      {/* 3. Hero Typography:
-             - On Mobile (< lg): Positioned UNDER the portrait via pt-[38vh] xs:pt-[42vh], centered horizontally in the screen
-             - On Desktop (lg): Positioned on the LEFT side over the dark background canvas (lg:pt-0 lg:text-start lg:justify-start)
-      */}
-      <div className="relative z-10 w-full max-w-[1520px] mx-auto px-4 sm:px-8 lg:px-12 my-auto pt-[46vh] xs:pt-[50vh] sm:pt-[54vh] lg:pt-0 py-4 sm:py-8 lg:py-12">
-        <div className="w-full flex justify-center lg:justify-start">
+      {/* 3. Hero Center Typography matching user's exact mockup */}
+      <div className="relative z-20 w-full max-w-[1520px] mx-auto px-6 sm:px-10 lg:px-14 my-auto py-8 sm:py-12">
+        <div className="w-full flex justify-start">
           <div 
-            className={`w-full max-w-xl sm:max-w-2xl space-y-3 sm:space-y-5 text-center lg:text-start ${isAr ? 'lg:text-right' : 'lg:text-left'} mx-auto lg:mx-0`}
-            dir={isAr ? 'rtl' : 'ltr'}
+            className="w-full max-w-xl sm:max-w-2xl space-y-3 sm:space-y-4 text-right"
+            dir="rtl"
           >
             
-            {/* Eyebrow */}
+            {/* Eyebrow: مصمم جرافيك */}
             <div 
-              className={`text-xs sm:text-base font-bold text-[#82E16B] drop-shadow ${isAr ? 'tracking-normal' : 'tracking-[0.2em] uppercase'}`} 
-              style={{ fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : '"A Nefel Sereke", sans-serif' }}
+              className="text-white font-medium text-sm sm:text-base md:text-[18px] text-white/95"
+              style={{ 
+                fontFamily: isAr ? '"29LT Kaff", "Noto Sans Arabic", sans-serif' : 'inherit',
+                letterSpacing: isAr ? '0.35em' : '0.22em',
+              }}
             >
-              {isAr ? 'مـصـمـم جـرافـيـك وهـويـات بـصـريـة' : 'G R A P H I C   D E S I G N E R'}
+              {isAr ? 'مـصـمـم   جـرافـيـك' : 'G R A P H I C   D E S I G N E R'}
             </div>
 
-            {/* Main Headline */}
+            {/* Main Headline: أحمد ماهر / الكوتش ديزينر */}
             <h1 
-              className="text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-[88px] font-black tracking-tight text-white leading-[1.14] sm:leading-[1.05] drop-shadow-lg" 
-              style={{ fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : '"29LT Kaff", sans-serif' }}
+              className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[76px] xl:text-[84px] font-black text-white leading-[1.08] tracking-tight drop-shadow-xl select-none"
+              style={{ 
+                fontFamily: isAr ? '"A Nefel Sereke", "A Nefel Sereke Qelew", "Zain Length 1", sans-serif' : '"A Nefel Sereke", sans-serif' 
+              }}
             >
-              {isAr ? (
-                <>
-                  أحمد ماهر
-                  <span className="block text-[#82E16B] mt-1 font-extrabold">الكوتش للتصميم</span>
-                </>
-              ) : (
-                <>
-                  Al Kutsh
-                  <span className="block text-[#82E16B] mt-1 font-extrabold">Design</span>
-                </>
-              )}
+              <span className="block text-white">
+                {isAr ? 'أحمد ماهر' : 'Ahmed Maher'}
+              </span>
+              <span className="block text-[#82E16B] mt-1 sm:mt-2 drop-shadow-[0_4px_24px_rgba(130,225,107,0.35)]">
+                {isAr ? 'الكوتش ديزينر' : 'Alkutsh Designer'}
+              </span>
             </h1>
 
-            {/* Subtitle */}
+            {/* Description Paragraph */}
             <p 
-              className="text-xs sm:text-base md:text-lg text-white/90 leading-relaxed font-medium pt-1 max-w-[280px] sm:max-w-md lg:max-w-xl mx-auto lg:mx-0 drop-shadow-md px-1 sm:px-0" 
-              style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'sans-serif' }}
+              className="text-white/95 text-sm sm:text-base md:text-[17px] lg:text-[18px] font-normal leading-relaxed max-w-lg pt-2 drop-shadow"
+              style={{ fontFamily: isAr ? '"TS Safaa", "Noto Sans Arabic", sans-serif' : 'sans-serif' }}
             >
               {isAr 
-                ? 'حلول تصميمية حديثة ومتقنة توازن بدقة بين البساطة والأثر البصري القوي.' 
-                : 'MODERN, REFINED DESIGN SOLUTIONS THAT BALANCE SIMPLICITY WITH STRONG VISUAL IMPACT.'}
+                ? 'حلول تصميمية حديثة ومتقنة توازن بدقة بين البساطة والأثر البصري القوي'
+                : 'Modern, refined design solutions that balance simplicity with strong visual impact.'}
             </p>
 
-            {/* Accent Divider Line */}
-            <div className={`w-14 sm:w-20 h-[3px] bg-[#82E16B] rounded-full mt-2 sm:mt-4 shadow mx-auto ${isAr ? 'lg:mr-0 lg:ml-auto' : 'lg:ml-0 lg:mr-auto'}`}></div>
+            {/* Decorative Accent Line */}
+            <div className="w-12 sm:w-14 h-[3.5px] bg-[#82E16B] rounded-full mt-4 sm:mt-5 shadow-[0_0_12px_rgba(130,225,107,0.85)]"></div>
 
           </div>
         </div>
       </div>
 
-      {/* 5. Bottom Row: Interactive Scroll Down Button & Location Badge */}
+      {/* 4. Bottom Controls: [انتقل لأسفل] on Left & [مصر / العاشر من رمضان] on Right */}
       <footer 
-        className="relative z-10 w-full max-w-[1520px] mx-auto px-5 sm:px-8 lg:px-12 pb-6 sm:pb-12 flex flex-col sm:flex-row items-center justify-center lg:justify-between gap-3 sm:gap-4" 
+        className="relative z-20 w-full max-w-[1520px] mx-auto px-6 sm:px-10 lg:px-14 pb-6 sm:pb-10 flex items-center justify-between" 
+        dir="ltr"
       >
         
-        {/* Scroll Down Button */}
+        {/* Bottom Left: Scroll Down Button */}
         <button
           onClick={() => handleNavClick('about')}
-          className="group inline-flex items-center justify-center gap-2.5 text-xs sm:text-sm font-bold tracking-wider text-white hover:text-[#82E16B] transition-colors cursor-pointer bg-black/60 backdrop-blur-md px-4 sm:px-5 py-2.5 sm:py-3 rounded-full border border-white/20 shadow-lg"
-          style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'monospace' }}
+          className="group inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md border border-white/20 hover:border-[#82E16B]/60 text-white hover:text-[#82E16B] text-xs sm:text-sm font-medium transition-all shadow-lg cursor-pointer select-none"
+          style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'sans-serif' }}
         >
-          <ArrowDown className="w-4 h-4 text-[#82E16B] group-hover:translate-y-1 transition-transform animate-bounce" />
-          <span className="uppercase">
-            {isAr ? 'انتقل للأسفل' : 'SCROLL DOWN'}
-          </span>
+          <ArrowDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#82E16B] group-hover:translate-y-0.5 transition-transform" />
+          <span>{isAr ? 'انتقل لأسفل' : 'Scroll Down'}</span>
         </button>
 
-        {/* Location Badge */}
+        {/* Bottom Right: Location Badge */}
         <div 
-          className="flex items-center justify-center gap-2.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-semibold text-white shadow-lg"
-          style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'monospace' }}
+          className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white/90 text-xs sm:text-sm font-medium shadow-lg select-none"
+          style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'sans-serif' }}
         >
-          <span className="w-2 h-2 rounded-full bg-[#82E16B] animate-pulse"></span>
-          <span>{isAr ? 'مصر / العاشر من رمضان' : 'Egypt / 10th Of Ramadan'}</span>
+          <span className="w-2 h-2 rounded-full bg-[#82E16B] shadow-[0_0_8px_rgba(130,225,107,1)] animate-pulse"></span>
+          <span>{isAr ? 'مصر / العاشر من رمضان' : 'Egypt / 10th of Ramadan'}</span>
         </div>
 
       </footer>
