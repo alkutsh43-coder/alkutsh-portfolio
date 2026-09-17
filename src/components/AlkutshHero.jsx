@@ -50,7 +50,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
             e.preventDefault();
             handleNavClick('home');
           }}
-          className="group cursor-pointer select-none drop-shadow-md flex items-center"
+          className="group cursor-pointer select-none flex items-center"
           aria-label="Alkutsh Designs Home"
         >
           <AlkutshLogo className="h-9 sm:h-12" light={true} />
@@ -68,7 +68,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
               className="relative text-[#82E16B] font-bold py-1 hover:text-[#9df288] transition-colors cursor-pointer"
             >
               {isAr ? 'الرئيسية' : 'Home'}
-              <span className="absolute -bottom-1 inset-x-0 h-[2.5px] bg-[#82E16B] rounded-full shadow-[0_0_8px_rgba(130,225,107,0.8)]"></span>
+              <span className="absolute -bottom-1 inset-x-0 h-[2.5px] bg-[#82E16B] rounded-full"></span>
             </button>
 
             {/* نبذه عني */}
@@ -175,15 +175,15 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
         </div>
       )}
 
-      {/* 3. Hero Typography strictly positioned on the LEFT side of the screen (in the empty dark wall space above the plant, keeping Ahmed's portrait completely clear on the right) */}
+      {/* 3. Hero Typography strictly aligned to the LEFT, matching the exact left edge of the logo */}
       <div 
         className="relative z-20 w-full max-w-[1520px] mx-auto px-6 sm:px-10 lg:px-14 my-auto py-8 sm:py-12"
         style={{ direction: 'ltr' }}
       >
         <div className="flex justify-start">
           <div 
-            className="w-full max-w-xl sm:max-w-2xl space-y-3 sm:space-y-4 text-right"
-            style={{ direction: 'rtl' }}
+            className="w-full max-w-xl sm:max-w-2xl space-y-3 sm:space-y-4 text-left flex flex-col items-start"
+            style={{ direction: 'ltr', textAlign: 'left' }}
           >
             
             {/* Eyebrow: مصمم جرافيك */}
@@ -197,9 +197,9 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
               {isAr ? 'مـصـمـم   جـرافـيـك' : 'G R A P H I C   D E S I G N E R'}
             </div>
 
-            {/* Main Headline: أحمد ماهر / الكوتش ديزينر (using Zain Length 1) */}
+            {/* Main Headline: أحمد ماهر / الكوتش ديزينر (Zain Length 1, pure crisp colors without glow) */}
             <h1 
-              className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[80px] xl:text-[88px] font-black text-white leading-[1.08] tracking-tight drop-shadow-xl select-none"
+              className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[80px] xl:text-[88px] font-black leading-[1.08] tracking-tight select-none"
               style={{ 
                 fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : '"29LT Kaff", sans-serif' 
               }}
@@ -207,14 +207,14 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
               <span className="block text-white font-extrabold">
                 {isAr ? 'أحمد ماهر' : 'Ahmed Maher'}
               </span>
-              <span className="block text-[#82E16B] mt-1 sm:mt-2 font-extrabold drop-shadow-[0_4px_24px_rgba(130,225,107,0.35)]">
+              <span className="block text-[#82E16B] mt-1 sm:mt-2 font-extrabold">
                 {isAr ? 'الكوتش ديزينر' : 'Alkutsh Designer'}
               </span>
             </h1>
 
             {/* Description Paragraph */}
             <p 
-              className="text-white/95 text-sm sm:text-base md:text-[17px] lg:text-[18px] font-normal leading-relaxed max-w-lg pt-2 drop-shadow"
+              className="text-white/95 text-sm sm:text-base md:text-[17px] lg:text-[18px] font-normal leading-relaxed max-w-lg pt-2"
               style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'sans-serif' }}
             >
               {isAr 
@@ -222,8 +222,8 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
                 : 'Modern, refined design solutions that balance simplicity with strong visual impact.'}
             </p>
 
-            {/* Decorative Accent Line */}
-            <div className="w-12 sm:w-14 h-[3.5px] bg-[#82E16B] rounded-full mt-4 sm:mt-5 shadow-[0_0_12px_rgba(130,225,107,0.85)]"></div>
+            {/* Decorative Accent Line (NO glow, clean lime green) */}
+            <div className="w-12 sm:w-14 h-[3.5px] bg-[#82E16B] rounded-full mt-4 sm:mt-5"></div>
 
           </div>
         </div>
@@ -250,7 +250,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
           className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white/90 text-xs sm:text-sm font-medium shadow-lg select-none"
           style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'sans-serif' }}
         >
-          <span className="w-2 h-2 rounded-full bg-[#82E16B] shadow-[0_0_8px_rgba(130,225,107,1)] animate-pulse"></span>
+          <span className="w-2 h-2 rounded-full bg-[#82E16B] animate-pulse"></span>
           <span>{isAr ? 'مصر / العاشر من رمضان' : 'Egypt / 10th of Ramadan'}</span>
         </div>
 
