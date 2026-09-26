@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { ArrowDown, Globe, Menu, X } from 'lucide-react';
+import { ArrowDown, Globe, Menu, X, FileText, ArrowLeft } from 'lucide-react';
 import { AlkutshLogo } from './AlkutshLogo';
 
-export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
+export const AlkutshHero = ({ lang, setLang, scrollToSection, onOpenBrief }) => {
   const isAr = lang === 'ar';
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -269,6 +269,21 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
                 ? 'حلول تصميمية حديثة ومتقنة توازن بدقة بين البساطة والأثر البصري القوي'
                 : 'Modern, refined design solutions that balance simplicity with strong visual impact.'}
             </p>
+
+            {/* ------------------------------------------------------------- */}
+            {/* 📌 [NEW] زر: "انتقل لصفحة البريف"                             */}
+            {/* ------------------------------------------------------------- */}
+            <div className="hero-brief-wrap pt-2 sm:pt-3">
+              <button
+                onClick={() => onOpenBrief ? onOpenBrief() : scrollToSection('contact')}
+                className="hero-brief-btn group inline-flex items-center gap-2.5 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-[#82E16B] hover:bg-[#9cf288] text-[#071610] font-extrabold text-sm sm:text-base transition-all duration-300 shadow-[0_4px_25px_rgba(130,225,107,0.35)] hover:shadow-[0_8px_35px_rgba(130,225,107,0.55)] hover:scale-105 active:scale-95 cursor-pointer select-none"
+                style={{ fontFamily: isAr ? '"Noto Sans Arabic", "29LT Kaff", sans-serif' : 'inherit' }}
+              >
+                <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-[#071610] transition-transform group-hover:rotate-6" />
+                <span>{isAr ? 'انتقل لصفحة البريف' : 'Start Project Brief'}</span>
+                <ArrowLeft className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform ${isAr ? 'group-hover:-translate-x-1' : 'rotate-180 group-hover:translate-x-1'}`} />
+              </button>
+            </div>
 
             {/* ------------------------------------------------------------- */}
             {/* 📌 [5] الخط الأخضر الديكوري (—)                                */}

@@ -280,7 +280,7 @@
      - صغّر الرقم لرفعها لفوق
   */
   .hero-text-container {
-    transform: translateY(510px) !important;
+    transform: translateY(485px) !important;
     padding-left: 20px !important;
     padding-right: 20px !important;
     margin-left: auto !important;
@@ -340,7 +340,15 @@
     transform: none !important;
   }
 
-  /* 📌 [8] الخط الأخضر الديكوري في المنتصف */
+  /* 📌 [8] زر صفحة البريف في المنتصف */
+  .hero-brief-wrap {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin-top: 6px !important;
+  }
+
+  /* 📌 [9] الخط الأخضر الديكوري في المنتصف */
   .hero-line {
     width: 44px !important;
     height: 3px !important;

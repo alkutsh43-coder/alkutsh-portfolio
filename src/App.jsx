@@ -7,6 +7,7 @@ import { EditorialProcess } from './components/EditorialProcess';
 import { EditorialTestimonials } from './components/EditorialTestimonials';
 import { EditorialFooter } from './components/EditorialFooter';
 import { EditorialCaseStudy } from './components/EditorialCaseStudy';
+import { EditorialBriefModal } from './components/EditorialBriefModal';
 
 export function App() {
   const [lang, setLang] = useState(() => {
@@ -17,6 +18,7 @@ export function App() {
     }
   });
   const [selectedProject, setSelectedProject] = useState(null);
+  const [isBriefModalOpen, setIsBriefModalOpen] = useState(false);
 
   const handleSetLang = (newLang) => {
     setLang(newLang);
@@ -46,6 +48,7 @@ export function App() {
         lang={lang}
         setLang={handleSetLang}
         scrollToSection={scrollToSection}
+        onOpenBrief={() => setIsBriefModalOpen(true)}
       />
 
       {/* Main Content Sections */}
@@ -89,6 +92,14 @@ export function App() {
           project={selectedProject}
           lang={lang}
           onClose={() => setSelectedProject(null)}
+        />
+      )}
+
+      {/* 6. Creative Project Brief Modal */}
+      {isBriefModalOpen && (
+        <EditorialBriefModal
+          lang={lang}
+          onClose={() => setIsBriefModalOpen(false)}
         />
       )}
     </div>
