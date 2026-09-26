@@ -22,19 +22,27 @@ export const EditorialFooter = ({ lang }) => {
               <AlkutshLogo className="h-9 sm:h-12" light={true} />
             </div>
             <h2 
-              className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight tracking-tight"
-              style={{ fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : '"A Nefel Sereke", sans-serif' }}
+              className="text-lg sm:text-xl md:text-2xl font-bold text-white leading-relaxed max-w-xl"
+              style={{ fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : '"29LT Kaff", sans-serif' }}
             >
               {isAr ? (
                 <>
-                  جاهز للتعاون الميداني في مشاريع الهويات البصرية والمطبوعات الكبرى.
+                  جاهز لبدء مشروعك القادم والتعاون في تطوير الهويات البصرية وتصميمات التغليف والطباعة.
                 </>
               ) : (
                 <>
-                  Available for on-site roles and major identity & packaging projects.
+                  Ready to collaborate on your next brand identity, custom packaging, and print production project.
                 </>
               )}
             </h2>
+            <p 
+              className="text-xs sm:text-sm text-white/60 font-normal leading-relaxed"
+              style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'sans-serif' }}
+            >
+              {isAr 
+                ? 'تواصل معي مباشرة لمناقشة تفاصيل العمل والبدء في التنفيذ.' 
+                : 'Get in touch directly to discuss your project scope and timelines.'}
+            </p>
           </div>
 
           {/* Quick WhatsApp Action Button */}
