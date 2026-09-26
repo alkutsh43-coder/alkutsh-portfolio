@@ -455,25 +455,39 @@
     .visual-card-media {
       width: 100%;
       height: 125px;
-      background: #0A1C14;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       overflow: hidden;
       border-bottom: 1px solid var(--border-subtle);
-      transition: transform 0.3s ease;
+      background: #0A1C14;
     }
 
-    .visual-card:hover .visual-card-media svg {
-      transform: scale(1.04);
+    .visual-card-media.logo-media {
+      background: #FFFFFF;
+      padding: 16px;
     }
 
-    .visual-card-media svg {
-      transition: transform 0.3s ease;
+    .brand-img-contain {
+      max-width: 82%;
+      max-height: 65px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      transition: transform 0.28s ease;
+    }
+
+    .brand-img-cover {
       width: 100%;
       height: 100%;
-      display: block;
+      object-fit: cover;
+      transition: transform 0.32s ease;
+    }
+
+    .visual-card:hover .brand-img-contain,
+    .visual-card:hover .brand-img-cover {
+      transform: scale(1.06);
     }
 
     .card-badge-check {
@@ -882,169 +896,75 @@
 
             <div class="visual-cards-grid" id="logoStylesGrid">
               
-              <!-- Card 1: Wordmark / Typographic -->
-              <div class="visual-card selected" data-value="شعار خطي / تايبوجرافي (Wordmark)">
+              <!-- Card 1: Google (Wordmark) -->
+              <div class="visual-card selected" data-value="شعار خطي (مثل Google)">
                 <div class="card-badge-check"></div>
-                <div class="visual-card-media">
-                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <linearGradient id="bgGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#081E15"/>
-                        <stop offset="100%" stop-color="#04100B"/>
-                      </linearGradient>
-                      <linearGradient id="goldText" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#E5C378"/>
-                        <stop offset="100%" stop-color="#FFF2B8"/>
-                      </linearGradient>
-                    </defs>
-                    <rect width="200" height="120" fill="url(#bgGrad1)"/>
-                    <circle cx="100" cy="60" r="45" fill="none" stroke="rgba(229,195,120,0.12)" stroke-width="1"/>
-                    <text x="100" y="58" font-family="'Cairo', sans-serif" font-size="22" font-weight="900" fill="url(#goldText)" text-anchor="middle" letter-spacing="2">نُـخْـبَـة</text>
-                    <text x="100" y="78" font-family="'Inter', sans-serif" font-size="9" font-weight="600" fill="#6CE680" text-anchor="middle" letter-spacing="5">ELITE LUXURY</text>
-                    <line x1="60" y1="88" x2="140" y2="88" stroke="rgba(108,230,128,0.3)" stroke-width="1"/>
-                  </svg>
+                <div class="visual-card-media logo-media">
+                  <img src="./assets/brief/logo_google.svg" alt="Google Logo" class="brand-img-contain">
                 </div>
                 <div class="visual-card-body">
-                  <div class="card-item-title">شعار خطي (Wordmark)</div>
-                  <div class="card-item-desc">كتابة اسم البراند بخط فني فريد ومميز (مثل Sony, Google).</div>
+                  <div class="card-item-title">شعار خطي (مثل Google)</div>
+                  <div class="card-item-desc">يعتمد على اسم البراند كاملاً مكتوباً بخط وألوان خاصة دون رمز مستقل.</div>
                 </div>
               </div>
 
-              <!-- Card 2: Pictorial / Icon Mark -->
-              <div class="visual-card" data-value="شعار رمزي / أيقوني (Pictorial Mark)">
+              <!-- Card 2: McDonald's (Lettermark) -->
+              <div class="visual-card" data-value="شعار حرفي (مثل McDonald's)">
                 <div class="card-badge-check"></div>
-                <div class="visual-card-media">
-                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#071912"/>
-                        <stop offset="100%" stop-color="#030E09"/>
-                      </linearGradient>
-                      <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#6CE680"/>
-                        <stop offset="100%" stop-color="#1EBE5D"/>
-                      </linearGradient>
-                    </defs>
-                    <rect width="200" height="120" fill="url(#bgGrad2)"/>
-                    <circle cx="100" cy="55" r="32" fill="rgba(108,230,128,0.08)"/>
-                    <!-- Geometric Modern Falcon / Wing Shape -->
-                    <path d="M100 32 L118 52 L112 68 L100 60 L88 68 L82 52 Z" fill="url(#iconGrad)"/>
-                    <circle cx="100" cy="46" r="4" fill="#ffffff"/>
-                    <text x="100" y="92" font-family="'Inter', sans-serif" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="3">ICONIC SYMBOL</text>
-                  </svg>
+                <div class="visual-card-media logo-media" style="background: #DA291C;">
+                  <img src="./assets/brief/logo_mcdonalds.svg" alt="McDonald's Golden Arches" class="brand-img-contain" style="max-height: 70px;">
                 </div>
                 <div class="visual-card-body">
-                  <div class="card-item-title">شعار رمزي (Icon Mark)</div>
-                  <div class="card-item-desc">أيقونة أو رمز بصري مجرد خالص يعبر عن الفكرة (مثل Apple).</div>
+                  <div class="card-item-title">شعار حرفي (مثل McDonald's)</div>
+                  <div class="card-item-desc">يعتمد على اختصار اسم الشركة بالحرف الأول أو مونوغرام أيقوني شهير.</div>
                 </div>
               </div>
 
-              <!-- Card 3: Monogram / Lettermark -->
-              <div class="visual-card" data-value="شعار مونوغرام / حرفي (Lettermark)">
+              <!-- Card 3: Apple (Pictorial) -->
+              <div class="visual-card" data-value="شعار رمزي (مثل Apple)">
                 <div class="card-badge-check"></div>
-                <div class="visual-card-media">
-                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#081E15"/>
-                        <stop offset="100%" stop-color="#04100B"/>
-                      </linearGradient>
-                      <linearGradient id="monogramGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#FFF0A0"/>
-                        <stop offset="100%" stop-color="#D4AF37"/>
-                      </linearGradient>
-                    </defs>
-                    <rect width="200" height="120" fill="url(#bgGrad3)"/>
-                    <rect x="75" y="25" width="50" height="50" rx="10" transform="rotate(45 100 50)" fill="none" stroke="rgba(212,175,55,0.25)" stroke-width="1.5"/>
-                    <text x="94" y="58" font-family="'Cairo', sans-serif" font-size="28" font-weight="900" fill="url(#monogramGrad)">كـ</text>
-                    <text x="110" y="60" font-family="'Inter', sans-serif" font-size="22" font-weight="800" fill="#6CE680">A</text>
-                    <text x="100" y="94" font-family="'Inter', sans-serif" font-size="8.5" font-weight="600" fill="#B2CCC0" text-anchor="middle" letter-spacing="4">MONOGRAM</text>
-                  </svg>
+                <div class="visual-card-media logo-media">
+                  <img src="./assets/brief/logo_apple.svg" alt="Apple Logo" class="brand-img-contain" style="max-height: 60px;">
                 </div>
                 <div class="visual-card-body">
-                  <div class="card-item-title">شعار مونوغرام (Monogram)</div>
-                  <div class="card-item-desc">حرف أو حرفين مدموجين بأناقة وفخامة (مثل LV, Chanel, AM).</div>
+                  <div class="card-item-title">شعار رمزي (مثل Apple)</div>
+                  <div class="card-item-desc">أيقونة أو رمز بصري مجرد خالص وسهل الحفظ من النظرة الأولى.</div>
                 </div>
               </div>
 
-              <!-- Card 4: Combination Mark -->
-              <div class="visual-card selected" data-value="شعار تركيبي - رمز واسم (Combination Mark)">
+              <!-- Card 4: Adidas (Combination) -->
+              <div class="visual-card selected" data-value="شعار تركيبي (مثل Adidas)">
                 <div class="card-badge-check"></div>
-                <div class="visual-card-media">
-                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <linearGradient id="bgGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#092017"/>
-                        <stop offset="100%" stop-color="#04120C"/>
-                      </linearGradient>
-                    </defs>
-                    <rect width="200" height="120" fill="url(#bgGrad4)"/>
-                    <!-- Modern Symbol + Typography combo -->
-                    <g transform="translate(100, 42)">
-                      <path d="M-14 -12 L0 -24 L14 -12 L14 10 L0 18 L-14 10 Z" fill="none" stroke="#6CE680" stroke-width="2.5"/>
-                      <circle cx="0" cy="-2" r="5" fill="#6CE680"/>
-                    </g>
-                    <text x="100" y="78" font-family="'Cairo', sans-serif" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">شـركـة نـبـتـة</text>
-                    <text x="100" y="94" font-family="'Inter', sans-serif" font-size="8" font-weight="500" fill="#6CE680" text-anchor="middle" letter-spacing="3">COMBINATION MARK</text>
-                  </svg>
+                <div class="visual-card-media logo-media">
+                  <img src="./assets/brief/logo_adidas.svg" alt="Adidas Logo" class="brand-img-contain" style="max-height: 65px;">
                 </div>
                 <div class="visual-card-body">
-                  <div class="card-item-title">شعار تركيبي (Combination)</div>
-                  <div class="card-item-desc">رمز مميز بالأعلى أو اليمين مع الاسم بجانبه (مثل Adidas, Nike).</div>
+                  <div class="card-item-title">شعار تركيبي (مثل Adidas)</div>
+                  <div class="card-item-desc">يجمع بين رمز بصري مستقل مع اسم البراند بتكامل دائم.</div>
                 </div>
               </div>
 
-              <!-- Card 5: Emblem / Badge -->
-              <div class="visual-card" data-value="شعار شارة / درع كلاسيكي (Emblem / Badge)">
+              <!-- Card 5: Starbucks (Emblem) -->
+              <div class="visual-card" data-value="شعار شارة / ختم (مثل Starbucks)">
                 <div class="card-badge-check"></div>
-                <div class="visual-card-media">
-                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <linearGradient id="bgGrad5" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#071911"/>
-                        <stop offset="100%" stop-color="#030E09"/>
-                      </linearGradient>
-                    </defs>
-                    <rect width="200" height="120" fill="url(#bgGrad5)"/>
-                    <circle cx="100" cy="54" r="34" fill="none" stroke="#E5C378" stroke-width="1.5" stroke-dasharray="3,2"/>
-                    <circle cx="100" cy="54" r="28" fill="rgba(229,195,120,0.08)" stroke="#E5C378" stroke-width="1"/>
-                    <polygon points="100,32 103,40 111,40 105,45 107,53 100,48 93,53 95,45 89,40 97,40" fill="#6CE680" transform="scale(0.7) translate(43, 15)"/>
-                    <text x="100" y="57" font-family="'Cairo', sans-serif" font-size="11" font-weight="800" fill="#ffffff" text-anchor="middle">أصـالـة</text>
-                    <text x="100" y="69" font-family="'Inter', sans-serif" font-size="7" font-weight="700" fill="#E5C378" text-anchor="middle">EST. 2025</text>
-                    <text x="100" y="100" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#B2CCC0" text-anchor="middle" letter-spacing="3">EMBLEM BADGE</text>
-                  </svg>
+                <div class="visual-card-media logo-media">
+                  <img src="./assets/brief/logo_starbucks.svg" alt="Starbucks Logo" class="brand-img-contain" style="max-height: 72px;">
                 </div>
                 <div class="visual-card-body">
-                  <div class="card-item-title">شعار شارة (Emblem)</div>
-                  <div class="card-item-desc">ختم أو درع كلاسيكي متماسك داخله الاسم والرمز (مثل Starbucks).</div>
+                  <div class="card-item-title">شعار شارة (مثل Starbucks)</div>
+                  <div class="card-item-desc">شعار متماسك داخل ختم دائري أو درع يدمج الاسم والرمز بداخله.</div>
                 </div>
               </div>
 
-              <!-- Card 6: Mascot / Character -->
-              <div class="visual-card" data-value="شعار شخصية / ماسكوت (Mascot)">
+              <!-- Card 6: KFC (Mascot) -->
+              <div class="visual-card" data-value="شعار شخصية / ماسكوت (مثل KFC)">
                 <div class="card-badge-check"></div>
-                <div class="visual-card-media">
-                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <linearGradient id="bgGrad6" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#081E15"/>
-                        <stop offset="100%" stop-color="#04100B"/>
-                      </linearGradient>
-                    </defs>
-                    <rect width="200" height="120" fill="url(#bgGrad6)"/>
-                    <circle cx="100" cy="50" r="30" fill="rgba(108,230,128,0.12)"/>
-                    <!-- Friendly Character Mascot Illustration -->
-                    <path d="M85 45 Q100 28 115 45 Q120 62 100 68 Q80 62 85 45 Z" fill="#6CE680"/>
-                    <circle cx="94" cy="46" r="3.5" fill="#07150E"/>
-                    <circle cx="106" cy="46" r="3.5" fill="#07150E"/>
-                    <path d="M94 56 Q100 61 106 56" fill="none" stroke="#07150E" stroke-width="2" stroke-linecap="round"/>
-                    <text x="100" y="92" font-family="'Cairo', sans-serif" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">شخصية كرتونية</text>
-                    <text x="100" y="104" font-family="'Inter', sans-serif" font-size="7.5" font-weight="600" fill="#6CE680" text-anchor="middle" letter-spacing="3">MASCOT</text>
-                  </svg>
+                <div class="visual-card-media logo-media" style="background: #E4002B;">
+                  <img src="./assets/brief/logo_kfc.svg" alt="KFC Logo" class="brand-img-contain" style="max-height: 68px; filter: brightness(0) invert(1);">
                 </div>
                 <div class="visual-card-body">
-                  <div class="card-item-title">شعار شخصية (Mascot)</div>
-                  <div class="card-item-desc">رسمة كرتونية مرحة لشخصية تمثل البراند (مثل KFC, Pringles).</div>
+                  <div class="card-item-title">شعار شخصية (مثل KFC)</div>
+                  <div class="card-item-desc">يعتمد على رسمة شخصية إنسانية أو كرتونية مميزة تعبر عن روح البراند.</div>
                 </div>
               </div>
 
@@ -1067,29 +987,11 @@
               <div class="visual-card selected" data-value="علبة كرتون صلبة فاخرة (Rigid Box)">
                 <div class="card-badge-check"></div>
                 <div class="visual-card-media">
-                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="200" height="120" fill="#081E15"/>
-                    <!-- 3D Luxury Box with Lid -->
-                    <g transform="translate(100, 62)">
-                      <!-- Base Box -->
-                      <polygon points="-45,-5 0,16 45,-5 0,-26" fill="#133626"/>
-                      <polygon points="-45,-5 0,16 0,42 -45,21" fill="#0B2117"/>
-                      <polygon points="0,16 45,-5 45,21 0,42" fill="#184230"/>
-                      <!-- Floating Lid -->
-                      <g transform="translate(0, -18)">
-                        <polygon points="-47,-8 0,14 47,-8 0,-30" fill="#1E523C" stroke="#6CE680" stroke-width="1.2"/>
-                        <polygon points="-47,-8 0,14 0,22 -47,0" fill="#133626"/>
-                        <polygon points="0,14 47,-8 47,0 0,22" fill="#1A4734"/>
-                        <!-- Gold Ribbon on Lid -->
-                        <line x1="-24" y1="3" x2="24" y2="-19" stroke="#E5C378" stroke-width="2"/>
-                      </g>
-                    </g>
-                    <text x="100" y="112" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#6CE680" text-anchor="middle" letter-spacing="3">RIGID LUXURY BOX</text>
-                  </svg>
+                  <img src="./assets/brief/pack_rigid_box.jpg" alt="Rigid Luxury Box" class="brand-img-cover">
                 </div>
                 <div class="visual-card-body">
                   <div class="card-item-title">علبة صلبة فاخرة (Rigid)</div>
-                  <div class="card-item-desc">كرتون رمادي مقوى للعطور، الساعات، الهدايا والسلع الراقية.</div>
+                  <div class="card-item-desc">كرتون مقوى للعطور، الساعات، الهدايا، والمصوغات الفاخرة.</div>
                 </div>
               </div>
 
@@ -1097,21 +999,7 @@
               <div class="visual-card" data-value="علبة كرتونية مطوية (Folding Carton)">
                 <div class="card-badge-check"></div>
                 <div class="visual-card-media">
-                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="200" height="120" fill="#071911"/>
-                    <!-- 3D Folding Box with Tuck Top -->
-                    <g transform="translate(100, 60)">
-                      <polygon points="-30,-15 0,0 30,-15 0,-30" fill="#18422F"/>
-                      <polygon points="-30,-15 0,0 0,40 -30,25" fill="#0E281C"/>
-                      <polygon points="0,0 30,-15 30,25 0,40" fill="#1E523A"/>
-                      <!-- Tuck Flap -->
-                      <polygon points="0,-30 30,-15 22,-22 0,-34" fill="#6CE680" opacity="0.8"/>
-                      <!-- Front artwork preview line -->
-                      <line x1="8" y1="8" x2="22" y2="1" stroke="#ffffff" stroke-width="1.5" opacity="0.6"/>
-                      <line x1="8" y1="16" x2="18" y2="11" stroke="#6CE680" stroke-width="1.5" opacity="0.8"/>
-                    </g>
-                    <text x="100" y="112" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#B2CCC0" text-anchor="middle" letter-spacing="3">FOLDING CARTON</text>
-                  </svg>
+                  <img src="./assets/brief/pack_folding_box.jpg" alt="Folding Carton" class="brand-img-cover">
                 </div>
                 <div class="visual-card-body">
                   <div class="card-item-title">علبة كرتون مطوية (Tuck)</div>
@@ -1123,20 +1011,7 @@
               <div class="visual-card" data-value="كرتون شحن مموج (Corrugated Mailer)">
                 <div class="card-badge-check"></div>
                 <div class="visual-card-media">
-                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="200" height="120" fill="#091F16"/>
-                    <!-- Kraft Corrugated Mailer Box Open -->
-                    <g transform="translate(100, 60)">
-                      <!-- Base -->
-                      <polygon points="-42,-6 0,14 42,-6 0,-26" fill="#8C6A48"/>
-                      <polygon points="-42,-6 0,14 0,34 -42,14" fill="#634A31"/>
-                      <polygon points="0,14 42,-6 42,14 0,34" fill="#75583B"/>
-                      <!-- Open Lid -->
-                      <polygon points="-42,-6 0,-26 0,-44 -42,-24" fill="#A37E57"/>
-                      <polygon points="0,-26 42,-6 42,-24 0,-44" fill="#BA9064"/>
-                    </g>
-                    <text x="100" y="112" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#E5C378" text-anchor="middle" letter-spacing="3">CORRUGATED MAILER</text>
-                  </svg>
+                  <img src="./assets/brief/pack_mailer_box.jpg" alt="Corrugated Mailer Box" class="brand-img-cover">
                 </div>
                 <div class="visual-card-body">
                   <div class="card-item-title">كرتون شحن (Mailer Box)</div>
@@ -1148,21 +1023,7 @@
               <div class="visual-card selected" data-value="ليبل واستيكر منتجات (Label / Sticker)">
                 <div class="card-badge-check"></div>
                 <div class="visual-card-media">
-                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="200" height="120" fill="#071911"/>
-                    <!-- Glass Cosmetic Jar / Bottle with Label -->
-                    <g transform="translate(100, 52)">
-                      <!-- Bottle Silhouette -->
-                      <rect x="-24" y="-30" width="48" height="64" rx="10" fill="#0C261B" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
-                      <rect x="-14" y="-40" width="28" height="10" rx="3" fill="#E5C378"/>
-                      <!-- Golden Foil Label -->
-                      <rect x="-20" y="-14" width="40" height="34" rx="4" fill="#06140D" stroke="#6CE680" stroke-width="1.2"/>
-                      <circle cx="0" cy="-3" r="5" fill="#E5C378"/>
-                      <line x1="-12" y1="8" x2="12" y2="8" stroke="#ffffff" stroke-width="1.2"/>
-                      <line x1="-8" y1="13" x2="8" y2="13" stroke="#6CE680" stroke-width="1"/>
-                    </g>
-                    <text x="100" y="112" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#6CE680" text-anchor="middle" letter-spacing="3">PRODUCT LABEL</text>
-                  </svg>
+                  <img src="./assets/brief/pack_bottle_label.jpg" alt="Product Label" class="brand-img-cover">
                 </div>
                 <div class="visual-card-body">
                   <div class="card-item-title">ليبل واستيكر (Labels)</div>
@@ -1174,21 +1035,7 @@
               <div class="visual-card" data-value="أكياس ورقية فاخرة (Luxury Bags)">
                 <div class="card-badge-check"></div>
                 <div class="visual-card-media">
-                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="200" height="120" fill="#081E15"/>
-                    <!-- Paper Bag with Twisted Cord Handle -->
-                    <g transform="translate(100, 56)">
-                      <!-- Handles -->
-                      <path d="M-14 -24 Q-8 -42 0 -42 Q8 -42 14 -24" fill="none" stroke="#E5C378" stroke-width="2"/>
-                      <!-- Bag Body -->
-                      <polygon points="-28,-22 28,-22 24,30 -24,30" fill="#0F2B1E" stroke="rgba(255,255,255,0.12)" stroke-width="1.2"/>
-                      <polygon points="28,-22 36,-16 31,34 24,30" fill="#091C13"/>
-                      <!-- Brand Gold Stamp -->
-                      <circle cx="0" cy="4" r="9" fill="rgba(229,195,120,0.15)" stroke="#E5C378" stroke-width="1"/>
-                      <text x="0" y="7" font-family="'Inter', sans-serif" font-size="6" font-weight="800" fill="#6CE680" text-anchor="middle">BAG</text>
-                    </g>
-                    <text x="100" y="112" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#E5C378" text-anchor="middle" letter-spacing="3">PAPER BAG</text>
-                  </svg>
+                  <img src="./assets/brief/pack_paper_bag.jpg" alt="Luxury Paper Bag" class="brand-img-cover">
                 </div>
                 <div class="visual-card-body">
                   <div class="card-item-title">أكياس ورقية فاخرة (Bags)</div>
@@ -1215,15 +1062,7 @@
               <div class="visual-card" data-value="حروف بارزة ثلاثية الأبعاد مضيئة (Channel Letters)">
                 <div class="card-badge-check"></div>
                 <div class="visual-card-media">
-                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="200" height="120" fill="#05100B"/>
-                    <!-- Dark Facade Wall with glowing 3D Letters -->
-                    <rect x="20" y="25" width="160" height="60" rx="4" fill="#0B1A13" stroke="rgba(255,255,255,0.06)"/>
-                    <!-- Glow Behind Letters -->
-                    <circle cx="100" cy="55" r="35" fill="rgba(108,230,128,0.18)" filter="blur(8px)"/>
-                    <text x="100" y="62" font-family="'Cairo', sans-serif" font-size="20" font-weight="900" fill="#ffffff" text-anchor="middle" stroke="#6CE680" stroke-width="1.2">الكـوتـش</text>
-                    <text x="100" y="104" font-family="'Inter', sans-serif" font-size="8" font-weight="700" fill="#6CE680" text-anchor="middle" letter-spacing="3">3D ILLUMINATED</text>
-                  </svg>
+                  <img src="./assets/brief/sign_3d_letters.jpg" alt="3D Illuminated Sign" class="brand-img-cover">
                 </div>
                 <div class="visual-card-body">
                   <div class="card-item-title">حروف بارزة مضيئة (3D LED)</div>
@@ -1235,19 +1074,7 @@
               <div class="visual-card" data-value="واجهات كلادينج واكريليك (Cladding Panels)">
                 <div class="card-badge-check"></div>
                 <div class="visual-card-media">
-                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="200" height="120" fill="#071911"/>
-                    <!-- Modern Cladding Panels Grid -->
-                    <g transform="translate(20, 20)">
-                      <rect x="0" y="0" width="76" height="30" fill="#102B1F" stroke="#05100B" stroke-width="1"/>
-                      <rect x="80" y="0" width="80" height="30" fill="#143627" stroke="#05100B" stroke-width="1"/>
-                      <rect x="0" y="34" width="160" height="30" fill="#0D241A" stroke="#05100B" stroke-width="1"/>
-                      <!-- Acrylic Sign Plaque -->
-                      <rect x="40" y="14" width="80" height="36" rx="4" fill="#06120B" stroke="#6CE680" stroke-width="1.2"/>
-                      <text x="80" y="36" font-family="'Cairo', sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">واجهة المحل</text>
-                    </g>
-                    <text x="100" y="104" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#B2CCC0" text-anchor="middle" letter-spacing="3">CLADDING PANELS</text>
-                  </svg>
+                  <img src="./assets/brief/sign_3d_letters.jpg" alt="Cladding Facade" class="brand-img-cover" style="filter: brightness(0.85) contrast(1.1);">
                 </div>
                 <div class="visual-card-body">
                   <div class="card-item-title">واجهات كلادينج (Cladding)</div>
@@ -1259,15 +1086,7 @@
               <div class="visual-card" data-value="لافتات نيون فليكس عصرية (Neon Signs)">
                 <div class="card-badge-check"></div>
                 <div class="visual-card-media">
-                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="200" height="120" fill="#030C07"/>
-                    <!-- Dark Brick / Glow Neon Wall -->
-                    <g transform="translate(100, 54)">
-                      <circle cx="0" cy="0" r="28" fill="none" stroke="#6CE680" stroke-width="3" filter="drop-shadow(0 0 8px #6CE680)"/>
-                      <path d="M-12 -6 Q0 -16 12 -6 Q16 12 0 16 Q-16 12 -12 -6" fill="none" stroke="#E5C378" stroke-width="2.5" filter="drop-shadow(0 0 6px #E5C378)"/>
-                    </g>
-                    <text x="100" y="104" font-family="'Inter', sans-serif" font-size="8" font-weight="700" fill="#6CE680" text-anchor="middle" letter-spacing="3">NEON FLEX</text>
-                  </svg>
+                  <img src="./assets/brief/sign_neon.jpg" alt="Neon Flex Sign" class="brand-img-cover">
                 </div>
                 <div class="visual-card-body">
                   <div class="card-item-title">لافتات نيون (Neon Flex)</div>
