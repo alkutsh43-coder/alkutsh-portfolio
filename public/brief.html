@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>استمارة البريف الإبداعي والمواصفات الفنية للمشروع - الكوتش ديزاين</title>
+  <title>استمارة البريف الإبداعي والمواصفات الفنية الشاملة - الكوتش ديزاين</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   
   <!-- Fonts -->
@@ -27,106 +27,97 @@
       --accent-glow: rgba(130, 225, 107, 0.25);
       --text: #FFFFFF;
       --text-muted: rgba(255, 255, 255, 0.7);
-      --text-dim: rgba(255, 255, 255, 0.4);
-      --border: rgba(255, 255, 255, 0.1);
-      --border-accent: rgba(130, 225, 107, 0.4);
+      --text-dim: rgba(255, 255, 255, 0.45);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(130, 225, 107, 0.35);
       --radius-sm: 8px;
       --radius-md: 14px;
-      --radius-lg: 22px;
+      --radius-lg: 20px;
       --radius-full: 9999px;
     }
 
     body {
-      font-family: 'Cairo', system-ui, -apple-system, sans-serif;
       background-color: var(--bg);
       color: var(--text);
+      font-family: 'Cairo', sans-serif;
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
-      padding: 0;
+      position: relative;
     }
 
     /* Ambient background glows */
     .glow-1 {
-      position: fixed;
-      top: -150px;
-      right: -150px;
-      width: 550px;
-      height: 550px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(130, 225, 107, 0.08) 0%, transparent 70%);
+      position: absolute;
+      top: 0;
+      left: 20%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(130, 225, 107, 0.07) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
+
     .glow-2 {
-      position: fixed;
-      bottom: -150px;
-      left: -150px;
-      width: 550px;
-      height: 550px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(130, 225, 107, 0.05) 0%, transparent 70%);
+      position: absolute;
+      top: 600px;
+      right: 10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(130, 225, 107, 0.04) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
 
     .container {
-      max-width: 960px;
+      max-width: 1240px;
       margin: 0 auto;
-      padding: 32px 20px 80px 20px;
+      padding: 32px 24px 80px 24px;
       position: relative;
-      z-index: 10;
+      z-index: 1;
     }
 
-    /* Top Bar */
+    /* Top Bar Navigation */
     .top-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      padding-bottom: 32px;
+      margin-bottom: 32px;
+      padding-bottom: 20px;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 40px;
     }
 
     .back-btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 10px 20px;
-      border-radius: var(--radius-full);
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      color: var(--text);
+      color: var(--text-muted);
       text-decoration: none;
       font-size: 14px;
-      font-weight: 700;
-      transition: all 0.2s ease;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      transition: all 0.25s ease;
     }
+
     .back-btn:hover {
-      background: rgba(130, 225, 107, 0.15);
-      border-color: var(--accent);
       color: var(--accent);
+      border-color: var(--border-accent);
+      background: rgba(130, 225, 107, 0.06);
       transform: translateX(3px);
     }
 
-    .brand-mark {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--text);
-    }
     .brand-mark img {
       height: 38px;
       width: auto;
+      display: block;
     }
 
-    /* Page Header */
+    /* Hero Header */
     .hero-header {
-      text-align: center;
-      max-width: 760px;
-      margin: 0 auto 48px auto;
+      margin-bottom: 36px;
     }
 
     .badge {
@@ -135,204 +126,154 @@
       gap: 8px;
       padding: 6px 16px;
       border-radius: var(--radius-full);
-      background: rgba(130, 225, 107, 0.1);
+      background: rgba(130, 225, 107, 0.08);
       border: 1px solid var(--border-accent);
       color: var(--accent);
       font-size: 13px;
       font-weight: 700;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
     }
 
     .page-title {
-      font-size: clamp(28px, 4.5vw, 44px);
+      font-size: 34px;
       font-weight: 900;
-      line-height: 1.25;
-      margin-bottom: 16px;
-      letter-spacing: -0.02em;
+      color: #ffffff;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
     }
 
     .page-title span {
       color: var(--accent);
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      display: inline-block;
+      margin-right: 8px;
     }
 
     .page-desc {
-      font-size: clamp(14px, 2vw, 17px);
+      font-size: 15px;
       color: var(--text-muted);
+      max-width: 820px;
       line-height: 1.7;
     }
 
-    /* Steps Progress Tracker */
-    .progress-bar-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-      margin-bottom: 48px;
-      padding: 0 10px;
-    }
-    .progress-line {
-      position: absolute;
-      top: 50%;
-      left: 30px;
-      right: 30px;
-      height: 2px;
-      background: var(--border);
-      z-index: 1;
-      transform: translateY(-50%);
-    }
-    .progress-line-fill {
-      height: 100%;
-      background: var(--accent);
-      width: 0%;
-      transition: width 0.4s ease;
+    /* Main Two-Column Layout */
+    .brief-layout {
+      display: grid;
+      grid-template-columns: 1fr 390px;
+      gap: 32px;
+      align-items: start;
     }
 
-    .progress-step {
-      position: relative;
-      z-index: 2;
+    /* Left Form Column */
+    .brief-sections {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      background: var(--bg);
-      padding: 0 8px;
-      cursor: pointer;
+      gap: 28px;
     }
 
-    .step-circle {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: var(--card);
-      border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--text-dim);
-      transition: all 0.3s ease;
-    }
-
-    .progress-step.active .step-circle {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #071610;
-      box-shadow: 0 0 20px var(--accent-glow);
-    }
-
-    .progress-step.completed .step-circle {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #071610;
-    }
-
-    .step-title {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-dim);
-      transition: color 0.3s ease;
-      white-space: nowrap;
-    }
-
-    .progress-step.active .step-title,
-    .progress-step.completed .step-title {
-      color: var(--text);
-    }
-
-    /* Brief Card Sections */
-    .brief-step-content {
-      display: none;
-      animation: fadeIn 0.35s ease;
-    }
-    .brief-step-content.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .card {
+    .card-section {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: clamp(24px, 4vw, 40px);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-      margin-bottom: 32px;
+      padding: 30px 28px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      transition: border-color 0.25s ease;
     }
 
-    .section-title {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--text);
+    .card-section:hover {
+      border-color: rgba(130, 225, 107, 0.2);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .section-title-wrap {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
     }
 
-    .section-title .step-number {
-      font-size: 13px;
-      font-family: 'Inter', monospace;
+    .sec-number {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
       color: var(--accent);
+      background: rgba(130, 225, 107, 0.12);
       padding: 4px 10px;
       border-radius: var(--radius-full);
-      background: rgba(130, 225, 107, 0.1);
-      border: 1px solid var(--border-accent);
+      border: 1px solid rgba(130, 225, 107, 0.3);
+      letter-spacing: 0.5px;
+    }
+
+    .sec-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .sec-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      line-height: 1.5;
     }
 
     /* Form Fields */
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-bottom: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 7px;
     }
 
     .form-group.full {
-      grid-column: 1 / -1;
+      grid-column: span 2;
     }
 
     label {
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 700;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      color: var(--text-muted);
     }
 
     label .req {
       color: var(--accent);
-    }
-
-    .hint {
-      font-size: 12px;
-      color: var(--text-dim);
-      margin-top: 4px;
+      margin-right: 4px;
     }
 
     input, select, textarea {
       width: 100%;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 14px 16px;
-      font-size: 14.5px;
-      font-family: inherit;
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
       color: var(--text);
+      font-size: 14px;
+      font-family: inherit;
       outline: none;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
     }
 
     input:focus, select:focus, textarea:focus {
@@ -340,30 +281,34 @@
       box-shadow: 0 0 0 3px rgba(130, 225, 107, 0.15);
     }
 
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-      line-height: 1.7;
+    select {
+      cursor: pointer;
     }
 
-    /* Option Cards Selection */
+    textarea {
+      resize: vertical;
+      min-height: 95px;
+      line-height: 1.6;
+    }
+
+    /* Option Cards Grids */
     .options-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 14px;
-      margin-top: 8px;
+      grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+      gap: 12px;
+      margin-top: 6px;
     }
 
     .option-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 16px;
+      padding: 15px;
       cursor: pointer;
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      transition: all 0.25s ease;
+      transition: all 0.22s ease;
       user-select: none;
     }
 
@@ -376,7 +321,7 @@
     .option-card.selected {
       border-color: var(--accent);
       background: rgba(130, 225, 107, 0.1);
-      box-shadow: 0 0 20px rgba(130, 225, 107, 0.12);
+      box-shadow: 0 0 16px rgba(130, 225, 107, 0.12);
     }
 
     .option-checkbox {
@@ -393,6 +338,7 @@
       position: relative;
     }
 
+    /* Pure CSS Vector Checkmark */
     .option-checkbox::after {
       content: '';
       display: none;
@@ -418,10 +364,10 @@
     }
 
     .option-title {
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .option-desc {
@@ -430,15 +376,15 @@
       line-height: 1.4;
     }
 
-    /* Sub-panels for detailed options in Step 2 */
+    /* Detailed Subpanels */
     .subpanel {
-      margin-top: 24px;
-      padding: 22px;
+      margin-top: 20px;
+      padding: 20px;
       background: rgba(6, 19, 13, 0.85);
       border: 1px solid rgba(130, 225, 107, 0.25);
       border-radius: var(--radius-md);
       display: none;
-      animation: fadeInSub 0.3s ease forwards;
+      animation: fadeInSub 0.28s ease forwards;
     }
 
     .subpanel.active {
@@ -446,16 +392,16 @@
     }
 
     @keyframes fadeInSub {
-      from { opacity: 0; transform: translateY(-8px); }
+      from { opacity: 0; transform: translateY(-6px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .subpanel-header {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       flex-wrap: wrap;
     }
@@ -466,9 +412,8 @@
       color: var(--accent);
       background: rgba(130, 225, 107, 0.12);
       padding: 3px 10px;
-      border-radius: 999px;
+      border-radius: var(--radius-full);
       border: 1px solid rgba(130, 225, 107, 0.3);
-      letter-spacing: 0.5px;
     }
 
     .subpanel-title {
@@ -478,7 +423,7 @@
     }
 
     .subpanel-section {
-      margin-top: 20px;
+      margin-top: 18px;
     }
 
     .subpanel-section:first-of-type {
@@ -489,23 +434,23 @@
       font-size: 13px;
       font-weight: 700;
       color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       display: block;
     }
 
     .sub-options-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
     }
 
     .sub-options-grid .option-card {
-      padding: 13px;
+      padding: 12px;
     }
 
     .sub-options-grid .option-title {
       font-size: 13px;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
     }
 
     .sub-options-grid .option-desc {
@@ -514,8 +459,8 @@
 
     .dimensions-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
       margin-top: 8px;
     }
 
@@ -523,132 +468,183 @@
       font-size: 11.5px;
       color: var(--text-dim);
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
 
     .dim-input-group input {
-      width: 100%;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
       padding: 10px 12px;
-      color: #ffffff;
       font-size: 13px;
-      outline: none;
-      transition: all 0.25s ease;
-      font-family: inherit;
     }
 
-    .dim-input-group input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(130, 225, 107, 0.15);
+    /* Right Sticky Summary Sidebar */
+    .brief-sidebar {
+      position: sticky;
+      top: 24px;
     }
 
-    /* Bottom Nav Buttons */
-    .nav-actions {
+    .summary-card {
+      background: #081F15;
+      border: 1px solid rgba(130, 225, 107, 0.35);
+      border-radius: var(--radius-lg);
+      padding: 26px 22px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    .summary-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      margin-top: 32px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .summary-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .live-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(130, 225, 107, 0.1);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(130, 225, 107, 0.25);
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulseLive 1.5s infinite;
+    }
+
+    @keyframes pulseLive {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .summary-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .summary-row {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+    }
+
+    .summary-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 3px;
+      display: block;
+    }
+
+    .summary-val {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    /* Actions */
+    .actions-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      padding: 14px 28px;
+      gap: 8px;
+      padding: 14px 20px;
       border-radius: var(--radius-full);
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 800;
       font-family: inherit;
       cursor: pointer;
       border: none;
       transition: all 0.25s ease;
       text-decoration: none;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #071610;
-      box-shadow: 0 4px 25px rgba(130, 225, 107, 0.35);
-    }
-    .btn-primary:hover {
-      background: #9ef387;
-      box-shadow: 0 6px 30px rgba(130, 225, 107, 0.5);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.15);
-      color: var(--text);
+      width: 100%;
     }
 
     .btn-whatsapp {
-      background: #25D366;
-      color: #FFFFFF;
-      box-shadow: 0 4px 25px rgba(37, 211, 102, 0.35);
-      padding: 16px 36px;
-      font-size: 16px;
+      background: var(--accent);
+      color: #071610;
+      box-shadow: 0 4px 20px rgba(130, 225, 107, 0.35);
     }
+
     .btn-whatsapp:hover {
-      background: #20bd5a;
-      box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5);
       transform: translateY(-2px);
+      box-shadow: 0 8px 26px rgba(130, 225, 107, 0.5);
+      background: #8bf074;
     }
 
-    /* Summary Final Block */
-    .summary-box {
-      background: var(--surface);
-      border: 1px solid var(--border-accent);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      margin-bottom: 24px;
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+      border: 1px solid var(--border);
     }
 
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      font-size: 13.5px;
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
     }
-    .summary-row:last-child {
-      border-bottom: none;
-    }
-    .summary-label {
+
+    .sidebar-note {
+      font-size: 11px;
       color: var(--text-dim);
-      font-weight: 600;
+      text-align: center;
+      margin-top: 14px;
+      line-height: 1.5;
     }
-    .summary-value {
-      color: var(--text);
-      font-weight: 700;
-      text-align: left;
-      direction: ltr;
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .brief-layout {
+        grid-template-columns: 1fr;
+      }
+      .brief-sidebar {
+        position: static;
+        margin-top: 10px;
+      }
     }
 
     @media (max-width: 640px) {
-      .step-title {
-        display: none;
+      .container {
+        padding: 20px 16px 60px 16px;
       }
-      .card {
-        padding: 20px 16px;
+      .card-section {
+        padding: 22px 18px;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-group.full {
+        grid-column: span 1;
       }
       .page-title {
         font-size: 26px;
       }
-      .nav-actions {
-        flex-direction: column-reverse;
-      }
-      .btn {
-        width: 100%;
+      .page-title span {
+        font-size: 17px;
       }
     }
   </style>
@@ -674,414 +670,373 @@
     <!-- Header Title -->
     <div class="hero-header">
       <div class="badge">
-        <span> استمارة المواصفات والبريف الإبداعي الشامل</span>
+        <span class="badge-dot"></span>
+        <span>استمارة المواصفات والبريف الإبداعي الشامل</span>
       </div>
       <h1 class="page-title">
-        موجز المشروع الإبداعي <span>(Creative & Technical Brief)</span>
+        موجز المشروع الهندسي والإبداعي <span>(Creative & Technical Brief)</span>
       </h1>
       <p class="page-desc">
-        صُممت هذه الاستمارة لجمع كافة التفاصيل الهندسية، الفنية، والتسويقية لمشروعك، لنتمكن من دراسة متطلبات التصنيع والطباعة بدقة متناهية وتحديد المسار الإبداعي الأنسب.
+        صفحة واحدة متكاملة لجمع كافة المعطيات الفنية والتسويقية لمشروعك؛ يمكنك تحديد اختياراتك وملاحظاتك مباشرة مع معاينة ملخص المواصفات فورياً قبل الإرسال.
       </p>
     </div>
 
-    <!-- Progress Tracker -->
-    <div class="progress-bar-wrap">
-      <div class="progress-line">
-        <div class="progress-line-fill" id="progressFill"></div>
-      </div>
+    <!-- Main 2-Column Grid -->
+    <div class="brief-layout">
+      
+      <!-- Left Main Form Column -->
+      <div class="brief-sections">
 
-      <div class="progress-step active" data-step="1" onclick="goToStep(1)">
-        <div class="step-circle">1</div>
-        <span class="step-title">بيانات المشروع</span>
-      </div>
-
-      <div class="progress-step" data-step="2" onclick="goToStep(2)">
-        <div class="step-circle">2</div>
-        <span class="step-title">نوع الخدمات</span>
-      </div>
-
-      <div class="progress-step" data-step="3" onclick="goToStep(3)">
-        <div class="step-circle">3</div>
-        <span class="step-title">المواصفات والخامات</span>
-      </div>
-
-      <div class="progress-step" data-step="4" onclick="goToStep(4)">
-        <div class="step-circle">4</div>
-        <span class="step-title">الهوية والجمهور</span>
-      </div>
-
-      <div class="progress-step" data-step="5" onclick="goToStep(5)">
-        <div class="step-circle">5</div>
-        <span class="step-title">التسليم والإرسال</span>
-      </div>
-    </div>
-
-    <!-- STEP 1: Basic Info -->
-    <div class="brief-step-content active" id="step-1">
-      <div class="card">
-        <div class="section-title">
-          <span class="step-number">STEP 01</span>
-          <span>بيانات العميل والعلامة التجارية</span>
-        </div>
-
-        <div class="form-grid">
-          <div class="form-group">
-            <label>اسم المسؤول / صاحب المشروع <span class="req">*</span></label>
-            <input type="text" id="clientName" placeholder="مثال: أ. عبد العزيز الشمري" required>
-          </div>
-
-          <div class="form-group">
-            <label>المسمى الوظيفي</label>
-            <input type="text" id="clientRole" placeholder="مثال: الرئيس التنفيذي / مدير التسويق">
-          </div>
-
-          <div class="form-group">
-            <label>اسم الشركة أو العلامة التجارية <span class="req">*</span></label>
-            <input type="text" id="brandName" placeholder="مثال: مصنع كيميت وين / شركة نبتة" required>
-          </div>
-
-          <div class="form-group">
-            <label>مجال النشاط التجاري والصناعة <span class="req">*</span></label>
-            <select id="industry">
-              <option value="صناعي وهندسي">صناعي، هندسي وتصنيع قطاعات</option>
-              <option value="أغذية ومشروبات وتغليف">أغذية ومشروبات وسلع استهلاكية (FMCG)</option>
-              <option value="تطوير عقاري ومقاولات">تطوير عقاري، استثمار ومقاولات</option>
-              <option value="صيدلي وتجميل">أدوية، مستحضرات تجميل وتغليف طبي</option>
-              <option value="نباتات وزراعة ديكورية">نباتات داخلية، حدائق وزراعة</option>
-              <option value="تقنية معلومات واتصالات">تقنية معلومات، سيرفرات وشبكات</option>
-              <option value="نشاط تجاري آخر">نشاط تجاري / خدمي آخر</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>رقم الواتساب للتواصل المباشر <span class="req">*</span></label>
-            <input type="tel" id="whatsappNumber" placeholder="+20... أو +966..." dir="ltr" required>
-          </div>
-
-          <div class="form-group">
-            <label>البريد الإلكتروني الرسمي</label>
-            <input type="email" id="emailAddress" placeholder="contact@company.com" dir="ltr">
-          </div>
-
-          <div class="form-group full">
-            <label>الموقع الجغرافي للمشروع أو المصنع</label>
-            <input type="text" id="projectLocation" placeholder="مثال: مصر (العاشر من رمضان) / السعودية (الرياض - جدة) / الإمارات">
-          </div>
-        </div>
-
-        <div class="nav-actions">
-          <div></div>
-          <button type="button" class="btn btn-primary" onclick="nextStep(2)">
-            <span>المتابعة لنوع الخدمات</span>
-            <span>&larr;</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 2: Services Scope -->
-    <div class="brief-step-content" id="step-2">
-      <div class="card">
-        <div class="section-title">
-          <span class="step-number">STEP 02</span>
-          <span>الخدمات والتطبيقات المطلوبة للمشروع</span>
-        </div>
-
-        <p class="hint" style="margin-bottom: 16px;">يمكنك تحديد أكثر من خدمة وفق نطاق احتياجاتك الفعلية:</p>
-
-        <div class="options-grid" id="servicesGrid">
-          <div class="option-card selected" data-value="هوية بصرية وشعار متكامل" data-service="brand">
-            <div class="option-checkbox"></div>
-            <div class="option-info">
-              <div class="option-title">الهوية البصرية والشعارات</div>
-              <div class="option-desc">شعار، دليل إرشادي، باليتة بانتون، والتايبوجرافي.</div>
+        <!-- SECTION 01: Client Profile -->
+        <section class="card-section">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <span class="sec-number">01</span>
+              <h2 class="sec-title">بيانات العميل والعلامة التجارية</h2>
             </div>
           </div>
+          <p class="sec-desc">أدخل المعلومات الأساسية للتواصل وتحديد هوية المنشأة أو المشروع:</p>
 
-          <div class="option-card selected" data-value="تصميم علب وتغليف CAD" data-service="packaging">
-            <div class="option-checkbox"></div>
-            <div class="option-info">
-              <div class="option-title">تصميم العلب والتغليف الهيكلي</div>
-              <div class="option-desc">قوالب تكسير CAD، علب صلبة ومطوية ومحاكاة 3D.</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>اسم المسؤول / صاحب المشروع <span class="req">*</span></label>
+              <input type="text" id="clientName" placeholder="مثال: أ. عبد العزيز الشمري" required>
+            </div>
+
+            <div class="form-group">
+              <label>المسمى الوظيفي</label>
+              <input type="text" id="clientRole" placeholder="مثال: الرئيس التنفيذي / مدير التسويق">
+            </div>
+
+            <div class="form-group">
+              <label>اسم الشركة أو العلامة التجارية <span class="req">*</span></label>
+              <input type="text" id="brandName" placeholder="مثال: شركة نبتة / مصنع كيميت" required>
+            </div>
+
+            <div class="form-group">
+              <label>مجال النشاط التجاري والصناعة <span class="req">*</span></label>
+              <select id="industry">
+                <option value="صناعي وهندسي">صناعي، هندسي وتصنيع قطاعات</option>
+                <option value="أغذية ومشروبات وسلع FMCG" selected>أغذية ومشروبات وسلع استهلاكية (FMCG)</option>
+                <option value="تطوير عقاري ومقاولات">تطوير عقاري، استثمار ومقاولات</option>
+                <option value="عطور ومستحضرات تجميل">عطور، تجميل ومستحضرات راقية</option>
+                <option value="نباتات وزراعة ديكورية">نباتات داخلية، حدائق وزراعة</option>
+                <option value="أدوية وتغليف طبي">أدوية ومستلزمات طبية</option>
+                <option value="تقنية معلومات وسيرفرات">تقنية معلومات، شبكات ومتاجر</option>
+                <option value="نشاط تجاري / خدمي آخر">نشاط تجاري / خدمي آخر</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>رقم الواتساب للتواصل المباشر <span class="req">*</span></label>
+              <input type="tel" id="whatsappNumber" placeholder="+20... أو +966..." dir="ltr" required>
+            </div>
+
+            <div class="form-group">
+              <label>البريد الإلكتروني الرسمي</label>
+              <input type="email" id="emailAddress" placeholder="contact@company.com" dir="ltr">
+            </div>
+
+            <div class="form-group full">
+              <label>الموقع الجغرافي للمشروع أو المصنع</label>
+              <input type="text" id="projectLocation" placeholder="مثال: مصر (العاشر من رمضان) / السعودية (الرياض - جدة) / الإمارات">
             </div>
           </div>
+        </section>
 
-          <div class="option-card" data-value="تجهيز ما قبل الطباعة Prepress">
-            <div class="option-checkbox"></div>
-            <div class="option-info">
-              <div class="option-title">تجهيز ما قبل الطباعة (Prepress)</div>
-              <div class="option-desc">فرز CMYK، ضبط الهوامش والقص، ومطابقة PDF/X.</div>
+        <!-- SECTION 02: Scope of Services & Nested Details -->
+        <section class="card-section">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <span class="sec-number">02</span>
+              <h2 class="sec-title">نطاق الخدمات والتطبيقات المطلوبة</h2>
             </div>
           </div>
+          <p class="sec-desc">حدد الخدمات المطلوبة؛ عند تحديد الهوية أو التغليف ستظهر خيارات التفصيل الخاصة بها مباشرة:</p>
 
-          <div class="option-card" data-value="صناديق ومجلدات عينات المهندسين">
-            <div class="option-checkbox"></div>
-            <div class="option-info">
-              <div class="option-title">صناديق عينات المهندسين (Swatch Box)</div>
-              <div class="option-desc">علب فوم لعرض عينات القطاعات للمقاولين والمعماريين.</div>
-            </div>
-          </div>
-
-          <div class="option-card" data-value="حملات إعلانية وبوسترات سوشيال">
-            <div class="option-checkbox"></div>
-            <div class="option-info">
-              <div class="option-title">حملات السوشيال والإعلانات</div>
-              <div class="option-desc">مفاتيح بصرية Key Visuals وبوسترات تسويقية متناسقة.</div>
-            </div>
-          </div>
-
-          <div class="option-card" data-value="مطبوعات ورقية وبروفايل شركات">
-            <div class="option-checkbox"></div>
-            <div class="option-info">
-              <div class="option-title">المطبوعات وبروفايل الشركات</div>
-              <div class="option-desc">كتالوجات، بروشورات، بطاقات تعريف، ولوحات إرشادية.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- SUBPANEL 1: Logo & Brand Identity Details -->
-        <div class="subpanel active" id="logoDetailsSubpanel">
-          <div class="subpanel-header">
-            <span class="subpanel-tag">تفاصيل الهوية والشعار</span>
-            <span class="subpanel-title">حدد نوع وأسلوب الشعار المفضل لمشروعك (اختر نمطاً أو أكثر):</span>
-          </div>
-
-          <div class="sub-options-grid" id="logoTypesGrid">
-            <div class="option-card selected" data-value="شعار خطي / تايبوجرافي مخصص (Wordmark)">
+          <div class="options-grid" id="servicesGrid">
+            <div class="option-card selected" data-value="هوية بصرية وشعار متكامل" data-service="brand">
               <div class="option-checkbox"></div>
               <div class="option-info">
-                <div class="option-title">شعار خطي تايبوجرافي (Wordmark)</div>
-                <div class="option-desc">رسم وكتابة اسم البراند بخط عربي أو لاتيني حصري ومبتكر.</div>
+                <div class="option-title">الهوية البصرية والشعارات</div>
+                <div class="option-desc">شعار، دليل إرشادي، باليتة ألوان، والتايبوجرافي.</div>
               </div>
             </div>
 
-            <div class="option-card" data-value="شعار أيقوني ورمزي معبر (Pictorial Mark)">
+            <div class="option-card selected" data-value="تصميم علب وتغليف CAD" data-service="packaging">
               <div class="option-checkbox"></div>
               <div class="option-info">
-                <div class="option-title">شعار أيقوني رمزي (Pictorial)</div>
-                <div class="option-desc">أيقونة أو رمز بصري مباشر وواضح يعبر عن طبيعة النشاط.</div>
+                <div class="option-title">تصميم العلب والتغليف الهيكلي</div>
+                <div class="option-desc">قوالب تكسير CAD، علب صلبة ومطوية ومحاكاة 3D.</div>
               </div>
             </div>
 
-            <div class="option-card selected" data-value="شعار تركيبي (أيقونة مميزة + اسم البراند)">
+            <div class="option-card" data-value="تجهيز ما قبل الطباعة Prepress">
               <div class="option-checkbox"></div>
               <div class="option-info">
-                <div class="option-title">شعار تركيبي (Combination Mark)</div>
-                <div class="option-desc">دمج متوازن بين الرمز البصري والاسم لمرونة كاملة في الاستخدام.</div>
+                <div class="option-title">تجهيز ما قبل الطباعة (Prepress)</div>
+                <div class="option-desc">فرز CMYK، ضبط الهوامش والقص، ومطابقة PDF/X.</div>
               </div>
             </div>
 
-            <div class="option-card" data-value="شعار تجريدي هندسي مبتكر (Abstract Mark)">
+            <div class="option-card" data-value="صناديق ومجلدات عينات المهندسين">
               <div class="option-checkbox"></div>
               <div class="option-info">
-                <div class="option-title">شعار تجريدي هندسي (Abstract)</div>
-                <div class="option-desc">تكوين هندسي فريد يحمل فلسفة ودلالة بصرية عميقة للمشروع.</div>
+                <div class="option-title">صناديق عينات المهندسين (Swatch Box)</div>
+                <div class="option-desc">علب فوم لعرض عينات القطاعات للمقاولين والمعماريين.</div>
               </div>
             </div>
 
-            <div class="option-card" data-value="شعار مونوغرام / دمج الحروف الأولى (Monogram)">
+            <div class="option-card" data-value="حملات إعلانية وبوسترات سوشيال">
               <div class="option-checkbox"></div>
               <div class="option-info">
-                <div class="option-title">شعار مونوغرام (Monogram)</div>
-                <div class="option-desc">دمج أنيق للحروف الأولى من الاسم بروح عصرية راقية.</div>
+                <div class="option-title">حملات السوشيال والإعلانات</div>
+                <div class="option-desc">مفاتيح بصرية Key Visuals وبوسترات تسويقية متناسقة.</div>
               </div>
             </div>
 
-            <div class="option-card" data-value="شعار شارة / درع كلاسيكي (Emblem / Badge)">
+            <div class="option-card" data-value="مطبوعات ورقية وبروفايل شركات">
               <div class="option-checkbox"></div>
               <div class="option-info">
-                <div class="option-title">شعار شارة ودرع (Emblem)</div>
-                <div class="option-desc">تصميم الاسم والتفاصيل داخل إطار أو درع رسمي عريق.</div>
-              </div>
-            </div>
-
-            <div class="option-card" data-value="تطوير وتحديث شعار قائم (Logo Redesign)">
-              <div class="option-checkbox"></div>
-              <div class="option-info">
-                <div class="option-title">تطوير وتحديث شعار حالي (Redesign)</div>
-                <div class="option-desc">إعادة رسم وعصرنة الشعار القائم مع الحفاظ على بصمته وهيبته.</div>
+                <div class="option-title">المطبوعات وبروفايل الشركات</div>
+                <div class="option-desc">كتالوجات، بروشورات، بطاقات تعريف، ولوحات إرشادية.</div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- SUBPANEL 2: Packaging & Stickers & Dimensions -->
-        <div class="subpanel active" id="packagingDetailsSubpanel">
-          <div class="subpanel-header">
-            <span class="subpanel-tag">تفاصيل العلب والتغليف الهندسي</span>
-            <span class="subpanel-title">المواصفات الفنية للعلب، الاستيكرات، والمقاسات:</span>
-          </div>
+          <!-- SUBPANEL 1: Logo & Brand Identity Details -->
+          <div class="subpanel active" id="logoDetailsSubpanel">
+            <div class="subpanel-header">
+              <span class="subpanel-tag">تفاصيل الشعار</span>
+              <span class="subpanel-title">حدد نوع وأسلوب الشعار المفضل لمشروعك (اختر نمطاً أو أكثر):</span>
+            </div>
 
-          <!-- Section A: Box Types -->
-          <div class="subpanel-section">
-            <span class="subpanel-label">أ. نوع العلبة أو الهيكل الكرتوني المطلوب:</span>
-            <div class="sub-options-grid" id="boxTypesGrid">
-              <div class="option-card selected" data-value="علبة صلبة فاخرة غطاء وقاعدة (Rigid Lid & Base)">
+            <div class="sub-options-grid" id="logoTypesGrid">
+              <div class="option-card selected" data-value="شعار خطي تايبوجرافي مخصص (Wordmark)">
                 <div class="option-checkbox"></div>
                 <div class="option-info">
-                  <div class="option-title">علبة صلبة غطاء وقاعدة (Lid & Base)</div>
-                  <div class="option-desc">فخامة كلاسيكية للعطور، الهدايا، والمصنوعات الراقية.</div>
+                  <div class="option-title">شعار خطي تايبوجرافي (Wordmark)</div>
+                  <div class="option-desc">رسم وكتابة اسم البراند بخط عربي أو لاتيني حصري ومبتكر.</div>
                 </div>
               </div>
 
-              <div class="option-card" data-value="علبة صلبة درج وسحاب (Slide Drawer Box)">
+              <div class="option-card" data-value="شعار أيقوني ورمزي معبر (Pictorial Mark)">
                 <div class="option-checkbox"></div>
                 <div class="option-info">
-                  <div class="option-title">علبة صلبة درج وسحاب (Drawer Box)</div>
-                  <div class="option-desc">سحب أفقي أنيق مع شريط قماشي أو مقبض مريح.</div>
+                  <div class="option-title">شعار أيقوني رمزي (Pictorial)</div>
+                  <div class="option-desc">أيقونة أو رمز بصري مباشر وواضح يعبر عن طبيعة النشاط.</div>
                 </div>
               </div>
 
-              <div class="option-card" data-value="علبة صلبة بغطاء مغناطيسي (Magnetic Book Box)">
+              <div class="option-card selected" data-value="شعار تركيبي (أيقونة مميزة + اسم البراند)">
                 <div class="option-checkbox"></div>
                 <div class="option-info">
-                  <div class="option-title">علبة غطاء مغناطيسي (Magnetic Box)</div>
-                  <div class="option-desc">تفتح مثل الكتاب مع إغلاق مغناطيسي خفي محكم.</div>
+                  <div class="option-title">شعار تركيبي (Combination Mark)</div>
+                  <div class="option-desc">دمج متوازن بين الرمز البصري والاسم لمرونة كاملة في الاستخدام.</div>
                 </div>
               </div>
 
-              <div class="option-card" data-value="علبة كرتون مطوية لسان وتكسير (Folding Tuck End)">
+              <div class="option-card" data-value="شعار تجريدي هندسي مبتكر (Abstract Mark)">
                 <div class="option-checkbox"></div>
                 <div class="option-info">
-                  <div class="option-title">علبة كرتون مطوية (Folding Carton)</div>
-                  <div class="option-desc">علب اقتصادية سريعة للأدوية، التجميل، والسلع الاستهلاكية.</div>
+                  <div class="option-title">شعار تجريدي هندسي (Abstract)</div>
+                  <div class="option-desc">تكوين هندسي فريد يحمل فلسفة ودلالة بصرية عميقة للمشروع.</div>
                 </div>
               </div>
 
-              <div class="option-card" data-value="صندوق شحن ونقل مضلع (Mailer Shipping Box)">
+              <div class="option-card" data-value="شعار مونوغرام / دمج الحروف الأولى (Monogram)">
                 <div class="option-checkbox"></div>
                 <div class="option-info">
-                  <div class="option-title">صندوق شحن مضلع (Mailer Box)</div>
-                  <div class="option-desc">قوي ومتين للشحن الإلكتروني وحماية البضائع.</div>
+                  <div class="option-title">شعار مونوغرام (Monogram)</div>
+                  <div class="option-desc">دمج أنيق للحروف الأولى من الاسم بروح عصرية راقية.</div>
                 </div>
               </div>
 
-              <div class="option-card" data-value="كيس أو باوتش تغليف مرن (Stand-up Pouch / Doypack)">
+              <div class="option-card" data-value="شعار شارة / درع كلاسيكي (Emblem / Badge)">
                 <div class="option-checkbox"></div>
                 <div class="option-info">
-                  <div class="option-title">باوتش تغليف مرن (Stand-up Pouch)</div>
-                  <div class="option-desc">أكياس محكمة الغلق للقهوة، المكسرات، والمنتجات الغذائية.</div>
+                  <div class="option-title">شعار شارة ودرع (Emblem)</div>
+                  <div class="option-desc">تصميم الاسم والتفاصيل داخل إطار أو درع رسمي عريق.</div>
                 </div>
               </div>
 
-              <div class="option-card" data-value="تصميم قالب سكاكين هندسي مخصص (Custom CAD Dieline)">
+              <div class="option-card" data-value="تطوير وتحديث شعار قائم (Logo Redesign)">
                 <div class="option-checkbox"></div>
                 <div class="option-info">
-                  <div class="option-title">قالب تكسير هندسي مخصص (Custom CAD)</div>
-                  <div class="option-desc">رسم سكين بمقاسات وزوايا حصرية تلائم منتجك بدقة.</div>
+                  <div class="option-title">تطوير وتحديث شعار حالي (Redesign)</div>
+                  <div class="option-desc">إعادة رسم وعصرنة الشعار القائم مع الحفاظ على بصمته وهيبته.</div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Section B: Sticker Types -->
-          <div class="subpanel-section">
-            <span class="subpanel-label">ب. نوع الاستيكرات والملصقات المطلوبة:</span>
-            <div class="sub-options-grid" id="stickerTypesGrid">
-              <div class="option-card selected" data-value="استيكر رول أوتوماتيك لخطوط الإنتاج (Roll Label)">
-                <div class="option-checkbox"></div>
-                <div class="option-info">
-                  <div class="option-title">استيكر رول لخطوط الإنتاج (Roll Label)</div>
-                  <div class="option-desc">رولات مخصصة لمكائن اللصق الأوتوماتيكية في المصانع.</div>
+          <!-- SUBPANEL 2: Packaging & Stickers & Dimensions -->
+          <div class="subpanel active" id="packagingDetailsSubpanel">
+            <div class="subpanel-header">
+              <span class="subpanel-tag">تفاصيل التغليف</span>
+              <span class="subpanel-title">المواصفات الفنية للعلب، الاستيكرات، والمقاسات:</span>
+            </div>
+
+            <!-- Section A: Box Types -->
+            <div class="subpanel-section">
+              <span class="subpanel-label">أ. نوع العلبة أو الهيكل الكرتوني المطلوب:</span>
+              <div class="sub-options-grid" id="boxTypesGrid">
+                <div class="option-card selected" data-value="علبة صلبة فاخرة غطاء وقاعدة (Rigid Lid & Base)">
+                  <div class="option-checkbox"></div>
+                  <div class="option-info">
+                    <div class="option-title">علبة صلبة غطاء وقاعدة (Lid & Base)</div>
+                    <div class="option-desc">فخامة كلاسيكية للعطور، الهدايا، والمصنوعات الراقية.</div>
+                  </div>
+                </div>
+
+                <div class="option-card" data-value="علبة صلبة درج وسحاب (Slide Drawer Box)">
+                  <div class="option-checkbox"></div>
+                  <div class="option-info">
+                    <div class="option-title">علبة صلبة درج وسحاب (Drawer Box)</div>
+                    <div class="option-desc">سحب أفقي أنيق مع شريط قماشي أو مقبض مريح.</div>
+                  </div>
+                </div>
+
+                <div class="option-card" data-value="علبة صلبة بغطاء مغناطيسي (Magnetic Book Box)">
+                  <div class="option-checkbox"></div>
+                  <div class="option-info">
+                    <div class="option-title">علبة غطاء مغناطيسي (Magnetic Box)</div>
+                    <div class="option-desc">تفتح مثل الكتاب مع إغلاق مغناطيسي خفي محكم.</div>
+                  </div>
+                </div>
+
+                <div class="option-card" data-value="علبة كرتون مطوية لسان وتكسير (Folding Tuck End)">
+                  <div class="option-checkbox"></div>
+                  <div class="option-info">
+                    <div class="option-title">علبة كرتون مطوية (Folding Carton)</div>
+                    <div class="option-desc">علب اقتصادية سريعة للأدوية، التجميل، والسلع الاستهلاكية.</div>
+                  </div>
+                </div>
+
+                <div class="option-card" data-value="صندوق شحن ونقل مضلع (Mailer Shipping Box)">
+                  <div class="option-checkbox"></div>
+                  <div class="option-info">
+                    <div class="option-title">صندوق شحن مضلع (Mailer Box)</div>
+                    <div class="option-desc">قوي ومتين للشحن الإلكتروني وحماية البضائع.</div>
+                  </div>
+                </div>
+
+                <div class="option-card" data-value="كيس أو باوتش تغليف مرن (Stand-up Pouch / Doypack)">
+                  <div class="option-checkbox"></div>
+                  <div class="option-info">
+                    <div class="option-title">باوتش تغليف مرن (Stand-up Pouch)</div>
+                    <div class="option-desc">أكياس محكمة الغلق للقهوة، المكسرات، والمنتجات الغذائية.</div>
+                  </div>
+                </div>
+
+                <div class="option-card" data-value="تصميم قالب سكاكين هندسي مخصص (Custom CAD Dieline)">
+                  <div class="option-checkbox"></div>
+                  <div class="option-info">
+                    <div class="option-title">قالب تكسير هندسي مخصص (Custom CAD)</div>
+                    <div class="option-desc">رسم سكين بمقاسات وزوايا حصرية تلائم منتجك بدقة.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section B: Sticker Types -->
+            <div class="subpanel-section">
+              <span class="subpanel-label">ب. نوع الاستيكرات والملصقات المطلوبة:</span>
+              <div class="sub-options-grid" id="stickerTypesGrid">
+                <div class="option-card selected" data-value="استيكر رول أوتوماتيك لخطوط الإنتاج (Roll Label)">
+                  <div class="option-checkbox"></div>
+                  <div class="option-info">
+                    <div class="option-title">استيكر رول لخطوط الإنتاج (Roll Label)</div>
+                    <div class="option-desc">رولات مخصصة لمكائن اللصق الأوتوماتيكية في المصانع.</div>
+                  </div>
+                </div>
+
+                <div class="option-card" data-value="استيكر شيت مقصوص فردي ليزر / بلوتر (Sheet Die-Cut)">
+                  <div class="option-checkbox"></div>
+                  <div class="option-info">
+                    <div class="option-title">استيكر شيت مقصوص فردي (Die-Cut)</div>
+                    <div class="option-desc">ملصقات مقصوصة بأشكال منتظمة أو حرة للصق اليدوي.</div>
+                  </div>
+                </div>
+
+                <div class="option-card" data-value="استيكر سيلوفان شفاف عازل (Clear BOPP)">
+                  <div class="option-checkbox"></div>
+                  <div class="option-info">
+                    <div class="option-title">استيكر شفاف عازل (Clear BOPP)</div>
+                    <div class="option-desc">خلفية شفافة تُظهر لون المنتج داخل العبوة الزجاجية.</div>
+                  </div>
+                </div>
+
+                <div class="option-card" data-value="استيكر ميتاليك فويل معدني (Gold/Silver Foil)">
+                  <div class="option-checkbox"></div>
+                  <div class="option-info">
+                    <div class="option-title">استيكر ميتاليك فويل (Metallic Foil)</div>
+                    <div class="option-desc">أرضية ذهبية أو فضية لماعة تعطي فخامة استثنائية.</div>
+                  </div>
+                </div>
+
+                <div class="option-card" data-value="استيكر كرافت ورقي طبيعي بيئي (Eco Kraft)">
+                  <div class="option-checkbox"></div>
+                  <div class="option-info">
+                    <div class="option-title">استيكر كرافت ورقي طبيعي (Kraft)</div>
+                    <div class="option-desc">ملمس ترابي طبيعي للمنتجات العضوية والمستدامة.</div>
+                  </div>
+                </div>
+
+                <div class="option-card" data-value="لا أحتاج استيكرات (الطباعة مباشرة على العلبة)">
+                  <div class="option-checkbox"></div>
+                  <div class="option-info">
+                    <div class="option-title">بدون استيكرات (طباعة مباشرة)</div>
+                    <div class="option-desc">الاعتماد على الطباعة المباشرة فوق خامة العلبة.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section C: Dimensions -->
+            <div class="subpanel-section">
+              <span class="subpanel-label">ج. مقاسات وأبعاد العلبة والاستيكر (إن كانت محددة لديك):</span>
+              <div class="dimensions-row">
+                <div class="dim-input-group">
+                  <label>طول العلبة (Length)</label>
+                  <input type="text" id="boxLength" placeholder="مثال: 25 cm أو 250 mm">
+                </div>
+                <div class="dim-input-group">
+                  <label>عرض العلبة (Width)</label>
+                  <input type="text" id="boxWidth" placeholder="مثال: 18 cm أو 180 mm">
+                </div>
+                <div class="dim-input-group">
+                  <label>ارتفاع / عمق العلبة (Height)</label>
+                  <input type="text" id="boxHeight" placeholder="مثال: 6 cm أو 60 mm">
+                </div>
+                <div class="dim-input-group">
+                  <label>مقاس أو قطر الاستيكر</label>
+                  <input type="text" id="stickerDims" placeholder="مثال: قطر 6cm أو 8x12cm">
                 </div>
               </div>
 
-              <div class="option-card" data-value="استيكر شيت مقصوص فردي ليزر / بلوتر (Sheet Die-Cut)">
-                <div class="option-checkbox"></div>
-                <div class="option-info">
-                  <div class="option-title">استيكر شيت مقصوص فردي (Die-Cut)</div>
-                  <div class="option-desc">ملصقات مقصوصة بأشكال منتظمة أو حرة للصق اليدوي.</div>
-                </div>
-              </div>
-
-              <div class="option-card" data-value="استيكر سيلوفان شفاف عازل (Clear BOPP)">
-                <div class="option-checkbox"></div>
-                <div class="option-info">
-                  <div class="option-title">استيكر شفاف عازل (Clear BOPP)</div>
-                  <div class="option-desc">خلفية شفافة تُظهر لون المنتج داخل العبوة الزجاجية.</div>
-                </div>
-              </div>
-
-              <div class="option-card" data-value="استيكر ميتاليك فويل معدني (Gold/Silver Foil)">
-                <div class="option-checkbox"></div>
-                <div class="option-info">
-                  <div class="option-title">استيكر ميتاليك فويل (Metallic Foil)</div>
-                  <div class="option-desc">أرضية ذهبية أو فضية لماعة تعطي فخامة استثنائية.</div>
-                </div>
-              </div>
-
-              <div class="option-card" data-value="استيكر كرافت ورقي بيئي (Eco Kraft Sticker)">
-                <div class="option-checkbox"></div>
-                <div class="option-info">
-                  <div class="option-title">استيكر كرافت ورقي طبيعي (Kraft)</div>
-                  <div class="option-desc">ملمس ترابي طبيعي للمنتجات العضوية والمستدامة.</div>
-                </div>
-              </div>
-
-              <div class="option-card" data-value="لا أحتاج استيكرات (الطباعة مباشرة على العلبة)">
-                <div class="option-checkbox"></div>
-                <div class="option-info">
-                  <div class="option-title">بدون استيكرات (طباعة مباشرة)</div>
-                  <div class="option-desc">الاعتماد على الطباعة المباشرة فوق خامة العلبة.</div>
-                </div>
+              <div style="margin-top: 12px; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" id="needSizeHelp" style="accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer;">
+                <label for="needSizeHelp" style="font-size: 12.5px; color: var(--text-muted); cursor: pointer;">
+                  لست متأكداً من المقاس بالضبط، وأحتاج مساعدة هندسية لتحديد أبعاد العلبة وفق حجم المنتج.
+                </label>
               </div>
             </div>
           </div>
+        </section>
 
-          <!-- Section C: Dimensions -->
-          <div class="subpanel-section">
-            <span class="subpanel-label">ج. مقاسات وأبعاد العلبة والاستيكر (إن كانت محددة لديك):</span>
-            <div class="dimensions-row">
-              <div class="dim-input-group">
-                <label>طول العلبة (Length)</label>
-                <input type="text" id="boxLength" placeholder="مثال: 25 cm أو 250 mm">
-              </div>
-              <div class="dim-input-group">
-                <label>عرض العلبة (Width)</label>
-                <input type="text" id="boxWidth" placeholder="مثال: 18 cm أو 180 mm">
-              </div>
-              <div class="dim-input-group">
-                <label>ارتفاع / عمق العلبة (Height)</label>
-                <input type="text" id="boxHeight" placeholder="مثال: 6 cm أو 60 mm">
-              </div>
-              <div class="dim-input-group">
-                <label>مقاس أو قطر الاستيكر</label>
-                <input type="text" id="stickerDims" placeholder="مثال: قطر 6cm أو 8x12cm">
-              </div>
-            </div>
-
-            <div style="margin-top: 12px; display: flex; align-items: center; gap: 8px;">
-              <input type="checkbox" id="needSizeHelp" style="accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer;">
-              <label for="needSizeHelp" style="font-size: 12.5px; color: var(--text-muted); cursor: pointer;">
-                لست متأكداً من المقاس بالضبط، وأحتاج مساعدة هندسية لتحديد أبعاد العلبة وفق حجم المنتج.
-              </label>
+        <!-- SECTION 03: Materials & Specialty Finishes -->
+        <section class="card-section">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <span class="sec-number">03</span>
+              <h2 class="sec-title">المواصفات الفنية وخامات الإنتاج والتشطيب</h2>
             </div>
           </div>
-        </div>
+          <p class="sec-desc">حدد أنواع الخامات المفضلة والتشطيبات الفنية الفاخرة للطباعة:</p>
 
-        <div class="nav-actions">
-          <button type="button" class="btn btn-secondary" onclick="prevStep(1)">
-            <span>&rarr; العودة للخطوة السابقة</span>
-          </button>
-          <button type="button" class="btn btn-primary" onclick="nextStep(3)">
-            <span>المتابعة للمواصفات والخامات</span>
-            <span>&larr;</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 3: Technical Specs & Substrates -->
-    <div class="brief-step-content" id="step-3">
-      <div class="card">
-        <div class="section-title">
-          <span class="step-number">STEP 03</span>
-          <span>المواصفات الفنية وخامات الإنتاج والتشطيب</span>
-        </div>
-
-        <div class="form-grid">
-          <div class="form-group full">
-            <label>نوعية الخامات المفضلة للتنفيذ (حدد ما ينطبق):</label>
+          <div class="form-group full" style="margin-bottom: 20px;">
+            <label style="margin-bottom: 8px; display: block;">نوعية الخامات المفضلة للتنفيذ:</label>
             <div class="options-grid" id="materialsGrid">
               <div class="option-card selected" data-value="كرتون صلب فاخر (Rigid Greyboard)">
                 <div class="option-checkbox"></div>
@@ -1091,7 +1046,7 @@
                 </div>
               </div>
 
-              <div class="option-card" data-value="كرتون مموج للشحن (Corrugated E-Flute)">
+              <div class="option-card" data-value="كرتون مموج للشحن (Corrugated Flute)">
                 <div class="option-checkbox"></div>
                 <div class="option-info">
                   <div class="option-title">كرتون مموج للشحن والنقل</div>
@@ -1099,7 +1054,7 @@
                 </div>
               </div>
 
-              <div class="option-card" data-value="ورق كرافت عضوي معاد تدويره">
+              <div class="option-card" data-value="ورق كرافت عضوي طبيعي">
                 <div class="option-checkbox"></div>
                 <div class="option-info">
                   <div class="option-title">ورق كرافت عضوي بيئي</div>
@@ -1107,24 +1062,24 @@
                 </div>
               </div>
 
-              <div class="option-card" data-value="بلاستيك وأفلام عازلة (BOPP / PVC)">
+              <div class="option-card" data-value="خامات بلاستيكية عازلة (BOPP / PVC)">
                 <div class="option-checkbox"></div>
                 <div class="option-info">
-                  <div class="option-title">خامات بوليستر وبلاستيك عازل</div>
-                  <div class="option-desc">ليبلات صناعية ومقاومة للرطوبة والحرارة.</div>
+                  <div class="option-title">خامات بلاستيكية عازلة</div>
+                  <div class="option-desc">مقاومة للرطوبة، الزيوت، ودرجات الحرارة.</div>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="form-group full">
-            <label>التشطيبات الخاصة واللمسات الفنية المطلوبة:</label>
+            <label style="margin-bottom: 8px; display: block;">التشطيبات الخاصة واللمسات الفنية المطلوبة:</label>
             <div class="options-grid" id="finishesGrid">
               <div class="option-card selected" data-value="بصمة حرارية Hot Foil (ذهبي/فضي)">
                 <div class="option-checkbox"></div>
                 <div class="option-info">
                   <div class="option-title">بصمة حرارية (Hot Foil)</div>
-                  <div class="option-desc">تذهيب أو فضي معدني عاكس للأناقة.</div>
+                  <div class="option-desc">تذهيب أو فضي معدني عاكس للأناقة والفخامة.</div>
                 </div>
               </div>
 
@@ -1140,7 +1095,7 @@
                 <div class="option-checkbox"></div>
                 <div class="option-info">
                   <div class="option-title">كبس بارز أو غائر (Emboss)</div>
-                  <div class="option-desc">ملمس حفري ثلاثي الأبعاد في الورق.</div>
+                  <div class="option-desc">ملمس حفري ثلاثي الأبعاد في الورق والكرتون.</div>
                 </div>
               </div>
 
@@ -1148,47 +1103,31 @@
                 <div class="option-checkbox"></div>
                 <div class="option-info">
                   <div class="option-title">قص ليزري ونوافذ تكسير</div>
-                  <div class="option-desc">فتحات هندسية مفرغة ونوافذ شفافة.</div>
+                  <div class="option-desc">فتحات هندسية مفرغة ونوافذ شفافة على المنتج.</div>
                 </div>
               </div>
             </div>
           </div>
+        </section>
 
-          <div class="form-group full">
-            <label>أبعاد أو مقاسات أولية للمنتج / العلبة (إن وجدت)</label>
-            <input type="text" id="dimensions" placeholder="مثال: العلبة: الطول 28cm x العرض 18cm x الارتفاع 6cm، أو حجم قياسي A4...">
+        <!-- SECTION 04: Brand Strategy & Audience -->
+        <section class="card-section">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <span class="sec-number">04</span>
+              <h2 class="sec-title">شخصية العلامة التجارية والجمهور المستهدف</h2>
+            </div>
           </div>
-        </div>
+          <p class="sec-desc">حدد الانطباع العام وشريحة العملاء التي تخاطبهم:</p>
 
-        <div class="nav-actions">
-          <button type="button" class="btn btn-secondary" onclick="prevStep(2)">
-            <span>&rarr; العودة للخدمات</span>
-          </button>
-          <button type="button" class="btn btn-primary" onclick="nextStep(4)">
-            <span>المتابعة لشخصية الهوية</span>
-            <span>&larr;</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 4: Brand Strategy & Audience -->
-    <div class="brief-step-content" id="step-4">
-      <div class="card">
-        <div class="section-title">
-          <span class="step-number">STEP 04</span>
-          <span>شخصية العلامة التجارية والجمهور المستهدف</span>
-        </div>
-
-        <div class="form-grid">
-          <div class="form-group full">
-            <label>ما هو الانطباع والشخصية التي تريد أن يتركها التصميم؟</label>
+          <div class="form-group full" style="margin-bottom: 18px;">
+            <label style="margin-bottom: 8px; display: block;">الانطباع والنبرة البصرية المستهدفة:</label>
             <div class="options-grid" id="vibeGrid">
               <div class="option-card selected" data-value="فاخر، ثري، ومتزن (Luxury & High-End)">
                 <div class="option-checkbox"></div>
                 <div class="option-info">
                   <div class="option-title">فاخر وأنيق (Luxury)</div>
-                  <div class="option-desc">ألوان هادئة، تشطيبات ميتاليك، وفخامة راقية.</div>
+                  <div class="option-desc">ألوان هادئة، تشطيبات ميتاليك، وهيبة راقية.</div>
                 </div>
               </div>
 
@@ -1218,107 +1157,119 @@
             </div>
           </div>
 
-          <div class="form-group full">
-            <label>من هو الجمهور والعميل المستهدف؟ <span class="req">*</span></label>
-            <input type="text" id="targetAudience" placeholder="مثال: كبار المقاولين والمكاتب الهندسية (B2B)، أو عملاء الشراء بالتجزئة (B2C)..." required>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>من هو الجمهور والعميل المستهدف؟ <span class="req">*</span></label>
+              <input type="text" id="targetAudience" placeholder="مثال: كبار المقاولين والمكاتب الهندسية (B2B)، أو عملاء التجزئة الفاخرة (B2C)..." required>
+            </div>
+
+            <div class="form-group full">
+              <label>أبرز المنافسين أو نقاط التميز التي تود التركيز عليها</label>
+              <textarea id="competitors" placeholder="اكتب هنا أسماء علامات تجارية منافسة أو أسلوب ترغب في التفوق عليه والتميز عنه..."></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 05: Timeline & Final Notes -->
+        <section class="card-section">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <span class="sec-number">05</span>
+              <h2 class="sec-title">الجدول الزمني المستهدف وروابط الملفات</h2>
+            </div>
           </div>
 
-          <div class="form-group full">
-            <label>أبرز المنافسين أو نقاط التميز التي تود التركيز عليها</label>
-            <textarea id="competitors" placeholder="اكتب هنا أسماء علامات تجارية منافسة تعجبك أو أسلوب ترغب في التفوق عليه..."></textarea>
-          </div>
-        </div>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>الجدول الزمني المستهدف لتسليم المشروع</label>
+              <select id="timelineSelect">
+                <option value="عاجل جداً (خلال 7 إلى 10 أيام عمل)">عاجل جداً (خلال 7 إلى 10 أيام عمل)</option>
+                <option value="متوسط وقياسي (خلال أسبوعين إلى 3 أسابيع)" selected>متوسط وقياسي (خلال أسبوعين إلى 3 أسابيع)</option>
+                <option value="مرن وممتد وفق مراحل التطوير الشاملة">مرن وممتد وفق مراحل التطوير الشاملة</option>
+              </select>
+            </div>
 
-        <div class="nav-actions">
-          <button type="button" class="btn btn-secondary" onclick="prevStep(3)">
-            <span>&rarr; العودة للمواصفات</span>
-          </button>
-          <button type="button" class="btn btn-primary" onclick="nextStep(5)">
-            <span>المتابعة للمراجعة والإرسال</span>
-            <span>&larr;</span>
-          </button>
-        </div>
+            <div class="form-group full">
+              <label>ملاحظات إضافية أو روابط لملفات ومراجع (Google Drive / Dropbox)</label>
+              <textarea id="finalNotes" placeholder="أضف أي تفاصيل أخرى أو روابط لملفات الشعار الحالية، صور المنتجات، أو قياسات خاصة..."></textarea>
+            </div>
+          </div>
+        </section>
+
       </div>
-    </div>
 
-    <!-- STEP 5: Review & Send -->
-    <div class="brief-step-content" id="step-5">
-      <div class="card">
-        <div class="section-title">
-          <span class="step-number">STEP 05</span>
-          <span>المراجعة النهائية وإرسال البريف</span>
+      <!-- Right Column: Live Sticky Summary & Direct Send -->
+      <aside class="brief-sidebar">
+        <div class="summary-card">
+          <div class="summary-header">
+            <span class="summary-title">ملخص البريف الفني</span>
+            <div class="live-status">
+              <span class="live-dot"></span>
+              <span>محدث لحظياً</span>
+            </div>
+          </div>
+
+          <!-- Dynamic Live Summary Items -->
+          <div class="summary-feed">
+            <div class="summary-row">
+              <span class="summary-label">العميل والشركة</span>
+              <div class="summary-val" id="sumClientBrand">-</div>
+            </div>
+
+            <div class="summary-row">
+              <span class="summary-label">الخدمات الأساسية</span>
+              <div class="summary-val" id="sumServices">-</div>
+            </div>
+
+            <div class="summary-row" id="sumLogoRow">
+              <span class="summary-label">أنماط الشعار المختارة</span>
+              <div class="summary-val" id="sumLogoTypes">-</div>
+            </div>
+
+            <div class="summary-row" id="sumPackagingRow">
+              <span class="summary-label">مواصفات العلب والاستيكر</span>
+              <div class="summary-val" id="sumPackagingDetails">-</div>
+            </div>
+
+            <div class="summary-row">
+              <span class="summary-label">الخامات والتشطيبات</span>
+              <div class="summary-val" id="sumSpecs">-</div>
+            </div>
+
+            <div class="summary-row">
+              <span class="summary-label">الجمهور والطابع</span>
+              <div class="summary-val" id="sumVibe">-</div>
+            </div>
+
+            <div class="summary-row">
+              <span class="summary-label">الجدولة الزمنية</span>
+              <div class="summary-val" id="sumTimeline">-</div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="actions-wrap">
+            <button type="button" class="btn btn-whatsapp" onclick="sendViaWhatsApp()">
+              <span>إرسال البريف الفني كاملاً عبر واتساب</span>
+            </button>
+
+            <button type="button" class="btn btn-secondary" onclick="sendViaEmail()">
+              <span>أو إرسال نسخة عبر البريد الرسمي</span>
+            </button>
+          </div>
+
+          <p class="sidebar-note">
+            يتم تجميع كافة اختياراتك الفنية بدقة وإرسالها مباشرة إلى أحمد ماهر لدراسة التنفيذ.
+          </p>
         </div>
+      </aside>
 
-        <p class="hint" style="margin-bottom: 20px;">
-          راجع ملخص بيانات البريف قبل إرساله؛ سيتم تجميع كل البيانات وتنسيقها في رسالة تقنية واضحة:
-        </p>
-
-        <div class="summary-box">
-          <div class="summary-row">
-            <span class="summary-label">اسم العميل:</span>
-            <span class="summary-value" id="sumClientName">-</span>
-          </div>
-          <div class="summary-row">
-            <span class="summary-label">الشركة والنشاط:</span>
-            <span class="summary-value" id="sumBrandName">-</span>
-          </div>
-          <div class="summary-row">
-            <span class="summary-label">الخدمات المحددة:</span>
-            <span class="summary-value" id="sumServices">-</span>
-          </div>
-          <div class="summary-row">
-            <span class="summary-label">الخامات والتشطيبات:</span>
-            <span class="summary-value" id="sumSpecs">-</span>
-          </div>
-          <div class="summary-row">
-            <span class="summary-label">الجمهور والشخصية:</span>
-            <span class="summary-value" id="sumVibe">-</span>
-          </div>
-        </div>
-
-        <div class="form-grid">
-          <div class="form-group full">
-            <label>الجدول الزمني المستهدف لتسليم المشروع</label>
-            <select id="timelineSelect">
-              <option value="عاجل جداً (خلال 7 إلى 10 أيام)">عاجل جداً (خلال 7 إلى 10 أيام عمل)</option>
-              <option value="متوسط وقياسي (خلال أسبوعين إلى 3 أسابيع)" selected>متوسط وقياسي (خلال أسبوعين إلى 3 أسابيع)</option>
-              <option value="مرن وفق مراحل التطوير الشاملة">مرن وممتد وفق مراحل التطوير الشاملة</option>
-            </select>
-          </div>
-
-          <div class="form-group full">
-            <label>ملاحظات إضافية أو روابط لملفات ومراجع (Google Drive / Dropbox)</label>
-            <textarea id="finalNotes" placeholder="أضف أي تفاصيل أخرى أو روابط لملفات الشعار الحالية، صور المنتجات، أو قياسات دقيقة..."></textarea>
-          </div>
-        </div>
-
-        <!-- Submission Actions -->
-        <div style="margin-top: 32px; display: flex; flex-direction: column; gap: 14px;">
-          <button type="button" class="btn btn-whatsapp" onclick="sendViaWhatsApp()">
-            <span>إرسال البريف كاملاً إلى أحمد ماهر عبر واتساب</span>
-          </button>
-
-          <button type="button" class="btn btn-secondary" onclick="sendViaEmail()">
-            <span>أو إرسال نسخة عبر البريد الإلكتروني الرسمي</span>
-          </button>
-        </div>
-
-        <div class="nav-actions" style="margin-top: 24px;">
-          <button type="button" class="btn btn-secondary" onclick="prevStep(4)">
-            <span>&rarr; تعديل الخطوة السابقة</span>
-          </button>
-          <div></div>
-        </div>
-      </div>
     </div>
 
   </div>
 
   <script>
-    let currentStep = 1;
-    const totalSteps = 5;
-
-    // Toggle multi-select cards
+    // Setup option card click handlers
     function setupGridCards(gridId) {
       const grid = document.getElementById(gridId);
       if (!grid) return;
@@ -1336,6 +1287,8 @@
               if (sub) sub.classList.toggle('active', card.classList.contains('selected'));
             }
           }
+
+          updateLiveSummary();
         });
       });
     }
@@ -1358,90 +1311,87 @@
       return selected;
     }
 
-    function goToStep(step) {
-      if (step < 1 || step > totalSteps) return;
+    // Live Summary Updater
+    function updateLiveSummary() {
+      const name = document.getElementById('clientName').value.trim();
+      const role = document.getElementById('clientRole').value.trim();
+      const brand = document.getElementById('brandName').value.trim();
+      const industry = document.getElementById('industry').value;
 
-      // Update contents
-      document.querySelectorAll('.brief-step-content').forEach(el => el.classList.remove('active'));
-      const activeContent = document.getElementById('step-' + step);
-      if (activeContent) activeContent.classList.add('active');
+      // 1. Client & Brand
+      let clientText = name ? name : 'اسم المسؤول لم يحدد';
+      if (role) clientText += ` (${role})`;
+      let brandText = brand ? brand : 'العلامة التجارية لم تحدد';
+      document.getElementById('sumClientBrand').innerText = `${brandText} - ${clientText} [${industry}]`;
 
-      // Update progress tracker
-      document.querySelectorAll('.progress-step').forEach(el => {
-        const s = parseInt(el.getAttribute('data-step'));
-        el.classList.remove('active', 'completed');
-        if (s === step) {
-          el.classList.add('active');
-        } else if (s < step) {
-          el.classList.add('completed');
-        }
-      });
-
-      const fillPct = ((step - 1) / (totalSteps - 1)) * 100;
-      document.getElementById('progressFill').style.width = fillPct + '%';
-
-      currentStep = step;
-      window.scrollTo({ top: 180, behavior: 'smooth' });
-
-      if (step === 5) {
-        updateSummary();
-      }
-    }
-
-    function nextStep(target) {
-      // Basic validation for Step 1
-      if (currentStep === 1) {
-        const name = document.getElementById('clientName').value.trim();
-        const brand = document.getElementById('brandName').value.trim();
-        if (!name || !brand) {
-          alert('يرجى كتابة اسم المسؤول واسم العلامة التجارية للمتابعة.');
-          return;
-        }
-      }
-      goToStep(target);
-    }
-
-    function prevStep(target) {
-      goToStep(target);
-    }
-
-    function updateSummary() {
-      const name = document.getElementById('clientName').value.trim() || 'غير محدد';
-      const role = document.getElementById('clientRole').value.trim() || '';
-      const brand = document.getElementById('brandName').value.trim() || 'غير محدد';
-      const industry = document.getElementById('industry').value || '';
-      
+      // 2. Services
       const isBrand = document.querySelector('#servicesGrid .option-card[data-service="brand"]')?.classList.contains('selected');
       const isPack = document.querySelector('#servicesGrid .option-card[data-service="packaging"]')?.classList.contains('selected');
       
-      let servicesSummaryList = [];
+      const allServices = getSelectedValues('servicesGrid');
+      document.getElementById('sumServices').innerText = allServices.length > 0 ? allServices.join(' + ') : 'لم يتم تحديد خدمات بعد';
+
+      // 3. Logo Types Subpanel
+      const logoRow = document.getElementById('sumLogoRow');
       if (isBrand) {
+        logoRow.style.display = 'block';
         const logos = getSelectedValues('logoTypesGrid');
-        servicesSummaryList.push(`هوية بصرية (${logos.length} أنماط شعار مختارة)`);
+        document.getElementById('sumLogoTypes').innerText = logos.length > 0 ? logos.join('، ') : 'لم تحدد أنماط محددة';
+      } else {
+        logoRow.style.display = 'none';
       }
+
+      // 4. Packaging Subpanel
+      const packRow = document.getElementById('sumPackagingRow');
       if (isPack) {
+        packRow.style.display = 'block';
         const boxes = getSelectedValues('boxTypesGrid');
         const stickers = getSelectedValues('stickerTypesGrid');
-        servicesSummaryList.push(`تغليف CAD (${boxes.length} علب، ${stickers.length} استيكرات)`);
+        const boxL = document.getElementById('boxLength').value.trim();
+        const boxW = document.getElementById('boxWidth').value.trim();
+        const boxH = document.getElementById('boxHeight').value.trim();
+        const stickerDim = document.getElementById('stickerDims').value.trim();
+        const needHelp = document.getElementById('needSizeHelp').checked;
+
+        let packDetailsParts = [];
+        if (boxes.length > 0) packDetailsParts.push(`العلب: ${boxes.join('، ')}`);
+        if (stickers.length > 0) packDetailsParts.push(`الاستيكرات: ${stickers.join('، ')}`);
+        
+        let dims = [];
+        if (boxL || boxW || boxH) dims.push(`أبعاد العلبة: ${boxL || '-'}x${boxW || '-'}x${boxH || '-'}`);
+        if (stickerDim) dims.push(`الاستيكر: ${stickerDim}`);
+        if (needHelp) dims.push('طلب مساعدة لتحديد المقاس');
+        if (dims.length > 0) packDetailsParts.push(`(${dims.join(' | ')})`);
+
+        document.getElementById('sumPackagingDetails').innerText = packDetailsParts.length > 0 ? packDetailsParts.join(' | ') : 'لم تحدد تفاصيل العلب بعد';
+      } else {
+        packRow.style.display = 'none';
       }
 
-      getSelectedValues('servicesGrid').forEach(s => {
-        if (s !== 'هوية بصرية وشعار متكامل' && s !== 'تصميم علب وتغليف CAD') {
-          servicesSummaryList.push(s);
-        }
-      });
+      // 5. Materials & Finishes
+      const materials = getSelectedValues('materialsGrid');
+      const finishes = getSelectedValues('finishesGrid');
+      const matStr = materials.length > 0 ? materials.join('، ') : 'وفق التوصية';
+      const finStr = finishes.length > 0 ? finishes.join('، ') : 'حسب التصميم';
+      document.getElementById('sumSpecs').innerText = `خامات: ${matStr} | تشطيبات: ${finStr}`;
 
-      const materials = getSelectedValues('materialsGrid').join('، ') || 'وفق التوصية الهندسية';
-      const finishes = getSelectedValues('finishesGrid').join('، ') || 'حسب التصميم';
-      const vibe = getSelectedValues('vibeGrid').join(' - ') || 'طابع احترافي متزن';
+      // 6. Vibe & Audience
+      const vibe = getSelectedValues('vibeGrid');
+      const audience = document.getElementById('targetAudience').value.trim();
+      const vibeStr = vibe.length > 0 ? vibe.join(' - ') : 'متزن';
+      document.getElementById('sumVibe').innerText = `${vibeStr} ${audience ? `| جمهور: ${audience}` : ''}`;
 
-      document.getElementById('sumClientName').innerText = `${name} ${role ? `(${role})` : ''}`;
-      document.getElementById('sumBrandName').innerText = `${brand} - [${industry}]`;
-      document.getElementById('sumServices').innerText = servicesSummaryList.join(' + ') || 'غير محدد';
-      document.getElementById('sumSpecs').innerText = `${materials} | تشطيبات: ${finishes}`;
-      document.getElementById('sumVibe').innerText = vibe;
+      // 7. Timeline
+      document.getElementById('sumTimeline').innerText = document.getElementById('timelineSelect').value;
     }
 
+    // Attach live listeners to all input elements
+    document.querySelectorAll('input, select, textarea').forEach(el => {
+      el.addEventListener('input', updateLiveSummary);
+      el.addEventListener('change', updateLiveSummary);
+    });
+
+    // Compile clean, organized WhatsApp message with ZERO emojis or exotic symbols
     function compileBriefText() {
       const name = document.getElementById('clientName').value.trim() || 'غير محدد';
       const role = document.getElementById('clientRole').value.trim();
@@ -1451,7 +1401,7 @@
       const email = document.getElementById('emailAddress').value.trim() || 'غير مدون';
       const location = document.getElementById('projectLocation').value.trim() || 'غير مدون';
 
-      // Services & Sub-details
+      // Services & Details
       const isBrandSelected = document.querySelector('#servicesGrid .option-card[data-service="brand"]')?.classList.contains('selected');
       const selectedLogoTypes = isBrandSelected ? getSelectedValues('logoTypesGrid') : [];
 
@@ -1459,11 +1409,11 @@
       const selectedBoxTypes = isPackagingSelected ? getSelectedValues('boxTypesGrid') : [];
       const selectedStickerTypes = isPackagingSelected ? getSelectedValues('stickerTypesGrid') : [];
 
-      const boxL = document.getElementById('boxLength')?.value.trim() || '';
-      const boxW = document.getElementById('boxWidth')?.value.trim() || '';
-      const boxH = document.getElementById('boxHeight')?.value.trim() || '';
-      const stickerDims = document.getElementById('stickerDims')?.value.trim() || '';
-      const needSizeHelp = document.getElementById('needSizeHelp')?.checked;
+      const boxL = document.getElementById('boxLength').value.trim();
+      const boxW = document.getElementById('boxWidth').value.trim();
+      const boxH = document.getElementById('boxHeight').value.trim();
+      const stickerDims = document.getElementById('stickerDims').value.trim();
+      const needSizeHelp = document.getElementById('needSizeHelp').checked;
 
       let servicesFormatted = [];
       const mainServices = getSelectedValues('servicesGrid');
@@ -1474,7 +1424,10 @@
         if (isBrandSelected) {
           let brandText = '- هوية بصرية وشعارات متكاملة:';
           if (selectedLogoTypes.length > 0) {
-            brandText += '\n  * أنواع الشعارات المفضلة:\n    - ' + selectedLogoTypes.join('\n    - ');
+            brandText += '
+  * أنواع الشعارات المفضلة:
+    - ' + selectedLogoTypes.join('
+    - ');
           }
           servicesFormatted.push(brandText);
         }
@@ -1482,10 +1435,16 @@
         if (isPackagingSelected) {
           let packText = '- تصميم العلب والتغليف الهيكلي CAD:';
           if (selectedBoxTypes.length > 0) {
-            packText += '\n  * نوع العلب المطلوبة:\n    - ' + selectedBoxTypes.join('\n    - ');
+            packText += '
+  * نوع العلب المطلوبة:
+    - ' + selectedBoxTypes.join('
+    - ');
           }
           if (selectedStickerTypes.length > 0) {
-            packText += '\n  * نوع الاستيكرات والملصقات:\n    - ' + selectedStickerTypes.join('\n    - ');
+            packText += '
+  * نوع الاستيكرات والملصقات:
+    - ' + selectedStickerTypes.join('
+    - ');
           }
 
           let dimsList = [];
@@ -1499,7 +1458,10 @@
             dimsList.push('طلب مساعدة لتحديد المقاسات هندسياً بناءً على عينة المنتج');
           }
           if (dimsList.length > 0) {
-            packText += '\n  * المقاسات والأبعاد الهندسية:\n    ' + dimsList.join('\n    ');
+            packText += '
+  * المقاسات والأبعاد الهندسية:
+    ' + dimsList.join('
+    ');
           }
           servicesFormatted.push(packText);
         }
@@ -1511,7 +1473,9 @@
         });
       }
 
-      const servicesText = servicesFormatted.join('\n\n');
+      const servicesText = servicesFormatted.join('
+
+');
 
       const materialsArr = getSelectedValues('materialsGrid');
       const materialsText = materialsArr.length > 0 ? materialsArr.join('، ') : 'وفق التوصية الهندسية';
@@ -1519,13 +1483,11 @@
       const finishesArr = getSelectedValues('finishesGrid');
       const finishesText = finishesArr.length > 0 ? finishesArr.join('، ') : 'حسب ما يناسب التصميم';
 
-      let dimensions = document.getElementById('dimensions').value.trim();
-      if (!dimensions) {
-        let boxDimParts = [];
-        if (boxL || boxW || boxH) boxDimParts.push(`العلبة: ${boxL || '-'} x ${boxW || '-'} x ${boxH || '-'}`);
-        if (stickerDims) boxDimParts.push(`الاستيكر: ${stickerDims}`);
-        dimensions = boxDimParts.length > 0 ? boxDimParts.join(' | ') : 'سيتم التحديد والتنسيق لاحقاً';
-      }
+      let dimensions = '';
+      let boxDimParts = [];
+      if (boxL || boxW || boxH) boxDimParts.push(`العلبة: ${boxL || '-'} x ${boxW || '-'} x ${boxH || '-'}`);
+      if (stickerDims) boxDimParts.push(`الاستيكر: ${stickerDims}`);
+      dimensions = boxDimParts.length > 0 ? boxDimParts.join(' | ') : 'سيتم التحديد والتنسيق لاحقاً';
 
       const vibeArr = getSelectedValues('vibeGrid');
       const vibeText = vibeArr.length > 0 ? vibeArr.join('، ') : 'متزن واحترافي';
@@ -1587,6 +1549,15 @@ ${line}
     }
 
     function sendViaWhatsApp() {
+      // Validate mandatory fields
+      const name = document.getElementById('clientName').value.trim();
+      const brand = document.getElementById('brandName').value.trim();
+      if (!name || !brand) {
+        alert('يرجى ملء اسم المسؤول واسم العلامة التجارية في القسم الأول للمتابعة.');
+        document.getElementById('clientName').focus();
+        return;
+      }
+
       const text = compileBriefText();
       const encoded = encodeURIComponent(text);
       window.open(`https://wa.me/201067017778?text=${encoded}`, '_blank');
@@ -1599,6 +1570,9 @@ ${line}
       const body = encodeURIComponent(text);
       window.location.href = `mailto:alkutsh43@gmail.com?subject=${subject}&body=${body}`;
     }
+
+    // Run initial live summary update on load
+    updateLiveSummary();
   </script>
 </body>
 </html>
