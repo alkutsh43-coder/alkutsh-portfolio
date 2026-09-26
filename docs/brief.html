@@ -390,12 +390,27 @@
       flex-shrink: 0;
       margin-top: 2px;
       transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .option-checkbox::after {
+      content: '';
+      display: none;
+      width: 5px;
+      height: 9px;
+      border: solid #071610;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      margin-top: -2px;
     }
 
     .option-card.selected .option-checkbox {
       background: var(--accent);
       border-color: var(--accent);
-      color: #071610;
+    }
+
+    .option-card.selected .option-checkbox::after {
+      display: block;
     }
 
     .option-info {
@@ -534,7 +549,7 @@
     <!-- Top Bar Navigation -->
     <header class="top-bar">
       <a href="./" class="back-btn">
-        <span>← العودة للبورتفوليو</span>
+        <span>&larr; العودة للبورتفوليو</span>
       </a>
 
       <a href="./" class="brand-mark">
@@ -545,7 +560,7 @@
     <!-- Header Title -->
     <div class="hero-header">
       <div class="badge">
-        <span>● استمارة المواصفات والبريف الإبداعي الشامل</span>
+        <span> استمارة المواصفات والبريف الإبداعي الشامل</span>
       </div>
       <h1 class="page-title">
         موجز المشروع الإبداعي <span>(Creative & Technical Brief)</span>
@@ -644,7 +659,7 @@
           <div></div>
           <button type="button" class="btn btn-primary" onclick="nextStep(2)">
             <span>المتابعة لنوع الخدمات</span>
-            <span>←</span>
+            <span>&larr;</span>
           </button>
         </div>
       </div>
@@ -662,7 +677,7 @@
 
         <div class="options-grid" id="servicesGrid">
           <div class="option-card selected" data-value="هوية بصرية وشعار متكامل">
-            <div class="option-checkbox">✓</div>
+            <div class="option-checkbox"></div>
             <div class="option-info">
               <div class="option-title">الهوية البصرية والشعارات</div>
               <div class="option-desc">شعار، دليل إرشادي، باليتة بانتون، والتايبوجرافي.</div>
@@ -670,7 +685,7 @@
           </div>
 
           <div class="option-card selected" data-value="تصميم علب وتغليف CAD">
-            <div class="option-checkbox">✓</div>
+            <div class="option-checkbox"></div>
             <div class="option-info">
               <div class="option-title">تصميم العلب والتغليف الهيكلي</div>
               <div class="option-desc">قوالب تكسير CAD، علب صلبة ومطوية ومحاكاة 3D.</div>
@@ -712,11 +727,11 @@
 
         <div class="nav-actions">
           <button type="button" class="btn btn-secondary" onclick="prevStep(1)">
-            <span>→ العودة للخطوة السابقة</span>
+            <span>&rarr; العودة للخطوة السابقة</span>
           </button>
           <button type="button" class="btn btn-primary" onclick="nextStep(3)">
             <span>المتابعة للمواصفات والخامات</span>
-            <span>←</span>
+            <span>&larr;</span>
           </button>
         </div>
       </div>
@@ -735,7 +750,7 @@
             <label>نوعية الخامات المفضلة للتنفيذ (حدد ما ينطبق):</label>
             <div class="options-grid" id="materialsGrid">
               <div class="option-card selected" data-value="كرتون صلب فاخر (Rigid Greyboard)">
-                <div class="option-checkbox">✓</div>
+                <div class="option-checkbox"></div>
                 <div class="option-info">
                   <div class="option-title">كرتون صلب فاخر (Rigid Box)</div>
                   <div class="option-desc">سماكات من 1.5mm إلى 3mm للعلب الفخمة.</div>
@@ -772,7 +787,7 @@
             <label>التشطيبات الخاصة واللمسات الفنية المطلوبة:</label>
             <div class="options-grid" id="finishesGrid">
               <div class="option-card selected" data-value="بصمة حرارية Hot Foil (ذهبي/فضي)">
-                <div class="option-checkbox">✓</div>
+                <div class="option-checkbox"></div>
                 <div class="option-info">
                   <div class="option-title">بصمة حرارية (Hot Foil)</div>
                   <div class="option-desc">تذهيب أو فضي معدني عاكس للأناقة.</div>
@@ -780,7 +795,7 @@
               </div>
 
               <div class="option-card selected" data-value="ورنيش موضعي بارز Spot UV / 3D">
-                <div class="option-checkbox">✓</div>
+                <div class="option-checkbox"></div>
                 <div class="option-info">
                   <div class="option-title">ورنيش موضعي (Spot UV)</div>
                   <div class="option-desc">طبقة لامعة بارزة فوق الشعارات والنصوص.</div>
@@ -807,17 +822,17 @@
 
           <div class="form-group full">
             <label>أبعاد أو مقاسات أولية للمنتج / العلبة (إن وجدت)</label>
-            <input type="text" id="dimensions" placeholder="مثال: العلبة: الطول 28cm × العرض 18cm × الارتفاع 6cm، أو حجم قياسي A4...">
+            <input type="text" id="dimensions" placeholder="مثال: العلبة: الطول 28cm x العرض 18cm x الارتفاع 6cm، أو حجم قياسي A4...">
           </div>
         </div>
 
         <div class="nav-actions">
           <button type="button" class="btn btn-secondary" onclick="prevStep(2)">
-            <span>→ العودة للخدمات</span>
+            <span>&rarr; العودة للخدمات</span>
           </button>
           <button type="button" class="btn btn-primary" onclick="nextStep(4)">
             <span>المتابعة لشخصية الهوية</span>
-            <span>←</span>
+            <span>&larr;</span>
           </button>
         </div>
       </div>
@@ -836,7 +851,7 @@
             <label>ما هو الانطباع والشخصية التي تريد أن يتركها التصميم؟</label>
             <div class="options-grid" id="vibeGrid">
               <div class="option-card selected" data-value="فاخر، ثري، ومتزن (Luxury & High-End)">
-                <div class="option-checkbox">✓</div>
+                <div class="option-checkbox"></div>
                 <div class="option-info">
                   <div class="option-title">فاخر وأنيق (Luxury)</div>
                   <div class="option-desc">ألوان هادئة، تشطيبات ميتاليك، وفخامة راقية.</div>
@@ -882,11 +897,11 @@
 
         <div class="nav-actions">
           <button type="button" class="btn btn-secondary" onclick="prevStep(3)">
-            <span>→ العودة للمواصفات</span>
+            <span>&rarr; العودة للمواصفات</span>
           </button>
           <button type="button" class="btn btn-primary" onclick="nextStep(5)">
             <span>المتابعة للمراجعة والإرسال</span>
-            <span>←</span>
+            <span>&larr;</span>
           </button>
         </div>
       </div>
@@ -956,7 +971,7 @@
 
         <div class="nav-actions" style="margin-top: 24px;">
           <button type="button" class="btn btn-secondary" onclick="prevStep(4)">
-            <span>→ تعديل الخطوة السابقة</span>
+            <span>&rarr; تعديل الخطوة السابقة</span>
           </button>
           <div></div>
         </div>
@@ -976,10 +991,6 @@
       grid.querySelectorAll('.option-card').forEach(card => {
         card.addEventListener('click', () => {
           card.classList.toggle('selected');
-          const check = card.querySelector('.option-checkbox');
-          if (check) {
-            check.innerText = card.classList.contains('selected') ? '✓' : '';
-          }
         });
       });
     }
@@ -1055,7 +1066,7 @@
       const services = getSelectedValues('servicesGrid').join(' + ') || 'غير محدد';
       const materials = getSelectedValues('materialsGrid').join('، ') || 'وفق التوصية الهندسية';
       const finishes = getSelectedValues('finishesGrid').join('، ') || 'حسب التصميم';
-      const vibe = getSelectedValues('vibeGrid').join(' • ') || 'طابع احترافي متزن';
+      const vibe = getSelectedValues('vibeGrid').join(' - ') || 'طابع احترافي متزن';
 
       document.getElementById('sumClientName').innerText = `${name} ${role ? `(${role})` : ''}`;
       document.getElementById('sumBrandName').innerText = `${brand} - [${industry}]`;
