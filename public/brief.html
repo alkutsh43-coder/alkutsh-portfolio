@@ -19,17 +19,19 @@
     }
 
     :root {
-      --bg: #071610;
-      --card: #0A2117;
-      --card-hover: #0E2B1E;
-      --surface: #06130D;
-      --accent: #82E16B;
-      --accent-glow: rgba(130, 225, 107, 0.25);
-      --text: #FFFFFF;
-      --text-muted: rgba(255, 255, 255, 0.72);
-      --text-dim: rgba(255, 255, 255, 0.45);
-      --border: rgba(255, 255, 255, 0.08);
-      --border-accent: rgba(130, 225, 107, 0.35);
+      --bg: #07150E;
+      --card-bg: #0D2319;
+      --card-hover: #123023;
+      --surface: #06130C;
+      --accent: #6CE680;
+      --accent-glow: rgba(108, 230, 128, 0.25);
+      --accent-dim: rgba(108, 230, 128, 0.12);
+      --gold: #E5C378;
+      --text-main: #FFFFFF;
+      --text-muted: #B2CCC0;
+      --text-dim: #6D8E7F;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(108, 230, 128, 0.4);
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
@@ -38,7 +40,7 @@
 
     body {
       background-color: var(--bg);
-      color: var(--text);
+      color: var(--text-main);
       font-family: 'Cairo', sans-serif;
       line-height: 1.6;
       min-height: 100vh;
@@ -46,43 +48,45 @@
       position: relative;
     }
 
+    /* Subtle ambient lighting */
     .glow-1 {
       position: absolute;
       top: 0;
-      left: 15%;
-      width: 550px;
-      height: 550px;
-      background: radial-gradient(circle, rgba(130, 225, 107, 0.08) 0%, transparent 70%);
+      left: 10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(108, 230, 128, 0.07) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
 
     .glow-2 {
       position: absolute;
-      top: 600px;
+      top: 700px;
       right: 5%;
-      width: 650px;
-      height: 650px;
-      background: radial-gradient(circle, rgba(130, 225, 107, 0.05) 0%, transparent 70%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(108, 230, 128, 0.05) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1220px;
       margin: 0 auto;
       padding: 32px 24px 80px 24px;
       position: relative;
       z-index: 1;
     }
 
+    /* Top Bar */
     .top-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 32px;
       padding-bottom: 20px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-subtle);
     }
 
     .back-btn {
@@ -96,7 +100,7 @@
       padding: 8px 18px;
       border-radius: var(--radius-full);
       background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-subtle);
       transition: all 0.25s ease;
     }
 
@@ -113,10 +117,11 @@
       display: block;
     }
 
+    /* Hero Header */
     .hero-header {
       text-align: center;
       max-width: 780px;
-      margin: 0 auto 40px auto;
+      margin: 0 auto 36px auto;
     }
 
     .badge {
@@ -125,12 +130,12 @@
       gap: 8px;
       padding: 6px 16px;
       border-radius: var(--radius-full);
-      background: rgba(130, 225, 107, 0.1);
-      border: 1px solid rgba(130, 225, 107, 0.3);
+      background: var(--accent-dim);
+      border: 1px solid var(--border-accent);
       color: var(--accent);
       font-size: 13px;
       font-weight: 700;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .badge-dot {
@@ -142,27 +147,27 @@
     }
 
     .page-title {
-      font-size: 34px;
+      font-size: 32px;
       font-weight: 900;
       color: #ffffff;
       line-height: 1.35;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       letter-spacing: -0.5px;
     }
 
     .page-title span {
       color: var(--accent);
       font-family: 'Inter', sans-serif;
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 700;
       display: inline-block;
       margin-right: 6px;
     }
 
     .page-desc {
-      font-size: 15.5px;
+      font-size: 15px;
       color: var(--text-muted);
-      line-height: 1.7;
+      line-height: 1.65;
     }
 
     /* 2-Column Responsive Layout */
@@ -179,11 +184,12 @@
       gap: 24px;
     }
 
+    /* Card Section Container */
     .card-section {
-      background: var(--card);
-      border: 1px solid var(--border);
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 28px 26px;
+      padding: 28px 24px;
       transition: border-color 0.25s ease;
     }
 
@@ -195,7 +201,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .section-title-wrap {
@@ -209,8 +215,8 @@
       font-size: 13px;
       font-weight: 800;
       color: var(--accent);
-      background: rgba(130, 225, 107, 0.12);
-      border: 1px solid rgba(130, 225, 107, 0.3);
+      background: var(--accent-dim);
+      border: 1px solid var(--border-accent);
       width: 32px;
       height: 32px;
       border-radius: 50%;
@@ -229,7 +235,7 @@
     .sec-desc {
       font-size: 13.5px;
       color: var(--text-muted);
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       line-height: 1.55;
     }
 
@@ -253,7 +259,7 @@
     label {
       font-size: 13px;
       font-weight: 700;
-      color: rgba(255, 255, 255, 0.88);
+      color: rgba(255, 255, 255, 0.92);
     }
 
     .req {
@@ -267,7 +273,7 @@
     select,
     textarea {
       background: var(--surface);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-sm);
       color: #ffffff;
       font-family: inherit;
@@ -282,8 +288,8 @@
     select:focus,
     textarea:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(130, 225, 107, 0.15);
-      background: #081B13;
+      box-shadow: 0 0 0 3px rgba(108, 230, 128, 0.15);
+      background: #081B12;
     }
 
     input::placeholder,
@@ -294,89 +300,236 @@
 
     textarea {
       resize: vertical;
-      min-height: 95px;
+      min-height: 90px;
       line-height: 1.6;
     }
 
-    /* Service Selection Grid */
-    .tracks-grid {
+    /* Main Services Chip Grid */
+    .services-chips-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 22px;
     }
 
-    .track-card {
+    .service-chip {
       background: var(--surface);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      padding: 15px 16px;
+      padding: 12px 14px;
       cursor: pointer;
       display: flex;
-      align-items: flex-start;
-      gap: 12px;
+      align-items: center;
+      gap: 10px;
       transition: all 0.22s ease;
       user-select: none;
     }
 
-    .track-card:hover {
+    .service-chip:hover {
       border-color: var(--border-accent);
-      background: rgba(130, 225, 107, 0.04);
+      background: rgba(108, 230, 128, 0.04);
       transform: translateY(-2px);
     }
 
-    .track-card.selected {
+    .service-chip.selected {
       border-color: var(--accent);
-      background: rgba(130, 225, 107, 0.1);
-      box-shadow: 0 0 16px rgba(130, 225, 107, 0.12);
+      background: rgba(108, 230, 128, 0.1);
+      box-shadow: 0 0 14px rgba(108, 230, 128, 0.12);
     }
 
-    .option-checkbox {
-      width: 20px;
-      height: 20px;
-      border-radius: 6px;
-      border: 2px solid var(--border);
+    .chip-check {
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      border: 2px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      margin-top: 2px;
       transition: all 0.2s ease;
       position: relative;
     }
 
-    .option-checkbox::after {
+    .chip-check::after {
       content: '';
       display: none;
-      width: 5px;
-      height: 9px;
-      border: solid #071610;
+      width: 4px;
+      height: 8px;
+      border: solid #07150E;
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
       margin-top: -2px;
     }
 
-    .track-card.selected .option-checkbox {
+    .service-chip.selected .chip-check {
       background: var(--accent);
       border-color: var(--accent);
     }
 
-    .track-card.selected .option-checkbox::after {
+    .service-chip.selected .chip-check::after {
       display: block;
     }
 
-    .track-info {
+    .chip-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.35;
+    }
+
+    /* Visual Galleries Section */
+    .visual-gallery-block {
+      margin-top: 24px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border-subtle);
+      animation: fadeInBlock 0.3s ease forwards;
+    }
+
+    @keyframes fadeInBlock {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .gallery-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .gallery-tag {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-accent);
+    }
+
+    .gallery-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .gallery-hint {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    /* Picture Cards Grid */
+    .visual-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 14px;
+    }
+
+    /* The Visual Card with Image */
+    .visual-card {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      user-select: none;
+    }
+
+    .visual-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .visual-card.selected {
+      border-color: var(--accent);
+      background: rgba(108, 230, 128, 0.08);
+      box-shadow: 0 0 18px rgba(108, 230, 128, 0.18);
+    }
+
+    /* Image / Visual Preview Container */
+    .visual-card-media {
+      width: 100%;
+      height: 125px;
+      background: #0A1C14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-subtle);
+      transition: transform 0.3s ease;
+    }
+
+    .visual-card:hover .visual-card-media svg {
+      transform: scale(1.04);
+    }
+
+    .visual-card-media svg {
+      transition: transform 0.3s ease;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .card-badge-check {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      z-index: 2;
+    }
+
+    .card-badge-check::after {
+      content: '';
+      display: none;
+      width: 4px;
+      height: 8px;
+      border: solid #07150E;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      margin-top: -2px;
+    }
+
+    .visual-card.selected .card-badge-check {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .visual-card.selected .card-badge-check::after {
+      display: block;
+    }
+
+    .visual-card-body {
+      padding: 12px 14px 14px 14px;
+      display: flex;
+      flex-direction: column;
       flex: 1;
     }
 
-    .track-title {
-      font-size: 14px;
+    .card-item-title {
+      font-size: 13.5px;
       font-weight: 800;
-      color: var(--text);
-      margin-bottom: 3px;
+      color: #ffffff;
+      margin-bottom: 4px;
+      line-height: 1.35;
     }
 
-    .track-desc {
-      font-size: 12px;
+    .card-item-desc {
+      font-size: 11.5px;
       color: var(--text-muted);
       line-height: 1.45;
     }
@@ -388,8 +541,8 @@
     }
 
     .summary-card {
-      background: #081F15;
-      border: 1px solid rgba(130, 225, 107, 0.35);
+      background: #091E15;
+      border: 1px solid rgba(108, 230, 128, 0.35);
       border-radius: var(--radius-lg);
       padding: 24px 20px;
       box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
@@ -401,7 +554,7 @@
       justify-content: space-between;
       margin-bottom: 18px;
       padding-bottom: 14px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid var(--border-subtle);
     }
 
     .summary-title {
@@ -417,10 +570,10 @@
       font-size: 11.5px;
       font-weight: 700;
       color: var(--accent);
-      background: rgba(130, 225, 107, 0.1);
+      background: var(--accent-dim);
       padding: 3px 10px;
       border-radius: var(--radius-full);
-      border: 1px solid rgba(130, 225, 107, 0.25);
+      border: 1px solid var(--border-accent);
     }
 
     .live-dot {
@@ -450,12 +603,12 @@
       width: 4px;
     }
     .summary-feed::-webkit-scrollbar-thumb {
-      background: rgba(130, 225, 107, 0.25);
+      background: rgba(108, 230, 128, 0.25);
       border-radius: 4px;
     }
 
     .summary-row {
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.25);
       border: 1px solid rgba(255, 255, 255, 0.04);
       border-radius: var(--radius-sm);
       padding: 9px 12px;
@@ -502,7 +655,7 @@
 
     .btn-whatsapp {
       background: #25D366;
-      color: #071610;
+      color: #07150E;
       box-shadow: 0 4px 18px rgba(37, 211, 102, 0.3);
     }
 
@@ -515,7 +668,7 @@
     .btn-secondary {
       background: rgba(255, 255, 255, 0.05);
       color: #ffffff;
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-subtle);
     }
 
     .btn-secondary:hover {
@@ -539,8 +692,8 @@
       .brief-sidebar {
         position: static;
       }
-      .tracks-grid {
-        grid-template-columns: 1fr;
+      .services-chips-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
@@ -549,7 +702,7 @@
         padding: 20px 16px 60px 16px;
       }
       .card-section {
-        padding: 22px 16px;
+        padding: 20px 16px;
       }
       .form-grid {
         grid-template-columns: 1fr;
@@ -557,11 +710,23 @@
       .form-group.full {
         grid-column: span 1;
       }
+      .services-chips-grid {
+        grid-template-columns: 1fr;
+      }
+      .visual-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
       .page-title {
-        font-size: 26px;
+        font-size: 25px;
       }
       .page-title span {
-        font-size: 17px;
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .visual-cards-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -591,10 +756,10 @@
         <span>استمارة طلب مشروع وتفاصيل العمل</span>
       </div>
       <h1 class="page-title">
-        بريف ومواصفات المشروع <span>(Creative Project Brief)</span>
+        بريف ومواصفات المشروع <span>(Visual Brief)</span>
       </h1>
       <p class="page-desc">
-        املأ البيانات الأساسية وحدد نوع التصميم المطلوب مع معاينة ملخص الطلب لحظياً، ثم أرسله مباشرة إلى واتساب لبدء دراسة التنفيذ والتسعير فورياً.
+        حدد متطلباتك بالصور التوضيحية لتصل فكرتك بدقة، مع ملخص مباشر ومحدث فورياً لإرسال البريف إلى واتساب.
       </p>
     </div>
 
@@ -604,7 +769,7 @@
       <!-- Main Content Column -->
       <div class="brief-sections">
 
-        <!-- SECTION 01: Client Profile -->
+        <!-- SECTION 01: Client Profile (7 Required Fields) -->
         <section class="card-section">
           <div class="section-header">
             <div class="section-title-wrap">
@@ -662,90 +827,542 @@
           </div>
         </section>
 
-        <!-- SECTION 02: Required Design Tracks (Simplified) -->
+        <!-- SECTION 02: Required Services with Visual Choice -->
         <section class="card-section">
           <div class="section-header">
             <div class="section-title-wrap">
               <span class="sec-number">02</span>
-              <h2 class="sec-title">ثانياً: المطلوب تصميمه</h2>
+              <h2 class="sec-title">ثانياً: المطلوب تصميمه (الاختيار بالصور)</h2>
             </div>
           </div>
-          <p class="sec-desc">حدد الخدمات المطلوبة لمشروعك (يمكنك اختيار أكثر من خدمة):</p>
+          <p class="sec-desc">حدد الخدمات المطلوبة لمشروعك؛ سينفتح لك معرض بصري بالصور لتختار النمط الذي يعجبك بمجرد الضغط عليه:</p>
 
-          <!-- 8 Clean Design Service Cards -->
-          <div class="tracks-grid" id="designTracksGrid">
-            
-            <div class="track-card selected" data-service="لوجو وهوية بصرية (Logo & Identity)">
-              <div class="option-checkbox"></div>
-              <div class="track-info">
-                <div class="track-title">لوجو وهوية بصرية (Logo & Identity)</div>
-                <div class="track-desc">تصميم شعار احترافي، ألوان، خطوط، وتطبيقات هوية متكاملة.</div>
-              </div>
+          <!-- High-Level Service Selection Chips -->
+          <div class="services-chips-grid" id="mainServicesGrid">
+            <div class="service-chip selected" data-service="logo">
+              <div class="chip-check"></div>
+              <div class="chip-title">لوجو وهوية بصرية</div>
             </div>
 
-            <div class="track-card selected" data-service="تصميم علب وتغليف وليبل (Packaging & Labels)">
-              <div class="option-checkbox"></div>
-              <div class="track-info">
-                <div class="track-title">تصميم علب وتغليف وليبل (Packaging & Labels)</div>
-                <div class="track-desc">علب صلبة ومطوية، قوالب سكاكين داي كت، وليبلات المنتجات.</div>
-              </div>
+            <div class="service-chip selected" data-service="packaging">
+              <div class="chip-check"></div>
+              <div class="chip-title">تصميم علب وتغليف</div>
             </div>
 
-            <div class="track-card" data-service="تصاميم سوشيال ميديا وإعلانات (Social Media)">
-              <div class="option-checkbox"></div>
-              <div class="track-info">
-                <div class="track-title">سوشيال ميديا وإعلانات (Social Media)</div>
-                <div class="track-desc">بوستات إعلانية، عروض، كاروسيل، ستوري وأغلفة مميزة.</div>
-              </div>
+            <div class="service-chip" data-service="social">
+              <div class="chip-check"></div>
+              <div class="chip-title">سوشيال ميديا وإعلانات</div>
             </div>
 
-            <div class="track-card" data-service="مطبوعات تجارية وتسويقية (Print & Stationery)">
-              <div class="option-checkbox"></div>
-              <div class="track-info">
-                <div class="track-title">مطبوعات تجارية (Print & Stationery)</div>
-                <div class="track-desc">بروشور، كتالوج، فلاير، فولدرات، بطاقات أعمال وأوراق رسمية.</div>
-              </div>
+            <div class="service-chip" data-service="print">
+              <div class="chip-check"></div>
+              <div class="chip-title">مطبوعات وبروشورات</div>
             </div>
 
-            <div class="track-card" data-service="لافتات ويافطات واجهات (Signage & Outdoor)">
-              <div class="option-checkbox"></div>
-              <div class="track-info">
-                <div class="track-title">لافتات ويافطات واجهات (Signage & CNC)</div>
-                <div class="track-desc">كلادينج، أكريليك، حروف بارزة مضيئة، وتجهيز ليزر/CNC.</div>
-              </div>
+            <div class="service-chip" data-service="signage">
+              <div class="chip-check"></div>
+              <div class="chip-title">لافتات واجهات ويافطات</div>
             </div>
 
-            <div class="track-card" data-service="تصميم منيو وقوائم طعام (Menu Design)">
-              <div class="option-checkbox"></div>
-              <div class="track-info">
-                <div class="track-title">منيو وقوائم طعام (Menu Design)</div>
-                <div class="track-desc">منيو مطاعم وكافيهات مطبوع وشاشات عرض مع QR Code.</div>
+            <div class="service-chip" data-service="menu">
+              <div class="chip-check"></div>
+              <div class="chip-title">منيو وقوائم طعام</div>
+            </div>
+          </div>
+
+          <!-- ================= VISUAL GALLERY 1: LOGO STYLES ================= -->
+          <div class="visual-gallery-block" id="gallery-logo">
+            <div class="gallery-heading">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="gallery-tag">1. نمط الشعار</span>
+                <span class="gallery-title">اختر بالصورة: ما نوع الشعار المفضل لديك؟</span>
               </div>
+              <span class="gallery-hint">يمكن اختيار نمط أو أكثر</span>
             </div>
 
-            <div class="track-card" data-service="حملة إعلانية ومفتاح بصري (Key Visual Campaign)">
-              <div class="option-checkbox"></div>
-              <div class="track-info">
-                <div class="track-title">حملة إعلانية كاملة (Key Visual Campaign)</div>
-                <div class="track-desc">فكرة تسويقية متكاملة وهوية بصرية مخصصة للحملة.</div>
+            <div class="visual-cards-grid" id="logoStylesGrid">
+              
+              <!-- Card 1: Wordmark / Typographic -->
+              <div class="visual-card selected" data-value="شعار خطي / تايبوجرافي (Wordmark)">
+                <div class="card-badge-check"></div>
+                <div class="visual-card-media">
+                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="bgGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#081E15"/>
+                        <stop offset="100%" stop-color="#04100B"/>
+                      </linearGradient>
+                      <linearGradient id="goldText" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#E5C378"/>
+                        <stop offset="100%" stop-color="#FFF2B8"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="200" height="120" fill="url(#bgGrad1)"/>
+                    <circle cx="100" cy="60" r="45" fill="none" stroke="rgba(229,195,120,0.12)" stroke-width="1"/>
+                    <text x="100" y="58" font-family="'Cairo', sans-serif" font-size="22" font-weight="900" fill="url(#goldText)" text-anchor="middle" letter-spacing="2">نُـخْـبَـة</text>
+                    <text x="100" y="78" font-family="'Inter', sans-serif" font-size="9" font-weight="600" fill="#6CE680" text-anchor="middle" letter-spacing="5">ELITE LUXURY</text>
+                    <line x1="60" y1="88" x2="140" y2="88" stroke="rgba(108,230,128,0.3)" stroke-width="1"/>
+                  </svg>
+                </div>
+                <div class="visual-card-body">
+                  <div class="card-item-title">شعار خطي (Wordmark)</div>
+                  <div class="card-item-desc">كتابة اسم البراند بخط فني فريد ومميز (مثل Sony, Google).</div>
+                </div>
               </div>
+
+              <!-- Card 2: Pictorial / Icon Mark -->
+              <div class="visual-card" data-value="شعار رمزي / أيقوني (Pictorial Mark)">
+                <div class="card-badge-check"></div>
+                <div class="visual-card-media">
+                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#071912"/>
+                        <stop offset="100%" stop-color="#030E09"/>
+                      </linearGradient>
+                      <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#6CE680"/>
+                        <stop offset="100%" stop-color="#1EBE5D"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="200" height="120" fill="url(#bgGrad2)"/>
+                    <circle cx="100" cy="55" r="32" fill="rgba(108,230,128,0.08)"/>
+                    <!-- Geometric Modern Falcon / Wing Shape -->
+                    <path d="M100 32 L118 52 L112 68 L100 60 L88 68 L82 52 Z" fill="url(#iconGrad)"/>
+                    <circle cx="100" cy="46" r="4" fill="#ffffff"/>
+                    <text x="100" y="92" font-family="'Inter', sans-serif" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="3">ICONIC SYMBOL</text>
+                  </svg>
+                </div>
+                <div class="visual-card-body">
+                  <div class="card-item-title">شعار رمزي (Icon Mark)</div>
+                  <div class="card-item-desc">أيقونة أو رمز بصري مجرد خالص يعبر عن الفكرة (مثل Apple).</div>
+                </div>
+              </div>
+
+              <!-- Card 3: Monogram / Lettermark -->
+              <div class="visual-card" data-value="شعار مونوغرام / حرفي (Lettermark)">
+                <div class="card-badge-check"></div>
+                <div class="visual-card-media">
+                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#081E15"/>
+                        <stop offset="100%" stop-color="#04100B"/>
+                      </linearGradient>
+                      <linearGradient id="monogramGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#FFF0A0"/>
+                        <stop offset="100%" stop-color="#D4AF37"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="200" height="120" fill="url(#bgGrad3)"/>
+                    <rect x="75" y="25" width="50" height="50" rx="10" transform="rotate(45 100 50)" fill="none" stroke="rgba(212,175,55,0.25)" stroke-width="1.5"/>
+                    <text x="94" y="58" font-family="'Cairo', sans-serif" font-size="28" font-weight="900" fill="url(#monogramGrad)">كـ</text>
+                    <text x="110" y="60" font-family="'Inter', sans-serif" font-size="22" font-weight="800" fill="#6CE680">A</text>
+                    <text x="100" y="94" font-family="'Inter', sans-serif" font-size="8.5" font-weight="600" fill="#B2CCC0" text-anchor="middle" letter-spacing="4">MONOGRAM</text>
+                  </svg>
+                </div>
+                <div class="visual-card-body">
+                  <div class="card-item-title">شعار مونوغرام (Monogram)</div>
+                  <div class="card-item-desc">حرف أو حرفين مدموجين بأناقة وفخامة (مثل LV, Chanel, AM).</div>
+                </div>
+              </div>
+
+              <!-- Card 4: Combination Mark -->
+              <div class="visual-card selected" data-value="شعار تركيبي - رمز واسم (Combination Mark)">
+                <div class="card-badge-check"></div>
+                <div class="visual-card-media">
+                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="bgGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#092017"/>
+                        <stop offset="100%" stop-color="#04120C"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="200" height="120" fill="url(#bgGrad4)"/>
+                    <!-- Modern Symbol + Typography combo -->
+                    <g transform="translate(100, 42)">
+                      <path d="M-14 -12 L0 -24 L14 -12 L14 10 L0 18 L-14 10 Z" fill="none" stroke="#6CE680" stroke-width="2.5"/>
+                      <circle cx="0" cy="-2" r="5" fill="#6CE680"/>
+                    </g>
+                    <text x="100" y="78" font-family="'Cairo', sans-serif" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">شـركـة نـبـتـة</text>
+                    <text x="100" y="94" font-family="'Inter', sans-serif" font-size="8" font-weight="500" fill="#6CE680" text-anchor="middle" letter-spacing="3">COMBINATION MARK</text>
+                  </svg>
+                </div>
+                <div class="visual-card-body">
+                  <div class="card-item-title">شعار تركيبي (Combination)</div>
+                  <div class="card-item-desc">رمز مميز بالأعلى أو اليمين مع الاسم بجانبه (مثل Adidas, Nike).</div>
+                </div>
+              </div>
+
+              <!-- Card 5: Emblem / Badge -->
+              <div class="visual-card" data-value="شعار شارة / درع كلاسيكي (Emblem / Badge)">
+                <div class="card-badge-check"></div>
+                <div class="visual-card-media">
+                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="bgGrad5" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#071911"/>
+                        <stop offset="100%" stop-color="#030E09"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="200" height="120" fill="url(#bgGrad5)"/>
+                    <circle cx="100" cy="54" r="34" fill="none" stroke="#E5C378" stroke-width="1.5" stroke-dasharray="3,2"/>
+                    <circle cx="100" cy="54" r="28" fill="rgba(229,195,120,0.08)" stroke="#E5C378" stroke-width="1"/>
+                    <polygon points="100,32 103,40 111,40 105,45 107,53 100,48 93,53 95,45 89,40 97,40" fill="#6CE680" transform="scale(0.7) translate(43, 15)"/>
+                    <text x="100" y="57" font-family="'Cairo', sans-serif" font-size="11" font-weight="800" fill="#ffffff" text-anchor="middle">أصـالـة</text>
+                    <text x="100" y="69" font-family="'Inter', sans-serif" font-size="7" font-weight="700" fill="#E5C378" text-anchor="middle">EST. 2025</text>
+                    <text x="100" y="100" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#B2CCC0" text-anchor="middle" letter-spacing="3">EMBLEM BADGE</text>
+                  </svg>
+                </div>
+                <div class="visual-card-body">
+                  <div class="card-item-title">شعار شارة (Emblem)</div>
+                  <div class="card-item-desc">ختم أو درع كلاسيكي متماسك داخله الاسم والرمز (مثل Starbucks).</div>
+                </div>
+              </div>
+
+              <!-- Card 6: Mascot / Character -->
+              <div class="visual-card" data-value="شعار شخصية / ماسكوت (Mascot)">
+                <div class="card-badge-check"></div>
+                <div class="visual-card-media">
+                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="bgGrad6" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#081E15"/>
+                        <stop offset="100%" stop-color="#04100B"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="200" height="120" fill="url(#bgGrad6)"/>
+                    <circle cx="100" cy="50" r="30" fill="rgba(108,230,128,0.12)"/>
+                    <!-- Friendly Character Mascot Illustration -->
+                    <path d="M85 45 Q100 28 115 45 Q120 62 100 68 Q80 62 85 45 Z" fill="#6CE680"/>
+                    <circle cx="94" cy="46" r="3.5" fill="#07150E"/>
+                    <circle cx="106" cy="46" r="3.5" fill="#07150E"/>
+                    <path d="M94 56 Q100 61 106 56" fill="none" stroke="#07150E" stroke-width="2" stroke-linecap="round"/>
+                    <text x="100" y="92" font-family="'Cairo', sans-serif" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">شخصية كرتونية</text>
+                    <text x="100" y="104" font-family="'Inter', sans-serif" font-size="7.5" font-weight="600" fill="#6CE680" text-anchor="middle" letter-spacing="3">MASCOT</text>
+                  </svg>
+                </div>
+                <div class="visual-card-body">
+                  <div class="card-item-title">شعار شخصية (Mascot)</div>
+                  <div class="card-item-desc">رسمة كرتونية مرحة لشخصية تمثل البراند (مثل KFC, Pringles).</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ================= VISUAL GALLERY 2: PACKAGING STYLES ================= -->
+          <div class="visual-gallery-block" id="gallery-packaging">
+            <div class="gallery-heading">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="gallery-tag">2. نمط العلب والتغليف</span>
+                <span class="gallery-title">اختر بالصورة: ما نوع العبوة أو التغليف المطلوب؟</span>
+              </div>
+              <span class="gallery-hint">اختر شكلاً أو أكثر</span>
             </div>
 
-            <div class="track-card" data-service="تصميم مخصص آخر (Custom Project)">
-              <div class="option-checkbox"></div>
-              <div class="track-info">
-                <div class="track-title">تصميم مخصص آخر (Custom Project)</div>
-                <div class="track-desc">استيكرات سيارات، جداريات، بوث معارض، أو فكرة مبتكرة.</div>
+            <div class="visual-cards-grid" id="packStylesGrid">
+              
+              <!-- Pack Card 1: Rigid Luxury Box -->
+              <div class="visual-card selected" data-value="علبة كرتون صلبة فاخرة (Rigid Box)">
+                <div class="card-badge-check"></div>
+                <div class="visual-card-media">
+                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="120" fill="#081E15"/>
+                    <!-- 3D Luxury Box with Lid -->
+                    <g transform="translate(100, 62)">
+                      <!-- Base Box -->
+                      <polygon points="-45,-5 0,16 45,-5 0,-26" fill="#133626"/>
+                      <polygon points="-45,-5 0,16 0,42 -45,21" fill="#0B2117"/>
+                      <polygon points="0,16 45,-5 45,21 0,42" fill="#184230"/>
+                      <!-- Floating Lid -->
+                      <g transform="translate(0, -18)">
+                        <polygon points="-47,-8 0,14 47,-8 0,-30" fill="#1E523C" stroke="#6CE680" stroke-width="1.2"/>
+                        <polygon points="-47,-8 0,14 0,22 -47,0" fill="#133626"/>
+                        <polygon points="0,14 47,-8 47,0 0,22" fill="#1A4734"/>
+                        <!-- Gold Ribbon on Lid -->
+                        <line x1="-24" y1="3" x2="24" y2="-19" stroke="#E5C378" stroke-width="2"/>
+                      </g>
+                    </g>
+                    <text x="100" y="112" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#6CE680" text-anchor="middle" letter-spacing="3">RIGID LUXURY BOX</text>
+                  </svg>
+                </div>
+                <div class="visual-card-body">
+                  <div class="card-item-title">علبة صلبة فاخرة (Rigid)</div>
+                  <div class="card-item-desc">كرتون رمادي مقوى للعطور، الساعات، الهدايا والسلع الراقية.</div>
+                </div>
               </div>
+
+              <!-- Pack Card 2: Folding Tuck Box -->
+              <div class="visual-card" data-value="علبة كرتونية مطوية (Folding Carton)">
+                <div class="card-badge-check"></div>
+                <div class="visual-card-media">
+                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="120" fill="#071911"/>
+                    <!-- 3D Folding Box with Tuck Top -->
+                    <g transform="translate(100, 60)">
+                      <polygon points="-30,-15 0,0 30,-15 0,-30" fill="#18422F"/>
+                      <polygon points="-30,-15 0,0 0,40 -30,25" fill="#0E281C"/>
+                      <polygon points="0,0 30,-15 30,25 0,40" fill="#1E523A"/>
+                      <!-- Tuck Flap -->
+                      <polygon points="0,-30 30,-15 22,-22 0,-34" fill="#6CE680" opacity="0.8"/>
+                      <!-- Front artwork preview line -->
+                      <line x1="8" y1="8" x2="22" y2="1" stroke="#ffffff" stroke-width="1.5" opacity="0.6"/>
+                      <line x1="8" y1="16" x2="18" y2="11" stroke="#6CE680" stroke-width="1.5" opacity="0.8"/>
+                    </g>
+                    <text x="100" y="112" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#B2CCC0" text-anchor="middle" letter-spacing="3">FOLDING CARTON</text>
+                  </svg>
+                </div>
+                <div class="visual-card-body">
+                  <div class="card-item-title">علبة كرتون مطوية (Tuck)</div>
+                  <div class="card-item-desc">علب كوشيه ودوبلكس للأدوية، مستحضرات التجميل، والأغذية.</div>
+                </div>
+              </div>
+
+              <!-- Pack Card 3: Corrugated Mailer Box -->
+              <div class="visual-card" data-value="كرتون شحن مموج (Corrugated Mailer)">
+                <div class="card-badge-check"></div>
+                <div class="visual-card-media">
+                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="120" fill="#091F16"/>
+                    <!-- Kraft Corrugated Mailer Box Open -->
+                    <g transform="translate(100, 60)">
+                      <!-- Base -->
+                      <polygon points="-42,-6 0,14 42,-6 0,-26" fill="#8C6A48"/>
+                      <polygon points="-42,-6 0,14 0,34 -42,14" fill="#634A31"/>
+                      <polygon points="0,14 42,-6 42,14 0,34" fill="#75583B"/>
+                      <!-- Open Lid -->
+                      <polygon points="-42,-6 0,-26 0,-44 -42,-24" fill="#A37E57"/>
+                      <polygon points="0,-26 42,-6 42,-24 0,-44" fill="#BA9064"/>
+                    </g>
+                    <text x="100" y="112" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#E5C378" text-anchor="middle" letter-spacing="3">CORRUGATED MAILER</text>
+                  </svg>
+                </div>
+                <div class="visual-card-body">
+                  <div class="card-item-title">كرتون شحن (Mailer Box)</div>
+                  <div class="card-item-desc">كرتون مقوى مموج لشحن وتوصيل طلبات المتاجر والمطاعم.</div>
+                </div>
+              </div>
+
+              <!-- Pack Card 4: Label / Sticker -->
+              <div class="visual-card selected" data-value="ليبل واستيكر منتجات (Label / Sticker)">
+                <div class="card-badge-check"></div>
+                <div class="visual-card-media">
+                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="120" fill="#071911"/>
+                    <!-- Glass Cosmetic Jar / Bottle with Label -->
+                    <g transform="translate(100, 52)">
+                      <!-- Bottle Silhouette -->
+                      <rect x="-24" y="-30" width="48" height="64" rx="10" fill="#0C261B" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+                      <rect x="-14" y="-40" width="28" height="10" rx="3" fill="#E5C378"/>
+                      <!-- Golden Foil Label -->
+                      <rect x="-20" y="-14" width="40" height="34" rx="4" fill="#06140D" stroke="#6CE680" stroke-width="1.2"/>
+                      <circle cx="0" cy="-3" r="5" fill="#E5C378"/>
+                      <line x1="-12" y1="8" x2="12" y2="8" stroke="#ffffff" stroke-width="1.2"/>
+                      <line x1="-8" y1="13" x2="8" y2="13" stroke="#6CE680" stroke-width="1"/>
+                    </g>
+                    <text x="100" y="112" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#6CE680" text-anchor="middle" letter-spacing="3">PRODUCT LABEL</text>
+                  </svg>
+                </div>
+                <div class="visual-card-body">
+                  <div class="card-item-title">ليبل واستيكر (Labels)</div>
+                  <div class="card-item-desc">ملصقات زجاجات العطور، البرطمانات، وأكياس السلع الغذائية.</div>
+                </div>
+              </div>
+
+              <!-- Pack Card 5: Luxury Paper Bag -->
+              <div class="visual-card" data-value="أكياس ورقية فاخرة (Luxury Bags)">
+                <div class="card-badge-check"></div>
+                <div class="visual-card-media">
+                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="120" fill="#081E15"/>
+                    <!-- Paper Bag with Twisted Cord Handle -->
+                    <g transform="translate(100, 56)">
+                      <!-- Handles -->
+                      <path d="M-14 -24 Q-8 -42 0 -42 Q8 -42 14 -24" fill="none" stroke="#E5C378" stroke-width="2"/>
+                      <!-- Bag Body -->
+                      <polygon points="-28,-22 28,-22 24,30 -24,30" fill="#0F2B1E" stroke="rgba(255,255,255,0.12)" stroke-width="1.2"/>
+                      <polygon points="28,-22 36,-16 31,34 24,30" fill="#091C13"/>
+                      <!-- Brand Gold Stamp -->
+                      <circle cx="0" cy="4" r="9" fill="rgba(229,195,120,0.15)" stroke="#E5C378" stroke-width="1"/>
+                      <text x="0" y="7" font-family="'Inter', sans-serif" font-size="6" font-weight="800" fill="#6CE680" text-anchor="middle">BAG</text>
+                    </g>
+                    <text x="100" y="112" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#E5C378" text-anchor="middle" letter-spacing="3">PAPER BAG</text>
+                  </svg>
+                </div>
+                <div class="visual-card-body">
+                  <div class="card-item-title">أكياس ورقية فاخرة (Bags)</div>
+                  <div class="card-item-desc">أكياس تسوق ورقية للمتاجر، المعارض، وعلب الهدايا الراقية.</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ================= VISUAL GALLERY 3: SIGNAGE STYLES ================= -->
+          <div class="visual-gallery-block" id="gallery-signage" style="display: none;">
+            <div class="gallery-heading">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="gallery-tag">3. نمط اللافتة والواجهة</span>
+                <span class="gallery-title">اختر بالصورة: ما نوع اللافتة أو اليافطة المطلوبة؟</span>
+              </div>
+              <span class="gallery-hint">اضغط لتحديد النمط</span>
             </div>
 
+            <div class="visual-cards-grid" id="signStylesGrid">
+              
+              <!-- Sign 1: 3D Channel Letters -->
+              <div class="visual-card" data-value="حروف بارزة ثلاثية الأبعاد مضيئة (Channel Letters)">
+                <div class="card-badge-check"></div>
+                <div class="visual-card-media">
+                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="120" fill="#05100B"/>
+                    <!-- Dark Facade Wall with glowing 3D Letters -->
+                    <rect x="20" y="25" width="160" height="60" rx="4" fill="#0B1A13" stroke="rgba(255,255,255,0.06)"/>
+                    <!-- Glow Behind Letters -->
+                    <circle cx="100" cy="55" r="35" fill="rgba(108,230,128,0.18)" filter="blur(8px)"/>
+                    <text x="100" y="62" font-family="'Cairo', sans-serif" font-size="20" font-weight="900" fill="#ffffff" text-anchor="middle" stroke="#6CE680" stroke-width="1.2">الكـوتـش</text>
+                    <text x="100" y="104" font-family="'Inter', sans-serif" font-size="8" font-weight="700" fill="#6CE680" text-anchor="middle" letter-spacing="3">3D ILLUMINATED</text>
+                  </svg>
+                </div>
+                <div class="visual-card-body">
+                  <div class="card-item-title">حروف بارزة مضيئة (3D LED)</div>
+                  <div class="card-item-desc">حروف زنكور، ستانلس ستيل، وأكريليك بإضاءة ليد خلفية أو أمامية.</div>
+                </div>
+              </div>
+
+              <!-- Sign 2: Cladding Facade -->
+              <div class="visual-card" data-value="واجهات كلادينج واكريليك (Cladding Panels)">
+                <div class="card-badge-check"></div>
+                <div class="visual-card-media">
+                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="120" fill="#071911"/>
+                    <!-- Modern Cladding Panels Grid -->
+                    <g transform="translate(20, 20)">
+                      <rect x="0" y="0" width="76" height="30" fill="#102B1F" stroke="#05100B" stroke-width="1"/>
+                      <rect x="80" y="0" width="80" height="30" fill="#143627" stroke="#05100B" stroke-width="1"/>
+                      <rect x="0" y="34" width="160" height="30" fill="#0D241A" stroke="#05100B" stroke-width="1"/>
+                      <!-- Acrylic Sign Plaque -->
+                      <rect x="40" y="14" width="80" height="36" rx="4" fill="#06120B" stroke="#6CE680" stroke-width="1.2"/>
+                      <text x="80" y="36" font-family="'Cairo', sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">واجهة المحل</text>
+                    </g>
+                    <text x="100" y="104" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#B2CCC0" text-anchor="middle" letter-spacing="3">CLADDING PANELS</text>
+                  </svg>
+                </div>
+                <div class="visual-card-body">
+                  <div class="card-item-title">واجهات كلادينج (Cladding)</div>
+                  <div class="card-item-desc">تغطية الواجهات بألواح الألمنيوم المعزول مع لوح الأكريليك.</div>
+                </div>
+              </div>
+
+              <!-- Sign 3: Neon / Flex Sign -->
+              <div class="visual-card" data-value="لافتات نيون فليكس عصرية (Neon Signs)">
+                <div class="card-badge-check"></div>
+                <div class="visual-card-media">
+                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="120" fill="#030C07"/>
+                    <!-- Dark Brick / Glow Neon Wall -->
+                    <g transform="translate(100, 54)">
+                      <circle cx="0" cy="0" r="28" fill="none" stroke="#6CE680" stroke-width="3" filter="drop-shadow(0 0 8px #6CE680)"/>
+                      <path d="M-12 -6 Q0 -16 12 -6 Q16 12 0 16 Q-16 12 -12 -6" fill="none" stroke="#E5C378" stroke-width="2.5" filter="drop-shadow(0 0 6px #E5C378)"/>
+                    </g>
+                    <text x="100" y="104" font-family="'Inter', sans-serif" font-size="8" font-weight="700" fill="#6CE680" text-anchor="middle" letter-spacing="3">NEON FLEX</text>
+                  </svg>
+                </div>
+                <div class="visual-card-body">
+                  <div class="card-item-title">لافتات نيون (Neon Flex)</div>
+                  <div class="card-item-desc">خطوط نيون مرنة ومضيئة للمقاهي والمطاعم والديكور الداخلي.</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ================= VISUAL GALLERY 4: SOCIAL MEDIA ================= -->
+          <div class="visual-gallery-block" id="gallery-social" style="display: none;">
+            <div class="gallery-heading">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="gallery-tag">4. نمط السوشيال ميديا</span>
+                <span class="gallery-title">اختر بالصورة: ما نوع المنشورات المطلوب تصميمها؟</span>
+              </div>
+              <span class="gallery-hint">اضغط لتحديد النمط</span>
+            </div>
+
+            <div class="visual-cards-grid" id="socialStylesGrid">
+              
+              <!-- Social 1: Single Ad Post -->
+              <div class="visual-card" data-value="بوستات إعلانية مفردة (Single Ad Posts)">
+                <div class="card-badge-check"></div>
+                <div class="visual-card-media">
+                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="120" fill="#071911"/>
+                    <!-- Square Ad Frame -->
+                    <g transform="translate(100, 50)">
+                      <rect x="-35" y="-35" width="70" height="70" rx="8" fill="#0F2B1E" stroke="rgba(255,255,255,0.12)" stroke-width="1.2"/>
+                      <circle cx="0" cy="-6" r="14" fill="#6CE680" opacity="0.8"/>
+                      <rect x="-24" y="14" width="48" height="6" rx="3" fill="#E5C378"/>
+                    </g>
+                    <text x="100" y="106" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#6CE680" text-anchor="middle" letter-spacing="3">SQUARE AD POST</text>
+                  </svg>
+                </div>
+                <div class="visual-card-body">
+                  <div class="card-item-title">بوستات إعلانية (Single Post)</div>
+                  <div class="card-item-desc">تصاميم مربعة تسويقية تركز على العرض والمنتج وجذب العميل.</div>
+                </div>
+              </div>
+
+              <!-- Social 2: Carousel Post -->
+              <div class="visual-card" data-value="كاروسيل متعدد الشرائح (Carousel Slides)">
+                <div class="card-badge-check"></div>
+                <div class="visual-card-media">
+                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="120" fill="#081E15"/>
+                    <!-- Stacked Carousel Cards -->
+                    <g transform="translate(100, 50)">
+                      <rect x="-22" y="-30" width="56" height="60" rx="6" fill="#0C2419" stroke="rgba(255,255,255,0.08)"/>
+                      <rect x="-34" y="-26" width="56" height="60" rx="6" fill="#133626" stroke="#6CE680" stroke-width="1.2"/>
+                      <!-- Page indicator dots -->
+                      <circle cx="-16" cy="24" r="2.5" fill="#6CE680"/>
+                      <circle cx="-6" cy="24" r="2" fill="rgba(255,255,255,0.3)"/>
+                      <circle cx="4" cy="24" r="2" fill="rgba(255,255,255,0.3)"/>
+                    </g>
+                    <text x="100" y="106" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#B2CCC0" text-anchor="middle" letter-spacing="3">CAROUSEL SLIDES</text>
+                  </svg>
+                </div>
+                <div class="visual-card-body">
+                  <div class="card-item-title">كاروسيل تعليمي (Carousel)</div>
+                  <div class="card-item-desc">شرائح متتابعة لشرح المميزات وسرد قصة البراند بالتفصيل.</div>
+                </div>
+              </div>
+
+              <!-- Social 3: Story / Reel Cover -->
+              <div class="visual-card" data-value="ستوري وبانرات عروض طولية (Story & Vertical)">
+                <div class="card-badge-check"></div>
+                <div class="visual-card-media">
+                  <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="120" fill="#071911"/>
+                    <!-- Vertical 9:16 Phone Frame -->
+                    <g transform="translate(100, 50)">
+                      <rect x="-22" y="-38" width="44" height="76" rx="6" fill="#0F2B1F" stroke="#E5C378" stroke-width="1.2"/>
+                      <line x1="-10" y1="26" x2="10" y2="26" stroke="#6CE680" stroke-width="2" stroke-linecap="round"/>
+                    </g>
+                    <text x="100" y="106" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#E5C378" text-anchor="middle" letter-spacing="3">STORY / 9:16</text>
+                  </svg>
+                </div>
+                <div class="visual-card-body">
+                  <div class="card-item-title">ستوري طولية (Story 9:16)</div>
+                  <div class="card-item-desc">مقاسات رأسية مخصصة لسناب شات، إنستجرام وتيك توك.</div>
+                </div>
+              </div>
+
+            </div>
           </div>
 
           <!-- Direct Details Inputs -->
           <div class="form-grid" style="margin-top: 24px;">
             <div class="form-group full">
               <label>تفاصيل ورؤية المطلوب في التصميم <span class="req">*</span></label>
-              <textarea id="projectDetails" style="min-height: 110px;" placeholder="اشرح هنا ما تتخيله بالتحديد: طبيعة الفكرة، الطابع المفضل (فاخر، عصري، بسيط، رسمي...)، وأي تفاصيل تود مراعاتها في العمل..."></textarea>
+              <textarea id="projectDetails" style="min-height: 105px;" placeholder="اشرح هنا ما تتخيله بالتحديد: طبيعة الفكرة، الطابع المفضل (فاخر، عصري، بسيط، رسمي...)، وأي تفاصيل تود مراعاتها في العمل..."></textarea>
             </div>
 
             <div class="form-group full">
@@ -782,7 +1399,7 @@
 
             <div class="form-group full">
               <label>ملاحظات إضافية (اختياري)</label>
-              <textarea id="finalNotes" style="min-height: 80px;" placeholder="أضف أي تفاصيل أخرى أو استفسار تود مشاركته مع أحمد ماهر..."></textarea>
+              <textarea id="finalNotes" style="min-height: 75px;" placeholder="أضف أي تفاصيل أخرى أو استفسار تود مشاركته مع أحمد ماهر..."></textarea>
             </div>
           </div>
         </section>
@@ -793,7 +1410,7 @@
       <aside class="brief-sidebar">
         <div class="summary-card">
           <div class="summary-header">
-            <span class="summary-title">ملخص البريف المباشر</span>
+            <span class="summary-title">ملخص البريف البصري</span>
             <div class="live-status">
               <span class="live-dot"></span>
               <span>محدث لحظياً</span>
@@ -808,8 +1425,28 @@
             </div>
 
             <div class="summary-row">
-              <span class="summary-label">الخدمات المختارة</span>
-              <div class="summary-val" id="sumTracksList">-</div>
+              <span class="summary-label">الخدمات العامة المختارة</span>
+              <div class="summary-val" id="sumServicesList">-</div>
+            </div>
+
+            <div class="summary-row" id="sumLogoStyleRow">
+              <span class="summary-label">نمط الشعار المختار (بالصورة)</span>
+              <div class="summary-val" id="sumLogoStyleVal">-</div>
+            </div>
+
+            <div class="summary-row" id="sumPackStyleRow">
+              <span class="summary-label">نمط التغليف المختار (بالصورة)</span>
+              <div class="summary-val" id="sumPackStyleVal">-</div>
+            </div>
+
+            <div class="summary-row" id="sumSignStyleRow" style="display: none;">
+              <span class="summary-label">نمط اللافتة المختار</span>
+              <div class="summary-val" id="sumSignStyleVal">-</div>
+            </div>
+
+            <div class="summary-row" id="sumSocialStyleRow" style="display: none;">
+              <span class="summary-label">نمط السوشيال ميديا</span>
+              <div class="summary-val" id="sumSocialStyleVal">-</div>
             </div>
 
             <div class="summary-row">
@@ -840,7 +1477,7 @@
           </div>
 
           <p class="sidebar-note">
-            تصل رسالة البريف مرتبة ومنسقة مباشرة إلى أحمد ماهر لدراسة التنفيذ والتواصل معك فورياً.
+            تصل اختياراتك ونماذج الصور المحددة مباشرة إلى أحمد ماهر لدراسة التنفيذ والتسعير فورياً.
           </p>
         </div>
       </aside>
@@ -850,11 +1487,29 @@
   </div>
 
   <script>
-    // Setup track card click handlers (multi-select)
-    function setupTrackCards() {
-      const grid = document.getElementById('designTracksGrid');
+    // 1. Service Chips Toggle & Gallery Visibility
+    function setupServiceChips() {
+      const chips = document.querySelectorAll('#mainServicesGrid .service-chip');
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          chip.classList.toggle('selected');
+          const service = chip.getAttribute('data-service');
+          
+          // Toggle related visual gallery block if exists
+          const gallery = document.getElementById('gallery-' + service);
+          if (gallery) {
+            gallery.style.display = chip.classList.contains('selected') ? 'block' : 'none';
+          }
+          updateLiveSummary();
+        });
+      });
+    }
+
+    // 2. Visual Picture Cards Multi-select
+    function setupVisualCards(gridId) {
+      const grid = document.getElementById(gridId);
       if (!grid) return;
-      grid.querySelectorAll('.track-card').forEach(card => {
+      grid.querySelectorAll('.visual-card').forEach(card => {
         card.addEventListener('click', () => {
           card.classList.toggle('selected');
           updateLiveSummary();
@@ -862,16 +1517,31 @@
       });
     }
 
-    setupTrackCards();
+    setupServiceChips();
+    setupVisualCards('logoStylesGrid');
+    setupVisualCards('packStylesGrid');
+    setupVisualCards('signStylesGrid');
+    setupVisualCards('socialStylesGrid');
 
-    // Live Summary Updater
+    function getSelectedVisualValues(gridId) {
+      const grid = document.getElementById(gridId);
+      if (!grid) return [];
+      const selected = [];
+      grid.querySelectorAll('.visual-card.selected').forEach(c => {
+        const val = c.getAttribute('data-value') || c.querySelector('.card-item-title').innerText;
+        selected.push(val);
+      });
+      return selected;
+    }
+
+    // 3. Live Summary Updater
     function updateLiveSummary() {
       const name = document.getElementById('clientName').value.trim();
       const brand = document.getElementById('brandName').value.trim();
       const industry = document.getElementById('industry').value.trim();
       const location = document.getElementById('projectLocation').value.trim();
 
-      // 1. Client & Brand
+      // Client & Brand
       let clientText = name ? name : 'اسم العميل لم يحدد';
       let brandText = brand ? brand : 'الشركة / البراند لم يحدد';
       let meta = [];
@@ -880,33 +1550,83 @@
       const metaStr = meta.length > 0 ? ` [${meta.join(' - ')}]` : '';
       document.getElementById('sumClientBrand').innerText = `${brandText} - ${clientText}${metaStr}`;
 
-      // 2. Tracks Selected
-      const trackCards = document.querySelectorAll('#designTracksGrid .track-card.selected');
-      let trackNames = [];
-      trackCards.forEach(c => {
-        trackNames.push(c.getAttribute('data-service') || c.querySelector('.track-title').innerText);
+      // Main Services
+      const selectedChips = document.querySelectorAll('#mainServicesGrid .service-chip.selected');
+      let serviceNames = [];
+      selectedChips.forEach(c => {
+        serviceNames.push(c.querySelector('.chip-title').innerText);
       });
-      document.getElementById('sumTracksList').innerText = trackNames.length > 0 ? trackNames.join(' + ') : 'لم يتم تحديد خدمات بعد';
+      document.getElementById('sumServicesList').innerText = serviceNames.length > 0 ? serviceNames.join(' + ') : 'لم يتم تحديد خدمات بعد';
 
-      // 3. Details Preview
+      // Visual Logo Styles
+      const logoStyles = getSelectedVisualValues('logoStylesGrid');
+      const logoRow = document.getElementById('sumLogoStyleRow');
+      const isLogoActive = document.querySelector('.service-chip[data-service="logo"]')?.classList.contains('selected');
+      if (isLogoActive && logoStyles.length > 0) {
+        logoRow.style.display = 'block';
+        document.getElementById('sumLogoStyleVal').innerText = logoStyles.join(' | ');
+      } else if (isLogoActive) {
+        logoRow.style.display = 'block';
+        document.getElementById('sumLogoStyleVal').innerText = 'اضغط على صورة لتحديد النمط';
+      } else {
+        logoRow.style.display = 'none';
+      }
+
+      // Visual Packaging Styles
+      const packStyles = getSelectedVisualValues('packStylesGrid');
+      const packRow = document.getElementById('sumPackStyleRow');
+      const isPackActive = document.querySelector('.service-chip[data-service="packaging"]')?.classList.contains('selected');
+      if (isPackActive && packStyles.length > 0) {
+        packRow.style.display = 'block';
+        document.getElementById('sumPackStyleVal').innerText = packStyles.join(' | ');
+      } else if (isPackActive) {
+        packRow.style.display = 'block';
+        document.getElementById('sumPackStyleVal').innerText = 'اضغط على صورة لتحديد النمط';
+      } else {
+        packRow.style.display = 'none';
+      }
+
+      // Visual Signage Styles
+      const signStyles = getSelectedVisualValues('signStylesGrid');
+      const signRow = document.getElementById('sumSignStyleRow');
+      const isSignActive = document.querySelector('.service-chip[data-service="signage"]')?.classList.contains('selected');
+      if (isSignActive && signStyles.length > 0) {
+        signRow.style.display = 'block';
+        document.getElementById('sumSignStyleVal').innerText = signStyles.join(' | ');
+      } else {
+        signRow.style.display = 'none';
+      }
+
+      // Visual Social Styles
+      const socialStyles = getSelectedVisualValues('socialStylesGrid');
+      const socialRow = document.getElementById('sumSocialStyleRow');
+      const isSocialActive = document.querySelector('.service-chip[data-service="social"]')?.classList.contains('selected');
+      if (isSocialActive && socialStyles.length > 0) {
+        socialRow.style.display = 'block';
+        document.getElementById('sumSocialStyleVal').innerText = socialStyles.join(' | ');
+      } else {
+        socialRow.style.display = 'none';
+      }
+
+      // Details Preview
       const details = document.getElementById('projectDetails').value.trim();
       document.getElementById('sumDetailsPreview').innerText = details ? (details.length > 60 ? details.substring(0, 60) + '...' : details) : 'في انتظار كتابة التفاصيل';
 
-      // 4. Specs Preview
+      // Specs Preview
       const specs = document.getElementById('projectSpecs').value.trim();
       document.getElementById('sumSpecsPreview').innerText = specs ? specs : 'حسب ما يناسب التصميم';
 
-      // 5. Timeline
+      // Timeline
       document.getElementById('sumTimeline').innerText = document.getElementById('timelineSelect').value;
     }
 
-    // Attach live listeners to all input elements
+    // Attach live listeners to inputs
     document.querySelectorAll('input, select, textarea').forEach(el => {
       el.addEventListener('input', updateLiveSummary);
       el.addEventListener('change', updateLiveSummary);
     });
 
-    // Compile clean, organized WhatsApp message with ZERO emojis or exotic symbols
+    // 4. Compile WhatsApp Message (Strictly zero emojis, zero broken unicode symbols)
     function compileBriefText() {
       const name = document.getElementById('clientName').value.trim() || 'غير محدد';
       const brand = document.getElementById('brandName').value.trim() || 'غير محدد';
@@ -916,12 +1636,36 @@
       const location = document.getElementById('projectLocation').value.trim() || 'غير مدون';
       const socialLinks = document.getElementById('socialLinks').value.trim() || 'لا يوجد';
 
-      const selectedCards = document.querySelectorAll('#designTracksGrid .track-card.selected');
-      let services = [];
-      selectedCards.forEach(c => {
-        services.push(c.getAttribute('data-service') || c.querySelector('.track-title').innerText);
+      const selectedChips = document.querySelectorAll('#mainServicesGrid .service-chip.selected');
+      let serviceNames = [];
+      selectedChips.forEach(c => {
+        serviceNames.push(c.querySelector('.chip-title').innerText);
       });
-      const servicesText = services.length > 0 ? services.map(s => '- ' + s).join('\n') : '- لم يتم تحديد خدمات محددة';
+      const servicesText = serviceNames.length > 0 ? serviceNames.map(s => '- ' + s).join('\n') : '- لم يتم تحديد خدمات بعد';
+
+      // Visual choices compilation
+      let visualChoices = [];
+      const logoStyles = getSelectedVisualValues('logoStylesGrid');
+      if (logoStyles.length > 0) {
+        visualChoices.push(`*نمط الشعار المختار (بالصورة):*\n- ` + logoStyles.join('\n- '));
+      }
+
+      const packStyles = getSelectedVisualValues('packStylesGrid');
+      if (packStyles.length > 0) {
+        visualChoices.push(`*نمط التغليف المختار (بالصورة):*\n- ` + packStyles.join('\n- '));
+      }
+
+      const signStyles = getSelectedVisualValues('signStylesGrid');
+      if (signStyles.length > 0) {
+        visualChoices.push(`*نمط اللافتة والواجهة المختار:*\n- ` + signStyles.join('\n- '));
+      }
+
+      const socialStyles = getSelectedVisualValues('socialStylesGrid');
+      if (socialStyles.length > 0) {
+        visualChoices.push(`*نمط السوشيال ميديا المختار:*\n- ` + socialStyles.join('\n- '));
+      }
+
+      const visualText = visualChoices.length > 0 ? visualChoices.join('\n\n') : 'لم يتم اختيار أنماط بصرية محددة';
 
       const details = document.getElementById('projectDetails').value.trim() || 'لم يتم تدوين تفاصيل إضافية';
       const specs = document.getElementById('projectSpecs').value.trim() || 'حسب التوصية والمقاسات القياسية';
@@ -946,8 +1690,13 @@ ${line}
 ${line}
 
 *ثانيا: المطلوب تصميمه*
-- الخدمات المطلوبة:
+- الخدمات العامة:
 ${servicesText}
+
+${line}
+
+*ثالثا: الأنماط المختارة بالصور*
+${visualText}
 
 - تفاصيل ورؤية المشروع:
 ${details}
@@ -957,7 +1706,7 @@ ${specs}
 
 ${line}
 
-*ثالثا: الجدول الزمني والمرفقات*
+*رابعا: الجدول الزمني والمرفقات*
 - موعد التسليم المستهدف: ${timeline}
 - رابط درايف / المراجع: ${drive}
 - ملاحظات إضافية:
