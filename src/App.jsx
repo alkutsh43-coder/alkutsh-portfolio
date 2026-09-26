@@ -5,6 +5,7 @@ import { EditorialProjects } from './components/EditorialProjects';
 import { EditorialBio } from './components/EditorialBio';
 import { EditorialServices } from './components/EditorialServices';
 import { EditorialProcess } from './components/EditorialProcess';
+import { EditorialTestimonials } from './components/EditorialTestimonials';
 import { EditorialFooter } from './components/EditorialFooter';
 import { EditorialCaseStudy } from './components/EditorialCaseStudy';
 
@@ -71,7 +72,12 @@ export function App() {
           lang={lang}
         />
 
-        {/* 6. Statement & Production Experience Perspective */}
+        {/* 6. 3-Column Vertical Drifting Client Testimonials Marquee */}
+        <EditorialTestimonials
+          lang={lang}
+        />
+
+        {/* 7. Statement & Production Experience Perspective */}
         <EditorialBio 
           lang={lang}
         />

@@ -272,15 +272,15 @@
 
   /* 📌 [1] تموضع صورتك في الجزء العلوي لتكون واضحة والنصوص تحتها */
   .hero-bg-photo {
-    object-position: 74% 15% !important;
+    object-position: 70% 5% !important;
   }
 
   /* 📌 [2] موضع كتلة النصوص وتنزيلها تحت صورتك:
-     - كبّر رقم translateY (مثلاً 240px أو 260px أو 280px) لتنزيلها تحت الصورة أكتر.
-     - صغّر الرقم (مثلاً 180px أو 150px) لرفعها لفوق.
+     - كبّر رقم translateY لتنزيلها تحت الصورة أكثر
+     - صغّر الرقم لرفعها لفوق
   */
   .hero-text-container {
-    transform: translateY(220px) !important;
+    transform: translateY(510px) !important;
     padding-left: 20px !important;
     padding-right: 20px !important;
     margin-left: auto !important;
@@ -304,9 +304,9 @@
 
   /* 📌 [5] سطر "مـصـمـم جـرافـيـك" في المنتصف */
   .hero-eyebrow {
-    font-size: 18px !important;
+    font-size: 22px !important;
     letter-spacing: 0.25em !important;
-    margin-bottom: 2px !important;
+    margin-bottom: 5px !important;
     text-align: center !important;
     width: 100% !important;
     transform: none !important;
@@ -314,8 +314,8 @@
 
   /* 📌 [6] عنوان "أحمد ماهر" و "الكوتش ديزاين" في المنتصف */
   .hero-title {
-    font-size: 45px !important;
-    line-height: 1.08 !important;
+    font-size: 50px !important;
+    line-height: 1 !important;
     text-align: center !important;
     width: 100% !important;
     transform: none !important;
@@ -350,4 +350,72 @@
     transform: none !important;
   }
 }
+
+/* ========================================================================= */
+/* 🌟 [Vertical Drifting Testimonials Marquee Animation]                     */
+/* ========================================================================= */
+@keyframes driftUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes driftDown {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-drift-up {
+  animation: driftUp 38s linear infinite;
+  will-change: transform;
+}
+
+.animate-drift-down {
+  animation: driftDown 30s linear infinite;
+  will-change: transform;
+}
+
+.animate-drift-up-slow {
+  animation: driftUp 46s linear infinite;
+  will-change: transform;
+}
+
+.testimonials-mask {
+  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-drift-up,
+  .animate-drift-down,
+  .animate-drift-up-slow {
+    animation: none !important;
+    transform: none !important;
+  }
+  .testimonials-mask {
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  }
+  .marquee-lane {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .testimonials-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+  }
+  [aria-hidden="true"] {
+    display: none !important;
+  }
+}
+
 

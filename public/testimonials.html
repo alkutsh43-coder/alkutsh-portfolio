@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vertical Drifting Testimonials Marquee - Alkutsh Designs</title>
+  <!-- Single external request: Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --ground: #FAFAFA;
+      --card: #FFFFFF;
+      --ink: #09090B;
+      --muted: #71717A;
+      --border: #E4E4E7;
+      --accent: #4F46E5;
+      --radius: 14px;
+      --shadow-card: 0 1px 2px rgba(9, 9, 11, 0.04);
+      --shadow-hover: 0 8px 24px rgba(9, 9, 11, 0.08);
+      --mask-ground: #FAFAFA;
+    }
+
+    [data-theme="dark"] {
+      --ground: #071610;
+      --card: #0c2419;
+      --ink: #F4F4F5;
+      --muted: #A1A1AA;
+      --border: rgba(255, 255, 255, 0.1);
+      --accent: #82E16B;
+      --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.3);
+      --shadow-hover: 0 8px 30px rgba(130, 225, 107, 0.15);
+      --mask-ground: #071610;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--ground);
+      color: var(--ink);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 48px 16px;
+      transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .section-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Section Header */
+    .header-bar {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--accent);
+    }
+
+    h1.heading {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+
+    p.subheading {
+      font-size: clamp(14px, 1.8vw, 16px);
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* Theme Switcher */
+    .theme-toggle-bar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .theme-btn {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .theme-btn:hover {
+      color: var(--ink);
+      border-color: var(--accent);
+    }
+
+    /* Testimonials Container */
+    .testimonials-stage {
+      position: relative;
+      height: 600px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+    }
+
+    /* Top and bottom fade masks for fallback */
+    .mask-top, .mask-bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 70px;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .mask-top {
+      top: 0;
+      background: linear-gradient(to bottom, var(--ground), transparent);
+    }
+    .mask-bottom {
+      bottom: 0;
+      background: linear-gradient(to top, var(--ground), transparent);
+    }
+
+    /* Grid of lanes */
+    .lanes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      height: 100%;
+      align-items: start;
+    }
+
+    .lane {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* Hover pauses every lane at once */
+    .testimonials-stage:hover .track {
+      animation-play-state: paused !important;
+    }
+
+    .track {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      will-change: transform;
+    }
+
+    /* Column animations */
+    .lane-1 .track {
+      animation: driftUp 36s linear infinite;
+    }
+
+    .lane-2 .track {
+      animation: driftDown 28s linear infinite;
+    }
+
+    .lane-3 .track {
+      animation: driftUp 44s linear infinite;
+    }
+
+    @keyframes driftUp {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-50%);
+      }
+    }
+
+    @keyframes driftDown {
+      0% {
+        transform: translateY(-50%);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    /* Card styling */
+    .card {
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 180px;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent);
+    }
+
+    .stars {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 12px;
+      color: #F59E0B;
+      font-size: 13px;
+    }
+
+    .quote-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink);
+      font-weight: 400;
+      margin-bottom: 18px;
+    }
+
+    .author-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    /* Initial-based avatar on coloured disc (0 asset dependency) */
+    .avatar-disc {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: #FFFFFF;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .author-meta {
+      min-width: 0;
+    }
+
+    .author-name {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .author-role {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .hint-label {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Progressive Column Drop */
+    @media (max-width: 1024px) {
+      .lanes-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .lane-3 {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .lanes-grid {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+        margin: 0 auto;
+      }
+      .lane-2 {
+        display: none;
+      }
+      body {
+        padding: 32px 12px;
+      }
+      .testimonials-stage {
+        height: 520px;
+      }
+    }
+
+    /* Reduced Motion Fallback: Plain readable static grid instead of broken frozen animation */
+    @media (prefers-reduced-motion: reduce) {
+      .track {
+        animation: none !important;
+        transform: none !important;
+      }
+      .testimonials-stage {
+        height: auto !important;
+        overflow: visible !important;
+        mask-image: none !important;
+        -webkit-mask-image: none !important;
+      }
+      .lanes-grid {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+        height: auto !important;
+        gap: 16px !important;
+      }
+      .lane {
+        height: auto !important;
+        display: block !important;
+      }
+      .mask-top, .mask-bottom, [aria-hidden="true"] {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="section-wrap">
+    
+    <!-- Theme Switcher -->
+    <div class="theme-toggle-bar">
+      <button class="theme-btn" id="themeToggle" onclick="toggleTheme()">
+        <span id="themeIcon">🌓</span>
+        <span id="themeLabel">Switch to Dark / Brand Mode</span>
+      </button>
+    </div>
+
+    <!-- Header -->
+    <header class="header-bar">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        <span>Trusted by Founders & Creative Directors</span>
+      </div>
+      <h1 class="heading">Client Testimonials & Feedback</h1>
+      <p class="subheading">Direct reviews from commercial brand partners and engineering clients who built high-impact visual campaigns with Alkutsh Design.</p>
+    </header>
+
+    <!-- 3-Column Vertical Drifting Marquee Component -->
+    <div class="testimonials-stage">
+      <div class="mask-top"></div>
+      <div class="mask-bottom"></div>
+
+      <div class="lanes-grid">
+        
+        <!-- Column 1: Upward Drift (~36s) -->
+        <div class="lane lane-1">
+          <div class="track">
+            <!-- Set 1 -->
+            <div class="card">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"Ahmed grasped the organic soul of Nabta from our first brief. The botanical campaign elevated our brand to an elite tier, surging sales by over 180%."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #10B981;">YM</div>
+                <div class="author-meta">
+                  <div class="author-name">Dr. Yasser El-Minshawi</div>
+                  <div class="author-role">Marketing Director • Nabta Botany</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"The UPVC sample presentation box and architectural binder designed by Alkutsh were decisive in winning engineering approvals from premier consultancies."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #4F46E5;">KA</div>
+                <div class="author-meta">
+                  <div class="author-name">Eng. Karim Abdelaziz</div>
+                  <div class="author-role">CEO • Kemet Win UPVC</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"His technical prepress engineering saved us substantial printing costs with zero dieline tolerances. Finding a designer with pressroom mastery is truly rare."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #F59E0B;">TS</div>
+                <div class="author-meta">
+                  <div class="author-name">Tarek El-Shennawy</div>
+                  <div class="author-role">Co-Founder • Smart Pack Packaging</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Set 2 (Exact Duplicate for Seamless Loop) -->
+            <div class="card" aria-hidden="true">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"Ahmed grasped the organic soul of Nabta from our first brief. The botanical campaign elevated our brand to an elite tier, surging sales by over 180%."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #10B981;">YM</div>
+                <div class="author-meta">
+                  <div class="author-name">Dr. Yasser El-Minshawi</div>
+                  <div class="author-role">Marketing Director • Nabta Botany</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" aria-hidden="true">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"The UPVC sample presentation box and architectural binder designed by Alkutsh were decisive in winning engineering approvals from premier consultancies."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #4F46E5;">KA</div>
+                <div class="author-meta">
+                  <div class="author-name">Eng. Karim Abdelaziz</div>
+                  <div class="author-role">CEO • Kemet Win UPVC</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" aria-hidden="true">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"His technical prepress engineering saved us substantial printing costs with zero dieline tolerances. Finding a designer with pressroom mastery is truly rare."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #F59E0B;">TS</div>
+                <div class="author-meta">
+                  <div class="author-name">Tarek El-Shennawy</div>
+                  <div class="author-role">Co-Founder • Smart Pack Packaging</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: Downward Reversed Drift (~28s) -->
+        <div class="lane lane-2">
+          <div class="track">
+            <!-- Set 1 -->
+            <div class="card">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"Absolute punctuality and executive professionalism. Ahmed’s command of pure typography and nuanced color systems imparts commanding authority."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #EC4899;">SM</div>
+                <div class="author-meta">
+                  <div class="author-name">Eng. Sarah El-Mahdi</div>
+                  <div class="author-role">Brand Director • Arkan Developments</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"Exceptional craft that exceeded our milestones. The visual systems for our control room infrastructure emerged sleek and strictly compliant with industrial standards."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #06B6D4;">AF</div>
+                <div class="author-meta">
+                  <div class="author-name">Amr Fahmy</div>
+                  <div class="author-role">Innovation Lead • IT Systems & Networks</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"Alkutsh does not merely provide artwork; he builds strategic visual frameworks grounded in market intelligence and competitive reality. Invaluable creative partner."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #8B5CF6;">HE</div>
+                <div class="author-meta">
+                  <div class="author-name">Dr. Haitham Ezzeldin</div>
+                  <div class="author-role">Brand Strategy • Cairo Vision</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Set 2 (Exact Duplicate) -->
+            <div class="card" aria-hidden="true">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"Absolute punctuality and executive professionalism. Ahmed’s command of pure typography and nuanced color systems imparts commanding authority."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #EC4899;">SM</div>
+                <div class="author-meta">
+                  <div class="author-name">Eng. Sarah El-Mahdi</div>
+                  <div class="author-role">Brand Director • Arkan Developments</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" aria-hidden="true">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"Exceptional craft that exceeded our milestones. The visual systems for our control room infrastructure emerged sleek and strictly compliant with industrial standards."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #06B6D4;">AF</div>
+                <div class="author-meta">
+                  <div class="author-name">Amr Fahmy</div>
+                  <div class="author-role">Innovation Lead • IT Systems & Networks</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" aria-hidden="true">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"Alkutsh does not merely provide artwork; he builds strategic visual frameworks grounded in market intelligence and competitive reality. Invaluable creative partner."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #8B5CF6;">HE</div>
+                <div class="author-meta">
+                  <div class="author-name">Dr. Haitham Ezzeldin</div>
+                  <div class="author-role">Brand Strategy • Cairo Vision</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 3: Upward Drift Slower (~44s) -->
+        <div class="lane lane-3">
+          <div class="track">
+            <!-- Set 1 -->
+            <div class="card">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"The retail packaging on supermarket shelves delivered an immediate leap in shelf dwell time and conversion. A tactile, visually irresistible aesthetic."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #10B981;">MB</div>
+                <div class="author-meta">
+                  <div class="author-name">Eng. Mohamed El-Badry</div>
+                  <div class="author-role">Marketing Lead • El Prince Fresh Foods</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"Remarkable agility with feedback and razor-sharp attention to nuanced revisions. Ahmed is a steadfast partner during high-stakes deadlines."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #6366F1;">RA</div>
+                <div class="author-meta">
+                  <div class="author-name">Reem Abdelkader</div>
+                  <div class="author-role">Comms Director • Global Logistics</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"Among the sharpest editorial talents in the Egyptian market. His cinematic art direction and uncompromising aesthetic standards easily compete with premier agencies."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #F43F5E;">SS</div>
+                <div class="author-meta">
+                  <div class="author-name">Eng. Sherif Salem</div>
+                  <div class="author-role">Founder & CD • Victory Creative</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Set 2 (Exact Duplicate) -->
+            <div class="card" aria-hidden="true">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"The retail packaging on supermarket shelves delivered an immediate leap in shelf dwell time and conversion. A tactile, visually irresistible aesthetic."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #10B981;">MB</div>
+                <div class="author-meta">
+                  <div class="author-name">Eng. Mohamed El-Badry</div>
+                  <div class="author-role">Marketing Lead • El Prince Fresh Foods</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" aria-hidden="true">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"Remarkable agility with feedback and razor-sharp attention to nuanced revisions. Ahmed is a steadfast partner during high-stakes deadlines."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #6366F1;">RA</div>
+                <div class="author-meta">
+                  <div class="author-name">Reem Abdelkader</div>
+                  <div class="author-role">Comms Director • Global Logistics</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" aria-hidden="true">
+              <div>
+                <div class="stars">★★★★★</div>
+                <p class="quote-text">"Among the sharpest editorial talents in the Egyptian market. His cinematic art direction and uncompromising aesthetic standards easily compete with premier agencies."</p>
+              </div>
+              <div class="author-row">
+                <div class="avatar-disc" style="background-color: #F43F5E;">SS</div>
+                <div class="author-meta">
+                  <div class="author-name">Eng. Sherif Salem</div>
+                  <div class="author-role">Founder & CD • Victory Creative</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="hint-label">
+      • Hover over any card to pause all lanes simultaneously •
+    </div>
+
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        document.getElementById('themeLabel').innerText = 'Switch to Dark / Brand Mode';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.getElementById('themeLabel').innerText = 'Switch to Light shadcn Mode';
+      }
+    }
+
+    // Overflow check as required by prompt
+    window.addEventListener('load', function() {
+      const hasHorizontalScroll = document.documentElement.scrollWidth > window.innerWidth;
+      console.log('Horizontal overflow check:', hasHorizontalScroll ? 'FAILED (overflow)' : 'PASSED (no overflow)');
+    });
+  </script>
+</body>
+</html>

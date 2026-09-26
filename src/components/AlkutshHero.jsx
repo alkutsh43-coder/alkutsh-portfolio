@@ -211,7 +211,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
                 marginBottom: '10px'
               }}
             >
-              {isAr ? 'مـصـمـم   جـــرافـــــيــــــــك' : 'GRAPHIC   DESIGNER'}
+              {isAr ? 'مـصـمـم   جـــرافــيـــك' : 'GRAPHIC DESIGNER'}
             </div>
 
             {/* ------------------------------------------------------------- */}
@@ -234,7 +234,7 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection }) => {
                   transform: 'translateY(10px)'
                 }}
               >
-                {isAr ? 'أحمد مــاهــر' : 'Ahmed Maher'}
+                {isAr ? 'أحمد مــــاهــــــــر' : 'Ahmed Maher'}
               </span>
 
               {/* سطر (2): "الكوتش ديزاين" */}
