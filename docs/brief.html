@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>استمارة البريف الإبداعي والمواصفات الفنية للمشروع - الكوتش ديزاين</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #071610;
+      --card: #0A2117;
+      --card-hover: #0E2B1E;
+      --surface: #06130D;
+      --accent: #82E16B;
+      --accent-glow: rgba(130, 225, 107, 0.25);
+      --text: #FFFFFF;
+      --text-muted: rgba(255, 255, 255, 0.7);
+      --text-dim: rgba(255, 255, 255, 0.4);
+      --border: rgba(255, 255, 255, 0.1);
+      --border-accent: rgba(130, 225, 107, 0.4);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-full: 9999px;
+    }
+
+    body {
+      font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 0;
+    }
+
+    /* Ambient background glows */
+    .glow-1 {
+      position: fixed;
+      top: -150px;
+      right: -150px;
+      width: 550px;
+      height: 550px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(130, 225, 107, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-2 {
+      position: fixed;
+      bottom: -150px;
+      left: -150px;
+      width: 550px;
+      height: 550px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(130, 225, 107, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px 80px 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover {
+      background: rgba(130, 225, 107, 0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateX(3px);
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .brand-mark img {
+      height: 38px;
+      width: auto;
+    }
+
+    /* Page Header */
+    .hero-header {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 48px auto;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      background: rgba(130, 225, 107, 0.1);
+      border: 1px solid var(--border-accent);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .page-title {
+      font-size: clamp(28px, 4.5vw, 44px);
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .page-title span {
+      color: var(--accent);
+    }
+
+    .page-desc {
+      font-size: clamp(14px, 2vw, 17px);
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Steps Progress Tracker */
+    .progress-bar-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      margin-bottom: 48px;
+      padding: 0 10px;
+    }
+    .progress-line {
+      position: absolute;
+      top: 50%;
+      left: 30px;
+      right: 30px;
+      height: 2px;
+      background: var(--border);
+      z-index: 1;
+      transform: translateY(-50%);
+    }
+    .progress-line-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    .progress-step {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg);
+      padding: 0 8px;
+      cursor: pointer;
+    }
+
+    .step-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-dim);
+      transition: all 0.3s ease;
+    }
+
+    .progress-step.active .step-circle {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #071610;
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .progress-step.completed .step-circle {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #071610;
+    }
+
+    .step-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-dim);
+      transition: color 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .progress-step.active .step-title,
+    .progress-step.completed .step-title {
+      color: var(--text);
+    }
+
+    /* Brief Card Sections */
+    .brief-step-content {
+      display: none;
+      animation: fadeIn 0.35s ease;
+    }
+    .brief-step-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: clamp(24px, 4vw, 40px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title .step-number {
+      font-size: 13px;
+      font-family: 'Inter', monospace;
+      color: var(--accent);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(130, 225, 107, 0.1);
+      border: 1px solid var(--border-accent);
+    }
+
+    /* Form Fields */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    label .req {
+      color: var(--accent);
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      font-size: 14.5px;
+      font-family: inherit;
+      color: var(--text);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(130, 225, 107, 0.15);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.7;
+    }
+
+    /* Option Cards Selection */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .option-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: all 0.25s ease;
+      user-select: none;
+    }
+
+    .option-card:hover {
+      border-color: var(--border-accent);
+      background: rgba(130, 225, 107, 0.04);
+      transform: translateY(-2px);
+    }
+
+    .option-card.selected {
+      border-color: var(--accent);
+      background: rgba(130, 225, 107, 0.1);
+      box-shadow: 0 0 20px rgba(130, 225, 107, 0.12);
+    }
+
+    .option-checkbox {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: all 0.2s ease;
+    }
+
+    .option-card.selected .option-checkbox {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #071610;
+    }
+
+    .option-info {
+      flex: 1;
+    }
+
+    .option-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .option-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Bottom Nav Buttons */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: var(--radius-full);
+      font-size: 15px;
+      font-weight: 800;
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #071610;
+      box-shadow: 0 4px 25px rgba(130, 225, 107, 0.35);
+    }
+    .btn-primary:hover {
+      background: #9ef387;
+      box-shadow: 0 6px 30px rgba(130, 225, 107, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--text);
+    }
+
+    .btn-whatsapp {
+      background: #25D366;
+      color: #FFFFFF;
+      box-shadow: 0 4px 25px rgba(37, 211, 102, 0.35);
+      padding: 16px 36px;
+      font-size: 16px;
+    }
+    .btn-whatsapp:hover {
+      background: #20bd5a;
+      box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5);
+      transform: translateY(-2px);
+    }
+
+    /* Summary Final Block */
+    .summary-box {
+      background: var(--surface);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 13.5px;
+    }
+    .summary-row:last-child {
+      border-bottom: none;
+    }
+    .summary-label {
+      color: var(--text-dim);
+      font-weight: 600;
+    }
+    .summary-value {
+      color: var(--text);
+      font-weight: 700;
+      text-align: left;
+      direction: ltr;
+    }
+
+    @media (max-width: 640px) {
+      .step-title {
+        display: none;
+      }
+      .card {
+        padding: 20px 16px;
+      }
+      .page-title {
+        font-size: 26px;
+      }
+      .nav-actions {
+        flex-direction: column-reverse;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+
+  <div class="container">
+    
+    <!-- Top Bar Navigation -->
+    <header class="top-bar">
+      <a href="./" class="back-btn">
+        <span>← العودة للبورتفوليو</span>
+      </a>
+
+      <a href="./" class="brand-mark">
+        <img src="./assets/alkutsh_logo.svg" alt="Alkutsh Designs">
+      </a>
+    </header>
+
+    <!-- Header Title -->
+    <div class="hero-header">
+      <div class="badge">
+        <span>● استمارة المواصفات والبريف الإبداعي الشامل</span>
+      </div>
+      <h1 class="page-title">
+        موجز المشروع الإبداعي <span>(Creative & Technical Brief)</span>
+      </h1>
+      <p class="page-desc">
+        صُممت هذه الاستمارة لجمع كافة التفاصيل الهندسية، الفنية، والتسويقية لمشروعك، لنتمكن من دراسة متطلبات التصنيع والطباعة بدقة متناهية وتحديد المسار الإبداعي الأنسب.
+      </p>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div class="progress-bar-wrap">
+      <div class="progress-line">
+        <div class="progress-line-fill" id="progressFill"></div>
+      </div>
+
+      <div class="progress-step active" data-step="1" onclick="goToStep(1)">
+        <div class="step-circle">1</div>
+        <span class="step-title">بيانات المشروع</span>
+      </div>
+
+      <div class="progress-step" data-step="2" onclick="goToStep(2)">
+        <div class="step-circle">2</div>
+        <span class="step-title">نوع الخدمات</span>
+      </div>
+
+      <div class="progress-step" data-step="3" onclick="goToStep(3)">
+        <div class="step-circle">3</div>
+        <span class="step-title">المواصفات والخامات</span>
+      </div>
+
+      <div class="progress-step" data-step="4" onclick="goToStep(4)">
+        <div class="step-circle">4</div>
+        <span class="step-title">الهوية والجمهور</span>
+      </div>
+
+      <div class="progress-step" data-step="5" onclick="goToStep(5)">
+        <div class="step-circle">5</div>
+        <span class="step-title">التسليم والإرسال</span>
+      </div>
+    </div>
+
+    <!-- STEP 1: Basic Info -->
+    <div class="brief-step-content active" id="step-1">
+      <div class="card">
+        <div class="section-title">
+          <span class="step-number">STEP 01</span>
+          <span>بيانات العميل والعلامة التجارية</span>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>اسم المسؤول / صاحب المشروع <span class="req">*</span></label>
+            <input type="text" id="clientName" placeholder="مثال: أ. عبد العزيز الشمري" required>
+          </div>
+
+          <div class="form-group">
+            <label>المسمى الوظيفي</label>
+            <input type="text" id="clientRole" placeholder="مثال: الرئيس التنفيذي / مدير التسويق">
+          </div>
+
+          <div class="form-group">
+            <label>اسم الشركة أو العلامة التجارية <span class="req">*</span></label>
+            <input type="text" id="brandName" placeholder="مثال: مصنع كيميت وين / شركة نبتة" required>
+          </div>
+
+          <div class="form-group">
+            <label>مجال النشاط التجاري والصناعة <span class="req">*</span></label>
+            <select id="industry">
+              <option value="صناعي وهندسي">صناعي، هندسي وتصنيع قطاعات</option>
+              <option value="أغذية ومشروبات وتغليف">أغذية ومشروبات وسلع استهلاكية (FMCG)</option>
+              <option value="تطوير عقاري ومقاولات">تطوير عقاري، استثمار ومقاولات</option>
+              <option value="صيدلي وتجميل">أدوية، مستحضرات تجميل وتغليف طبي</option>
+              <option value="نباتات وزراعة ديكورية">نباتات داخلية، حدائق وزراعة</option>
+              <option value="تقنية معلومات واتصالات">تقنية معلومات، سيرفرات وشبكات</option>
+              <option value="نشاط تجاري آخر">نشاط تجاري / خدمي آخر</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>رقم الواتساب للتواصل المباشر <span class="req">*</span></label>
+            <input type="tel" id="whatsappNumber" placeholder="+20... أو +966..." dir="ltr" required>
+          </div>
+
+          <div class="form-group">
+            <label>البريد الإلكتروني الرسمي</label>
+            <input type="email" id="emailAddress" placeholder="contact@company.com" dir="ltr">
+          </div>
+
+          <div class="form-group full">
+            <label>الموقع الجغرافي للمشروع أو المصنع</label>
+            <input type="text" id="projectLocation" placeholder="مثال: مصر (العاشر من رمضان) / السعودية (الرياض - جدة) / الإمارات">
+          </div>
+        </div>
+
+        <div class="nav-actions">
+          <div></div>
+          <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+            <span>المتابعة لنوع الخدمات</span>
+            <span>←</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: Services Scope -->
+    <div class="brief-step-content" id="step-2">
+      <div class="card">
+        <div class="section-title">
+          <span class="step-number">STEP 02</span>
+          <span>الخدمات والتطبيقات المطلوبة للمشروع</span>
+        </div>
+
+        <p class="hint" style="margin-bottom: 16px;">يمكنك تحديد أكثر من خدمة وفق نطاق احتياجاتك الفعلية:</p>
+
+        <div class="options-grid" id="servicesGrid">
+          <div class="option-card selected" data-value="هوية بصرية وشعار متكامل">
+            <div class="option-checkbox">✓</div>
+            <div class="option-info">
+              <div class="option-title">الهوية البصرية والشعارات</div>
+              <div class="option-desc">شعار، دليل إرشادي، باليتة بانتون، والتايبوجرافي.</div>
+            </div>
+          </div>
+
+          <div class="option-card selected" data-value="تصميم علب وتغليف CAD">
+            <div class="option-checkbox">✓</div>
+            <div class="option-info">
+              <div class="option-title">تصميم العلب والتغليف الهيكلي</div>
+              <div class="option-desc">قوالب تكسير CAD، علب صلبة ومطوية ومحاكاة 3D.</div>
+            </div>
+          </div>
+
+          <div class="option-card" data-value="تجهيز ما قبل الطباعة Prepress">
+            <div class="option-checkbox"></div>
+            <div class="option-info">
+              <div class="option-title">تجهيز ما قبل الطباعة (Prepress)</div>
+              <div class="option-desc">فرز CMYK، ضبط الهوامش والقص، ومطابقة PDF/X.</div>
+            </div>
+          </div>
+
+          <div class="option-card" data-value="صناديق ومجلدات عينات المهندسين">
+            <div class="option-checkbox"></div>
+            <div class="option-info">
+              <div class="option-title">صناديق عينات المهندسين (Swatch Box)</div>
+              <div class="option-desc">علب فوم لعرض عينات القطاعات للمقاولين والمعماريين.</div>
+            </div>
+          </div>
+
+          <div class="option-card" data-value="حملات إعلانية وبوسترات سوشيال">
+            <div class="option-checkbox"></div>
+            <div class="option-info">
+              <div class="option-title">حملات السوشيال والإعلانات</div>
+              <div class="option-desc">مفاتيح بصرية Key Visuals وبوسترات تسويقية متناسقة.</div>
+            </div>
+          </div>
+
+          <div class="option-card" data-value="مطبوعات ورقية وبروفايل شركات">
+            <div class="option-checkbox"></div>
+            <div class="option-info">
+              <div class="option-title">المطبوعات وبروفايل الشركات</div>
+              <div class="option-desc">كتالوجات، بروشورات، بطاقات تعريف، ولوحات إرشادية.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-actions">
+          <button type="button" class="btn btn-secondary" onclick="prevStep(1)">
+            <span>→ العودة للخطوة السابقة</span>
+          </button>
+          <button type="button" class="btn btn-primary" onclick="nextStep(3)">
+            <span>المتابعة للمواصفات والخامات</span>
+            <span>←</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: Technical Specs & Substrates -->
+    <div class="brief-step-content" id="step-3">
+      <div class="card">
+        <div class="section-title">
+          <span class="step-number">STEP 03</span>
+          <span>المواصفات الفنية وخامات الإنتاج والتشطيب</span>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>نوعية الخامات المفضلة للتنفيذ (حدد ما ينطبق):</label>
+            <div class="options-grid" id="materialsGrid">
+              <div class="option-card selected" data-value="كرتون صلب فاخر (Rigid Greyboard)">
+                <div class="option-checkbox">✓</div>
+                <div class="option-info">
+                  <div class="option-title">كرتون صلب فاخر (Rigid Box)</div>
+                  <div class="option-desc">سماكات من 1.5mm إلى 3mm للعلب الفخمة.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="كرتون مموج للشحن (Corrugated E-Flute)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">كرتون مموج للشحن والنقل</div>
+                  <div class="option-desc">حماية عالية وامتصاص صدمات (Flute B/E/F).</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="ورق كرافت عضوي معاد تدويره">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">ورق كرافت عضوي بيئي</div>
+                  <div class="option-desc">طابع طبيعي ترابي للمنتجات المستدامة.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="بلاستيك وأفلام عازلة (BOPP / PVC)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">خامات بوليستر وبلاستيك عازل</div>
+                  <div class="option-desc">ليبلات صناعية ومقاومة للرطوبة والحرارة.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group full">
+            <label>التشطيبات الخاصة واللمسات الفنية المطلوبة:</label>
+            <div class="options-grid" id="finishesGrid">
+              <div class="option-card selected" data-value="بصمة حرارية Hot Foil (ذهبي/فضي)">
+                <div class="option-checkbox">✓</div>
+                <div class="option-info">
+                  <div class="option-title">بصمة حرارية (Hot Foil)</div>
+                  <div class="option-desc">تذهيب أو فضي معدني عاكس للأناقة.</div>
+                </div>
+              </div>
+
+              <div class="option-card selected" data-value="ورنيش موضعي بارز Spot UV / 3D">
+                <div class="option-checkbox">✓</div>
+                <div class="option-info">
+                  <div class="option-title">ورنيش موضعي (Spot UV)</div>
+                  <div class="option-desc">طبقة لامعة بارزة فوق الشعارات والنصوص.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="كبس غائر أو بارز Emboss / Deboss">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">كبس بارز أو غائر (Emboss)</div>
+                  <div class="option-desc">ملمس حفري ثلاثي الأبعاد في الورق.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="قص ليزري وتكسير دقيق Laser Cutlines">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">قص ليزري ونوافذ تكسير</div>
+                  <div class="option-desc">فتحات هندسية مفرغة ونوافذ شفافة.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group full">
+            <label>أبعاد أو مقاسات أولية للمنتج / العلبة (إن وجدت)</label>
+            <input type="text" id="dimensions" placeholder="مثال: العلبة: الطول 28cm × العرض 18cm × الارتفاع 6cm، أو حجم قياسي A4...">
+          </div>
+        </div>
+
+        <div class="nav-actions">
+          <button type="button" class="btn btn-secondary" onclick="prevStep(2)">
+            <span>→ العودة للخدمات</span>
+          </button>
+          <button type="button" class="btn btn-primary" onclick="nextStep(4)">
+            <span>المتابعة لشخصية الهوية</span>
+            <span>←</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: Brand Strategy & Audience -->
+    <div class="brief-step-content" id="step-4">
+      <div class="card">
+        <div class="section-title">
+          <span class="step-number">STEP 04</span>
+          <span>شخصية العلامة التجارية والجمهور المستهدف</span>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>ما هو الانطباع والشخصية التي تريد أن يتركها التصميم؟</label>
+            <div class="options-grid" id="vibeGrid">
+              <div class="option-card selected" data-value="فاخر، ثري، ومتزن (Luxury & High-End)">
+                <div class="option-checkbox">✓</div>
+                <div class="option-info">
+                  <div class="option-title">فاخر وأنيق (Luxury)</div>
+                  <div class="option-desc">ألوان هادئة، تشطيبات ميتاليك، وفخامة راقية.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="هندسي، صناعي، ودقيق (Strict Industrial)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">صناعي وهندسي صارم</div>
+                  <div class="option-desc">خطوط معمارية صريحة ودقة تقنية للمهندسين.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="عضوي، طبيعي، ومريح (Pure Organic Botany)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">طبيعي وعضوي (Organic)</div>
+                  <div class="option-desc">نباتي، مريح للعين، وروح صديقة للبيئة.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="جريء، عصري، ومبتكر (Modern & Bold)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">عصري وجريء (Bold)</div>
+                  <div class="option-desc">ألوان عالية التباين وطاقة بصرية لافتة فوراً.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group full">
+            <label>من هو الجمهور والعميل المستهدف؟ <span class="req">*</span></label>
+            <input type="text" id="targetAudience" placeholder="مثال: كبار المقاولين والمكاتب الهندسية (B2B)، أو عملاء الشراء بالتجزئة (B2C)..." required>
+          </div>
+
+          <div class="form-group full">
+            <label>أبرز المنافسين أو نقاط التميز التي تود التركيز عليها</label>
+            <textarea id="competitors" placeholder="اكتب هنا أسماء علامات تجارية منافسة تعجبك أو أسلوب ترغب في التفوق عليه..."></textarea>
+          </div>
+        </div>
+
+        <div class="nav-actions">
+          <button type="button" class="btn btn-secondary" onclick="prevStep(3)">
+            <span>→ العودة للمواصفات</span>
+          </button>
+          <button type="button" class="btn btn-primary" onclick="nextStep(5)">
+            <span>المتابعة للمراجعة والإرسال</span>
+            <span>←</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5: Review & Send -->
+    <div class="brief-step-content" id="step-5">
+      <div class="card">
+        <div class="section-title">
+          <span class="step-number">STEP 05</span>
+          <span>المراجعة النهائية وإرسال البريف</span>
+        </div>
+
+        <p class="hint" style="margin-bottom: 20px;">
+          راجع ملخص بيانات البريف قبل إرساله؛ سيتم تجميع كل البيانات وتنسيقها في رسالة تقنية واضحة:
+        </p>
+
+        <div class="summary-box">
+          <div class="summary-row">
+            <span class="summary-label">اسم العميل:</span>
+            <span class="summary-value" id="sumClientName">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">الشركة والنشاط:</span>
+            <span class="summary-value" id="sumBrandName">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">الخدمات المحددة:</span>
+            <span class="summary-value" id="sumServices">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">الخامات والتشطيبات:</span>
+            <span class="summary-value" id="sumSpecs">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">الجمهور والشخصية:</span>
+            <span class="summary-value" id="sumVibe">-</span>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>الجدول الزمني المستهدف لتسليم المشروع</label>
+            <select id="timelineSelect">
+              <option value="عاجل جداً (خلال 7 إلى 10 أيام)">عاجل جداً (خلال 7 إلى 10 أيام عمل)</option>
+              <option value="متوسط وقياسي (خلال أسبوعين إلى 3 أسابيع)" selected>متوسط وقياسي (خلال أسبوعين إلى 3 أسابيع)</option>
+              <option value="مرن وفق مراحل التطوير الشاملة">مرن وممتد وفق مراحل التطوير الشاملة</option>
+            </select>
+          </div>
+
+          <div class="form-group full">
+            <label>ملاحظات إضافية أو روابط لملفات ومراجع (Google Drive / Dropbox)</label>
+            <textarea id="finalNotes" placeholder="أضف أي تفاصيل أخرى أو روابط لملفات الشعار الحالية، صور المنتجات، أو قياسات دقيقة..."></textarea>
+          </div>
+        </div>
+
+        <!-- Submission Actions -->
+        <div style="margin-top: 32px; display: flex; flex-direction: column; gap: 14px;">
+          <button type="button" class="btn btn-whatsapp" onclick="sendViaWhatsApp()">
+            <span>💬 إرسال البريف كاملاً إلى أحمد ماهر عبر واتساب</span>
+          </button>
+
+          <button type="button" class="btn btn-secondary" onclick="sendViaEmail()">
+            <span>✉️ أو إرسال نسخة عبر البريد الإلكتروني الرسمى</span>
+          </button>
+        </div>
+
+        <div class="nav-actions" style="margin-top: 24px;">
+          <button type="button" class="btn btn-secondary" onclick="prevStep(4)">
+            <span>→ تعديل الخطوة السابقة</span>
+          </button>
+          <div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let currentStep = 1;
+    const totalSteps = 5;
+
+    // Toggle multi-select cards
+    function setupGridCards(gridId) {
+      const grid = document.getElementById(gridId);
+      if (!grid) return;
+      grid.querySelectorAll('.option-card').forEach(card => {
+        card.addEventListener('click', () => {
+          card.classList.toggle('selected');
+          const check = card.querySelector('.option-checkbox');
+          if (check) {
+            check.innerText = card.classList.contains('selected') ? '✓' : '';
+          }
+        });
+      });
+    }
+
+    setupGridCards('servicesGrid');
+    setupGridCards('materialsGrid');
+    setupGridCards('finishesGrid');
+    setupGridCards('vibeGrid');
+
+    function getSelectedValues(gridId) {
+      const grid = document.getElementById(gridId);
+      if (!grid) return [];
+      const selected = [];
+      grid.querySelectorAll('.option-card.selected').forEach(c => {
+        selected.push(c.getAttribute('data-value'));
+      });
+      return selected;
+    }
+
+    function goToStep(step) {
+      if (step < 1 || step > totalSteps) return;
+
+      // Update contents
+      document.querySelectorAll('.brief-step-content').forEach(el => el.classList.remove('active'));
+      const activeContent = document.getElementById('step-' + step);
+      if (activeContent) activeContent.classList.add('active');
+
+      // Update progress tracker
+      document.querySelectorAll('.progress-step').forEach(el => {
+        const s = parseInt(el.getAttribute('data-step'));
+        el.classList.remove('active', 'completed');
+        if (s === step) {
+          el.classList.add('active');
+        } else if (s < step) {
+          el.classList.add('completed');
+        }
+      });
+
+      const fillPct = ((step - 1) / (totalSteps - 1)) * 100;
+      document.getElementById('progressFill').style.width = fillPct + '%';
+
+      currentStep = step;
+      window.scrollTo({ top: 180, behavior: 'smooth' });
+
+      if (step === 5) {
+        updateSummary();
+      }
+    }
+
+    function nextStep(target) {
+      // Basic validation for Step 1
+      if (currentStep === 1) {
+        const name = document.getElementById('clientName').value.trim();
+        const brand = document.getElementById('brandName').value.trim();
+        if (!name || !brand) {
+          alert('يرجى كتابة اسم المسؤول واسم العلامة التجارية للمتابعة.');
+          return;
+        }
+      }
+      goToStep(target);
+    }
+
+    function prevStep(target) {
+      goToStep(target);
+    }
+
+    function updateSummary() {
+      const name = document.getElementById('clientName').value || 'غير محدد';
+      const role = document.getElementById('clientRole').value || '';
+      const brand = document.getElementById('brandName').value || 'غير محدد';
+      const industry = document.getElementById('industry').value || '';
+      
+      const services = getSelectedValues('servicesGrid').join(' + ') || 'غير محدد';
+      const materials = getSelectedValues('materialsGrid').join('، ') || 'وفق التوصية الهندسية';
+      const finishes = getSelectedValues('finishesGrid').join('، ') || 'حسب التصميم';
+      const vibe = getSelectedValues('vibeGrid').join(' • ') || 'طابع احترافي متزن';
+
+      document.getElementById('sumClientName').innerText = `${name} ${role ? `(${role})` : ''}`;
+      document.getElementById('sumBrandName').innerText = `${brand} - [${industry}]`;
+      document.getElementById('sumServices').innerText = services;
+      document.getElementById('sumSpecs').innerText = `${materials} | تشطيبات: ${finishes}`;
+      document.getElementById('sumVibe').innerText = vibe;
+    }
+
+    function compileBriefText() {
+      const name = document.getElementById('clientName').value || 'غير محدد';
+      const role = document.getElementById('clientRole').value || '';
+      const brand = document.getElementById('brandName').value || 'غير محدد';
+      const industry = document.getElementById('industry').value || '';
+      const phone = document.getElementById('whatsappNumber').value || '';
+      const email = document.getElementById('emailAddress').value || '';
+      const location = document.getElementById('projectLocation').value || '';
+
+      const services = getSelectedValues('servicesGrid').join(' • ') || 'غير محدد';
+      const materials = getSelectedValues('materialsGrid').join(' • ') || 'غير محدد';
+      const finishes = getSelectedValues('finishesGrid').join(' • ') || 'غير محدد';
+      const dimensions = document.getElementById('dimensions').value || 'سيتم تحديدها لاحقاً';
+
+      const vibe = getSelectedValues('vibeGrid').join(' • ') || 'غير محدد';
+      const audience = document.getElementById('targetAudience').value || 'غير محدد';
+      const competitors = document.getElementById('competitors').value || 'لا يوجد';
+
+      const timeline = document.getElementById('timelineSelect').value || '';
+      const notes = document.getElementById('finalNotes').value || 'لا توجد ملاحظات إضافية';
+
+      return `📋 *استمارة البريف الإبداعي والمواصفات الفنية الكاملة*
+━━━━━━━━━━━━━━━━━━━━
+👤 *1. بيانات العميل والمشروع:*
+• الاسم: ${name} ${role ? `(${role})` : ''}
+• العلامة التجارية: ${brand}
+• النشاط: ${industry}
+• الهاتف: ${phone}
+• البريد: ${email || 'غير مدون'}
+• الموقع: ${location || 'مصر / السعودية'}
+
+🛠️ *2. نطاق الخدمات المطلوبة:*
+${services}
+
+📐 *3. المواصفات والخامات الهندسية:*
+• الخامات المقترحة: ${materials}
+• التشطيبات الخاصة: ${finishes}
+• الأبعاد والمقاسات: ${dimensions}
+
+🎯 *4. شخصية الهوية والجمهور:*
+• الطابع البصري: ${vibe}
+• الجمهور المستهدف: ${audience}
+• المنافسين/الملاحظات: ${competitors}
+
+⏳ *5. الجدولة الزمنية والملاحظات:*
+• التوقيت المطلوب: ${timeline}
+• روابط أو ملاحظات:
+${notes}
+━━━━━━━━━━━━━━━━━━━━
+بانتظار دراستك الفنية للتنفيذ ومناقشة الخطوة التالية.`;
+    }
+
+    function sendViaWhatsApp() {
+      const text = compileBriefText();
+      const encoded = encodeURIComponent(text);
+      window.open(`https://wa.me/201067017778?text=${encoded}`, '_blank');
+    }
+
+    function sendViaEmail() {
+      const brand = document.getElementById('brandName').value || 'مشروع جديد';
+      const subject = encodeURIComponent(`بريف مشروع كامل ومواصفات فنية - ${brand}`);
+      const text = compileBriefText();
+      const body = encodeURIComponent(text);
+      window.location.href = `mailto:alkutsh43@gmail.com?subject=${subject}&body=${body}`;
+    }
+  </script>
+</body>
+</html>
