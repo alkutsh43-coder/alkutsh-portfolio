@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { AlkutshHero } from './components/AlkutshHero';
 import { EditorialAbout } from './components/EditorialAbout';
 import { EditorialProjects } from './components/EditorialProjects';
-import { EditorialBio } from './components/EditorialBio';
 import { EditorialServices } from './components/EditorialServices';
 import { EditorialProcess } from './components/EditorialProcess';
 import { EditorialTestimonials } from './components/EditorialTestimonials';
@@ -77,10 +76,6 @@ export function App() {
           lang={lang}
         />
 
-        {/* 7. Statement & Production Experience Perspective */}
-        <EditorialBio 
-          lang={lang}
-        />
       </main>
 
       {/* 4. Colophon & Direct Contact */}
