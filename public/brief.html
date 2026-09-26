@@ -946,11 +946,11 @@
         <!-- Submission Actions -->
         <div style="margin-top: 32px; display: flex; flex-direction: column; gap: 14px;">
           <button type="button" class="btn btn-whatsapp" onclick="sendViaWhatsApp()">
-            <span>💬 إرسال البريف كاملاً إلى أحمد ماهر عبر واتساب</span>
+            <span>إرسال البريف كاملاً إلى أحمد ماهر عبر واتساب</span>
           </button>
 
           <button type="button" class="btn btn-secondary" onclick="sendViaEmail()">
-            <span>✉️ أو إرسال نسخة عبر البريد الإلكتروني الرسمى</span>
+            <span>أو إرسال نسخة عبر البريد الإلكتروني الرسمي</span>
           </button>
         </div>
 
@@ -1065,55 +1065,84 @@
     }
 
     function compileBriefText() {
-      const name = document.getElementById('clientName').value || 'غير محدد';
-      const role = document.getElementById('clientRole').value || '';
-      const brand = document.getElementById('brandName').value || 'غير محدد';
-      const industry = document.getElementById('industry').value || '';
-      const phone = document.getElementById('whatsappNumber').value || '';
-      const email = document.getElementById('emailAddress').value || '';
-      const location = document.getElementById('projectLocation').value || '';
+      const name = document.getElementById('clientName').value.trim() || 'غير محدد';
+      const role = document.getElementById('clientRole').value.trim();
+      const brand = document.getElementById('brandName').value.trim() || 'غير محدد';
+      const industry = document.getElementById('industry').value || 'غير محدد';
+      const phone = document.getElementById('whatsappNumber').value.trim() || 'غير مدون';
+      const email = document.getElementById('emailAddress').value.trim() || 'غير مدون';
+      const location = document.getElementById('projectLocation').value.trim() || 'غير مدون';
 
-      const services = getSelectedValues('servicesGrid').join(' • ') || 'غير محدد';
-      const materials = getSelectedValues('materialsGrid').join(' • ') || 'غير محدد';
-      const finishes = getSelectedValues('finishesGrid').join(' • ') || 'غير محدد';
-      const dimensions = document.getElementById('dimensions').value || 'سيتم تحديدها لاحقاً';
+      const servicesArr = getSelectedValues('servicesGrid');
+      const servicesText = servicesArr.length > 0
+        ? servicesArr.map(s => `- ${s}`).join('\n')
+        : '- لم يتم تحديد خدمات محددة';
 
-      const vibe = getSelectedValues('vibeGrid').join(' • ') || 'غير محدد';
-      const audience = document.getElementById('targetAudience').value || 'غير محدد';
-      const competitors = document.getElementById('competitors').value || 'لا يوجد';
+      const materialsArr = getSelectedValues('materialsGrid');
+      const materialsText = materialsArr.length > 0 ? materialsArr.join('، ') : 'وفق التوصية الهندسية';
 
-      const timeline = document.getElementById('timelineSelect').value || '';
-      const notes = document.getElementById('finalNotes').value || 'لا توجد ملاحظات إضافية';
+      const finishesArr = getSelectedValues('finishesGrid');
+      const finishesText = finishesArr.length > 0 ? finishesArr.join('، ') : 'حسب ما يناسب التصميم';
 
-      return `📋 *استمارة البريف الإبداعي والمواصفات الفنية الكاملة*
-━━━━━━━━━━━━━━━━━━━━
-👤 *1. بيانات العميل والمشروع:*
-• الاسم: ${name} ${role ? `(${role})` : ''}
-• العلامة التجارية: ${brand}
-• النشاط: ${industry}
-• الهاتف: ${phone}
-• البريد: ${email || 'غير مدون'}
-• الموقع: ${location || 'مصر / السعودية'}
+      const dimensions = document.getElementById('dimensions').value.trim() || 'سيتم التحديد والتنسيق لاحقاً';
 
-🛠️ *2. نطاق الخدمات المطلوبة:*
-${services}
+      const vibeArr = getSelectedValues('vibeGrid');
+      const vibeText = vibeArr.length > 0 ? vibeArr.join('، ') : 'متزن واحترافي';
 
-📐 *3. المواصفات والخامات الهندسية:*
-• الخامات المقترحة: ${materials}
-• التشطيبات الخاصة: ${finishes}
-• الأبعاد والمقاسات: ${dimensions}
+      const audience = document.getElementById('targetAudience').value.trim() || 'غير محدد';
+      const competitors = document.getElementById('competitors').value.trim() || 'لا يوجد';
 
-🎯 *4. شخصية الهوية والجمهور:*
-• الطابع البصري: ${vibe}
-• الجمهور المستهدف: ${audience}
-• المنافسين/الملاحظات: ${competitors}
+      const timeline = document.getElementById('timelineSelect').value || 'قياسي (أسبوعين إلى 3 أسابيع)';
+      const notes = document.getElementById('finalNotes').value.trim() || 'لا توجد ملاحظات إضافية';
 
-⏳ *5. الجدولة الزمنية والملاحظات:*
-• التوقيت المطلوب: ${timeline}
-• روابط أو ملاحظات:
+      const line = '----------------------------------------';
+
+      return `*استمارة بريف مشروع ومواصفات فنية*
+${line}
+
+*أولاً: بيانات العميل والمشروع*
+- اسم العميل: ${name}${role ? ` (${role})` : ''}
+- العلامة التجارية: ${brand}
+- مجال النشاط: ${industry}
+- رقم الواتساب: ${phone}
+- البريد الإلكتروني: ${email}
+- الدولة والمدينة: ${location}
+
+${line}
+
+*ثانياً: نطاق الخدمات والتطبيقات المطلوبة*
+${servicesText}
+
+${line}
+
+*ثالثاً: المواصفات الفنية وخامات الإنتاج*
+- خامات الكرتون والورق:
+  ${materialsText}
+- التشطيبات والمعالجات الفنية:
+  ${finishesText}
+- المقاسات والأبعاد الهندسية:
+  ${dimensions}
+
+${line}
+
+*رابعاً: التوجه الاستراتيجي وشخصية البراند*
+- الطابع والانطباع البصري:
+  ${vibeText}
+- الفئة والجمهور المستهدف:
+  ${audience}
+- مراجع وملاحظات المنافسين:
+  ${competitors}
+
+${line}
+
+*خامساً: الجدولة الزمنية والملاحظات الفنية*
+- موعد التسليم المستهدف:
+  ${timeline}
+- تفاصيل وملاحظات إضافية:
 ${notes}
-━━━━━━━━━━━━━━━━━━━━
-بانتظار دراستك الفنية للتنفيذ ومناقشة الخطوة التالية.`;
+
+${line}
+*تم إرسال هذا البريف عبر الموقع الرسمي - Alkutsh Designs*`;
     }
 
     function sendViaWhatsApp() {
@@ -1123,7 +1152,7 @@ ${notes}
     }
 
     function sendViaEmail() {
-      const brand = document.getElementById('brandName').value || 'مشروع جديد';
+      const brand = document.getElementById('brandName').value.trim() || 'مشروع جديد';
       const subject = encodeURIComponent(`بريف مشروع كامل ومواصفات فنية - ${brand}`);
       const text = compileBriefText();
       const body = encodeURIComponent(text);
