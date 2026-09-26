@@ -430,6 +430,120 @@
       line-height: 1.4;
     }
 
+    /* Sub-panels for detailed options in Step 2 */
+    .subpanel {
+      margin-top: 24px;
+      padding: 22px;
+      background: rgba(6, 19, 13, 0.85);
+      border: 1px solid rgba(130, 225, 107, 0.25);
+      border-radius: var(--radius-md);
+      display: none;
+      animation: fadeInSub 0.3s ease forwards;
+    }
+
+    .subpanel.active {
+      display: block;
+    }
+
+    @keyframes fadeInSub {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .subpanel-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      flex-wrap: wrap;
+    }
+
+    .subpanel-tag {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent);
+      background: rgba(130, 225, 107, 0.12);
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(130, 225, 107, 0.3);
+      letter-spacing: 0.5px;
+    }
+
+    .subpanel-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .subpanel-section {
+      margin-top: 20px;
+    }
+
+    .subpanel-section:first-of-type {
+      margin-top: 0;
+    }
+
+    .subpanel-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .sub-options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 12px;
+    }
+
+    .sub-options-grid .option-card {
+      padding: 13px;
+    }
+
+    .sub-options-grid .option-title {
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+
+    .sub-options-grid .option-desc {
+      font-size: 11px;
+    }
+
+    .dimensions-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .dim-input-group label {
+      font-size: 11.5px;
+      color: var(--text-dim);
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .dim-input-group input {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      color: #ffffff;
+      font-size: 13px;
+      outline: none;
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+
+    .dim-input-group input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(130, 225, 107, 0.15);
+    }
+
     /* Bottom Nav Buttons */
     .nav-actions {
       display: flex;
@@ -676,7 +790,7 @@
         <p class="hint" style="margin-bottom: 16px;">يمكنك تحديد أكثر من خدمة وفق نطاق احتياجاتك الفعلية:</p>
 
         <div class="options-grid" id="servicesGrid">
-          <div class="option-card selected" data-value="هوية بصرية وشعار متكامل">
+          <div class="option-card selected" data-value="هوية بصرية وشعار متكامل" data-service="brand">
             <div class="option-checkbox"></div>
             <div class="option-info">
               <div class="option-title">الهوية البصرية والشعارات</div>
@@ -684,7 +798,7 @@
             </div>
           </div>
 
-          <div class="option-card selected" data-value="تصميم علب وتغليف CAD">
+          <div class="option-card selected" data-value="تصميم علب وتغليف CAD" data-service="packaging">
             <div class="option-checkbox"></div>
             <div class="option-info">
               <div class="option-title">تصميم العلب والتغليف الهيكلي</div>
@@ -721,6 +835,226 @@
             <div class="option-info">
               <div class="option-title">المطبوعات وبروفايل الشركات</div>
               <div class="option-desc">كتالوجات، بروشورات، بطاقات تعريف، ولوحات إرشادية.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUBPANEL 1: Logo & Brand Identity Details -->
+        <div class="subpanel active" id="logoDetailsSubpanel">
+          <div class="subpanel-header">
+            <span class="subpanel-tag">تفاصيل الهوية والشعار</span>
+            <span class="subpanel-title">حدد نوع وأسلوب الشعار المفضل لمشروعك (اختر نمطاً أو أكثر):</span>
+          </div>
+
+          <div class="sub-options-grid" id="logoTypesGrid">
+            <div class="option-card selected" data-value="شعار خطي / تايبوجرافي مخصص (Wordmark)">
+              <div class="option-checkbox"></div>
+              <div class="option-info">
+                <div class="option-title">شعار خطي تايبوجرافي (Wordmark)</div>
+                <div class="option-desc">رسم وكتابة اسم البراند بخط عربي أو لاتيني حصري ومبتكر.</div>
+              </div>
+            </div>
+
+            <div class="option-card" data-value="شعار أيقوني ورمزي معبر (Pictorial Mark)">
+              <div class="option-checkbox"></div>
+              <div class="option-info">
+                <div class="option-title">شعار أيقوني رمزي (Pictorial)</div>
+                <div class="option-desc">أيقونة أو رمز بصري مباشر وواضح يعبر عن طبيعة النشاط.</div>
+              </div>
+            </div>
+
+            <div class="option-card selected" data-value="شعار تركيبي (أيقونة مميزة + اسم البراند)">
+              <div class="option-checkbox"></div>
+              <div class="option-info">
+                <div class="option-title">شعار تركيبي (Combination Mark)</div>
+                <div class="option-desc">دمج متوازن بين الرمز البصري والاسم لمرونة كاملة في الاستخدام.</div>
+              </div>
+            </div>
+
+            <div class="option-card" data-value="شعار تجريدي هندسي مبتكر (Abstract Mark)">
+              <div class="option-checkbox"></div>
+              <div class="option-info">
+                <div class="option-title">شعار تجريدي هندسي (Abstract)</div>
+                <div class="option-desc">تكوين هندسي فريد يحمل فلسفة ودلالة بصرية عميقة للمشروع.</div>
+              </div>
+            </div>
+
+            <div class="option-card" data-value="شعار مونوغرام / دمج الحروف الأولى (Monogram)">
+              <div class="option-checkbox"></div>
+              <div class="option-info">
+                <div class="option-title">شعار مونوغرام (Monogram)</div>
+                <div class="option-desc">دمج أنيق للحروف الأولى من الاسم بروح عصرية راقية.</div>
+              </div>
+            </div>
+
+            <div class="option-card" data-value="شعار شارة / درع كلاسيكي (Emblem / Badge)">
+              <div class="option-checkbox"></div>
+              <div class="option-info">
+                <div class="option-title">شعار شارة ودرع (Emblem)</div>
+                <div class="option-desc">تصميم الاسم والتفاصيل داخل إطار أو درع رسمي عريق.</div>
+              </div>
+            </div>
+
+            <div class="option-card" data-value="تطوير وتحديث شعار قائم (Logo Redesign)">
+              <div class="option-checkbox"></div>
+              <div class="option-info">
+                <div class="option-title">تطوير وتحديث شعار حالي (Redesign)</div>
+                <div class="option-desc">إعادة رسم وعصرنة الشعار القائم مع الحفاظ على بصمته وهيبته.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUBPANEL 2: Packaging & Stickers & Dimensions -->
+        <div class="subpanel active" id="packagingDetailsSubpanel">
+          <div class="subpanel-header">
+            <span class="subpanel-tag">تفاصيل العلب والتغليف الهندسي</span>
+            <span class="subpanel-title">المواصفات الفنية للعلب، الاستيكرات، والمقاسات:</span>
+          </div>
+
+          <!-- Section A: Box Types -->
+          <div class="subpanel-section">
+            <span class="subpanel-label">أ. نوع العلبة أو الهيكل الكرتوني المطلوب:</span>
+            <div class="sub-options-grid" id="boxTypesGrid">
+              <div class="option-card selected" data-value="علبة صلبة فاخرة غطاء وقاعدة (Rigid Lid & Base)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">علبة صلبة غطاء وقاعدة (Lid & Base)</div>
+                  <div class="option-desc">فخامة كلاسيكية للعطور، الهدايا، والمصنوعات الراقية.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="علبة صلبة درج وسحاب (Slide Drawer Box)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">علبة صلبة درج وسحاب (Drawer Box)</div>
+                  <div class="option-desc">سحب أفقي أنيق مع شريط قماشي أو مقبض مريح.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="علبة صلبة بغطاء مغناطيسي (Magnetic Book Box)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">علبة غطاء مغناطيسي (Magnetic Box)</div>
+                  <div class="option-desc">تفتح مثل الكتاب مع إغلاق مغناطيسي خفي محكم.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="علبة كرتون مطوية لسان وتكسير (Folding Tuck End)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">علبة كرتون مطوية (Folding Carton)</div>
+                  <div class="option-desc">علب اقتصادية سريعة للأدوية، التجميل، والسلع الاستهلاكية.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="صندوق شحن ونقل مضلع (Mailer Shipping Box)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">صندوق شحن مضلع (Mailer Box)</div>
+                  <div class="option-desc">قوي ومتين للشحن الإلكتروني وحماية البضائع.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="كيس أو باوتش تغليف مرن (Stand-up Pouch / Doypack)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">باوتش تغليف مرن (Stand-up Pouch)</div>
+                  <div class="option-desc">أكياس محكمة الغلق للقهوة، المكسرات، والمنتجات الغذائية.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="تصميم قالب سكاكين هندسي مخصص (Custom CAD Dieline)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">قالب تكسير هندسي مخصص (Custom CAD)</div>
+                  <div class="option-desc">رسم سكين بمقاسات وزوايا حصرية تلائم منتجك بدقة.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section B: Sticker Types -->
+          <div class="subpanel-section">
+            <span class="subpanel-label">ب. نوع الاستيكرات والملصقات المطلوبة:</span>
+            <div class="sub-options-grid" id="stickerTypesGrid">
+              <div class="option-card selected" data-value="استيكر رول أوتوماتيك لخطوط الإنتاج (Roll Label)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">استيكر رول لخطوط الإنتاج (Roll Label)</div>
+                  <div class="option-desc">رولات مخصصة لمكائن اللصق الأوتوماتيكية في المصانع.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="استيكر شيت مقصوص فردي ليزر / بلوتر (Sheet Die-Cut)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">استيكر شيت مقصوص فردي (Die-Cut)</div>
+                  <div class="option-desc">ملصقات مقصوصة بأشكال منتظمة أو حرة للصق اليدوي.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="استيكر سيلوفان شفاف عازل (Clear BOPP)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">استيكر شفاف عازل (Clear BOPP)</div>
+                  <div class="option-desc">خلفية شفافة تُظهر لون المنتج داخل العبوة الزجاجية.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="استيكر ميتاليك فويل معدني (Gold/Silver Foil)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">استيكر ميتاليك فويل (Metallic Foil)</div>
+                  <div class="option-desc">أرضية ذهبية أو فضية لماعة تعطي فخامة استثنائية.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="استيكر كرافت ورقي بيئي (Eco Kraft Sticker)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">استيكر كرافت ورقي طبيعي (Kraft)</div>
+                  <div class="option-desc">ملمس ترابي طبيعي للمنتجات العضوية والمستدامة.</div>
+                </div>
+              </div>
+
+              <div class="option-card" data-value="لا أحتاج استيكرات (الطباعة مباشرة على العلبة)">
+                <div class="option-checkbox"></div>
+                <div class="option-info">
+                  <div class="option-title">بدون استيكرات (طباعة مباشرة)</div>
+                  <div class="option-desc">الاعتماد على الطباعة المباشرة فوق خامة العلبة.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section C: Dimensions -->
+          <div class="subpanel-section">
+            <span class="subpanel-label">ج. مقاسات وأبعاد العلبة والاستيكر (إن كانت محددة لديك):</span>
+            <div class="dimensions-row">
+              <div class="dim-input-group">
+                <label>طول العلبة (Length)</label>
+                <input type="text" id="boxLength" placeholder="مثال: 25 cm أو 250 mm">
+              </div>
+              <div class="dim-input-group">
+                <label>عرض العلبة (Width)</label>
+                <input type="text" id="boxWidth" placeholder="مثال: 18 cm أو 180 mm">
+              </div>
+              <div class="dim-input-group">
+                <label>ارتفاع / عمق العلبة (Height)</label>
+                <input type="text" id="boxHeight" placeholder="مثال: 6 cm أو 60 mm">
+              </div>
+              <div class="dim-input-group">
+                <label>مقاس أو قطر الاستيكر</label>
+                <input type="text" id="stickerDims" placeholder="مثال: قطر 6cm أو 8x12cm">
+              </div>
+            </div>
+
+            <div style="margin-top: 12px; display: flex; align-items: center; gap: 8px;">
+              <input type="checkbox" id="needSizeHelp" style="accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer;">
+              <label for="needSizeHelp" style="font-size: 12.5px; color: var(--text-muted); cursor: pointer;">
+                لست متأكداً من المقاس بالضبط، وأحتاج مساعدة هندسية لتحديد أبعاد العلبة وفق حجم المنتج.
+              </label>
             </div>
           </div>
         </div>
@@ -991,11 +1325,25 @@
       grid.querySelectorAll('.option-card').forEach(card => {
         card.addEventListener('click', () => {
           card.classList.toggle('selected');
+
+          if (gridId === 'servicesGrid') {
+            const serviceKey = card.getAttribute('data-service');
+            if (serviceKey === 'brand') {
+              const sub = document.getElementById('logoDetailsSubpanel');
+              if (sub) sub.classList.toggle('active', card.classList.contains('selected'));
+            } else if (serviceKey === 'packaging') {
+              const sub = document.getElementById('packagingDetailsSubpanel');
+              if (sub) sub.classList.toggle('active', card.classList.contains('selected'));
+            }
+          }
         });
       });
     }
 
     setupGridCards('servicesGrid');
+    setupGridCards('logoTypesGrid');
+    setupGridCards('boxTypesGrid');
+    setupGridCards('stickerTypesGrid');
     setupGridCards('materialsGrid');
     setupGridCards('finishesGrid');
     setupGridCards('vibeGrid');
@@ -1058,19 +1406,38 @@
     }
 
     function updateSummary() {
-      const name = document.getElementById('clientName').value || 'غير محدد';
-      const role = document.getElementById('clientRole').value || '';
-      const brand = document.getElementById('brandName').value || 'غير محدد';
+      const name = document.getElementById('clientName').value.trim() || 'غير محدد';
+      const role = document.getElementById('clientRole').value.trim() || '';
+      const brand = document.getElementById('brandName').value.trim() || 'غير محدد';
       const industry = document.getElementById('industry').value || '';
       
-      const services = getSelectedValues('servicesGrid').join(' + ') || 'غير محدد';
+      const isBrand = document.querySelector('#servicesGrid .option-card[data-service="brand"]')?.classList.contains('selected');
+      const isPack = document.querySelector('#servicesGrid .option-card[data-service="packaging"]')?.classList.contains('selected');
+      
+      let servicesSummaryList = [];
+      if (isBrand) {
+        const logos = getSelectedValues('logoTypesGrid');
+        servicesSummaryList.push(`هوية بصرية (${logos.length} أنماط شعار مختارة)`);
+      }
+      if (isPack) {
+        const boxes = getSelectedValues('boxTypesGrid');
+        const stickers = getSelectedValues('stickerTypesGrid');
+        servicesSummaryList.push(`تغليف CAD (${boxes.length} علب، ${stickers.length} استيكرات)`);
+      }
+
+      getSelectedValues('servicesGrid').forEach(s => {
+        if (s !== 'هوية بصرية وشعار متكامل' && s !== 'تصميم علب وتغليف CAD') {
+          servicesSummaryList.push(s);
+        }
+      });
+
       const materials = getSelectedValues('materialsGrid').join('، ') || 'وفق التوصية الهندسية';
       const finishes = getSelectedValues('finishesGrid').join('، ') || 'حسب التصميم';
       const vibe = getSelectedValues('vibeGrid').join(' - ') || 'طابع احترافي متزن';
 
       document.getElementById('sumClientName').innerText = `${name} ${role ? `(${role})` : ''}`;
       document.getElementById('sumBrandName').innerText = `${brand} - [${industry}]`;
-      document.getElementById('sumServices').innerText = services;
+      document.getElementById('sumServices').innerText = servicesSummaryList.join(' + ') || 'غير محدد';
       document.getElementById('sumSpecs').innerText = `${materials} | تشطيبات: ${finishes}`;
       document.getElementById('sumVibe').innerText = vibe;
     }
@@ -1084,10 +1451,67 @@
       const email = document.getElementById('emailAddress').value.trim() || 'غير مدون';
       const location = document.getElementById('projectLocation').value.trim() || 'غير مدون';
 
-      const servicesArr = getSelectedValues('servicesGrid');
-      const servicesText = servicesArr.length > 0
-        ? servicesArr.map(s => `- ${s}`).join('\n')
-        : '- لم يتم تحديد خدمات محددة';
+      // Services & Sub-details
+      const isBrandSelected = document.querySelector('#servicesGrid .option-card[data-service="brand"]')?.classList.contains('selected');
+      const selectedLogoTypes = isBrandSelected ? getSelectedValues('logoTypesGrid') : [];
+
+      const isPackagingSelected = document.querySelector('#servicesGrid .option-card[data-service="packaging"]')?.classList.contains('selected');
+      const selectedBoxTypes = isPackagingSelected ? getSelectedValues('boxTypesGrid') : [];
+      const selectedStickerTypes = isPackagingSelected ? getSelectedValues('stickerTypesGrid') : [];
+
+      const boxL = document.getElementById('boxLength')?.value.trim() || '';
+      const boxW = document.getElementById('boxWidth')?.value.trim() || '';
+      const boxH = document.getElementById('boxHeight')?.value.trim() || '';
+      const stickerDims = document.getElementById('stickerDims')?.value.trim() || '';
+      const needSizeHelp = document.getElementById('needSizeHelp')?.checked;
+
+      let servicesFormatted = [];
+      const mainServices = getSelectedValues('servicesGrid');
+
+      if (mainServices.length === 0) {
+        servicesFormatted.push('- لم يتم تحديد خدمات محددة');
+      } else {
+        if (isBrandSelected) {
+          let brandText = '- هوية بصرية وشعارات متكاملة:';
+          if (selectedLogoTypes.length > 0) {
+            brandText += '\n  * أنواع الشعارات المفضلة:\n    - ' + selectedLogoTypes.join('\n    - ');
+          }
+          servicesFormatted.push(brandText);
+        }
+
+        if (isPackagingSelected) {
+          let packText = '- تصميم العلب والتغليف الهيكلي CAD:';
+          if (selectedBoxTypes.length > 0) {
+            packText += '\n  * نوع العلب المطلوبة:\n    - ' + selectedBoxTypes.join('\n    - ');
+          }
+          if (selectedStickerTypes.length > 0) {
+            packText += '\n  * نوع الاستيكرات والملصقات:\n    - ' + selectedStickerTypes.join('\n    - ');
+          }
+
+          let dimsList = [];
+          if (boxL || boxW || boxH) {
+            dimsList.push(`أبعاد العلبة: ${boxL || '-'} x ${boxW || '-'} x ${boxH || '-'}`);
+          }
+          if (stickerDims) {
+            dimsList.push(`مقاس الاستيكر: ${stickerDims}`);
+          }
+          if (needSizeHelp) {
+            dimsList.push('طلب مساعدة لتحديد المقاسات هندسياً بناءً على عينة المنتج');
+          }
+          if (dimsList.length > 0) {
+            packText += '\n  * المقاسات والأبعاد الهندسية:\n    ' + dimsList.join('\n    ');
+          }
+          servicesFormatted.push(packText);
+        }
+
+        mainServices.forEach(s => {
+          if (s !== 'هوية بصرية وشعار متكامل' && s !== 'تصميم علب وتغليف CAD') {
+            servicesFormatted.push(`- ${s}`);
+          }
+        });
+      }
+
+      const servicesText = servicesFormatted.join('\n\n');
 
       const materialsArr = getSelectedValues('materialsGrid');
       const materialsText = materialsArr.length > 0 ? materialsArr.join('، ') : 'وفق التوصية الهندسية';
@@ -1095,7 +1519,13 @@
       const finishesArr = getSelectedValues('finishesGrid');
       const finishesText = finishesArr.length > 0 ? finishesArr.join('، ') : 'حسب ما يناسب التصميم';
 
-      const dimensions = document.getElementById('dimensions').value.trim() || 'سيتم التحديد والتنسيق لاحقاً';
+      let dimensions = document.getElementById('dimensions').value.trim();
+      if (!dimensions) {
+        let boxDimParts = [];
+        if (boxL || boxW || boxH) boxDimParts.push(`العلبة: ${boxL || '-'} x ${boxW || '-'} x ${boxH || '-'}`);
+        if (stickerDims) boxDimParts.push(`الاستيكر: ${stickerDims}`);
+        dimensions = boxDimParts.length > 0 ? boxDimParts.join(' | ') : 'سيتم التحديد والتنسيق لاحقاً';
+      }
 
       const vibeArr = getSelectedValues('vibeGrid');
       const vibeText = vibeArr.length > 0 ? vibeArr.join('، ') : 'متزن واحترافي';
@@ -1121,7 +1551,7 @@ ${line}
 
 ${line}
 
-*ثانياً: نطاق الخدمات والتطبيقات المطلوبة*
+*ثانياً: نطاق الخدمات والتطبيقات المطلوبة (مفصلة)*
 ${servicesText}
 
 ${line}
