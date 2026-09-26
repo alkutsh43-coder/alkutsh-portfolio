@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Palette, Box, Printer, Megaphone, ArrowUpRight } from 'lucide-react';
+import { Palette, Box, Printer, Megaphone, ArrowUpRight, FileText, Sparkles, Layers, FileCheck, Scissors, Image as ImageIcon, Layout } from 'lucide-react';
+import { InteractiveFolder } from './InteractiveFolder';
 
 export const EditorialServices = ({ lang }) => {
   const isAr = lang === 'ar';
@@ -182,6 +183,146 @@ export const EditorialServices = ({ lang }) => {
               </div>
             );
           })}
+        </div>
+
+        {/* Interactive Deliverables Showcase (حقائب الأصول والتسليم الرقمية التفاعلية) */}
+        <div className="pt-10 sm:pt-14 border-t border-[#143224]/70">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
+            <div className="space-y-1">
+              <span 
+                className="text-xs font-mono font-bold text-[#82E16B] uppercase tracking-widest"
+                style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'monospace' }}
+              >
+                // {isAr ? 'حقائب تسليم الأصول الرقمية' : 'INTERACTIVE ASSET VAULTS'}
+              </span>
+              <h3 
+                className="text-xl sm:text-3xl font-black text-white"
+                style={{ fontFamily: isAr ? '"Zain Length 1", "Zain", sans-serif' : '"29LT Kaff", sans-serif' }}
+              >
+                {isAr ? 'اضغط على أي مجلد لاستكشاف مخرجات كل خدمة' : 'Click Any Folder to Inspect Deliverables'}
+              </h3>
+            </div>
+            <p 
+              className="text-xs sm:text-sm text-white/60 max-w-md font-normal leading-relaxed"
+              style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'sans-serif' }}
+            >
+              {isAr 
+                ? 'مجلدات تفاعلية تفتح عند النقر عليها وتتفاعل أوراقها الداخلية بفيزيائية عائمة مع حركة الماوس.'
+                : 'Click to open and hover to drift floating papers with responsive mouse parallax physics.'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 py-6 items-center justify-items-center">
+            
+            {/* Folder 1: BRANDING */}
+            <div className="flex flex-col items-center gap-3">
+              <InteractiveFolder 
+                size={1.15}
+                color="#82E16B"
+                label={isAr ? 'الهوية' : 'BRANDING'}
+                darkPapers={false}
+                items={[
+                  <div key="1" className="flex flex-col items-center justify-center gap-1 p-2 text-center text-slate-800">
+                    <Sparkles className="w-5 h-5 text-emerald-600" />
+                    <span className="text-[9px] font-bold tracking-tight">Logo Marks</span>
+                  </div>,
+                  <div key="2" className="flex flex-col items-center justify-center gap-1 p-2 text-center text-slate-800">
+                    <FileText className="w-5 h-5 text-indigo-600" />
+                    <span className="text-[9px] font-bold tracking-tight">Guidelines</span>
+                  </div>,
+                  <div key="3" className="flex flex-col items-center justify-center gap-1 p-2 text-center text-slate-800">
+                    <Palette className="w-5 h-5 text-emerald-700" />
+                    <span className="text-[9px] font-bold tracking-tight">Pantone Kit</span>
+                  </div>
+                ]}
+              />
+              <span className="text-xs font-semibold text-white/80 mt-2 select-none">
+                {isAr ? 'أصول الهوية البصرية' : 'Brand Identity'}
+              </span>
+            </div>
+
+            {/* Folder 2: PACKAGING */}
+            <div className="flex flex-col items-center gap-3">
+              <InteractiveFolder 
+                size={1.15}
+                color="#10B981"
+                label={isAr ? 'التغليف' : 'PACKAGING'}
+                darkPapers={false}
+                items={[
+                  <div key="1" className="flex flex-col items-center justify-center gap-1 p-2 text-center text-slate-800">
+                    <Box className="w-5 h-5 text-emerald-600" />
+                    <span className="text-[9px] font-bold tracking-tight">CAD Dielines</span>
+                  </div>,
+                  <div key="2" className="flex flex-col items-center justify-center gap-1 p-2 text-center text-slate-800">
+                    <Layers className="w-5 h-5 text-teal-600" />
+                    <span className="text-[9px] font-bold tracking-tight">3D Mockup</span>
+                  </div>,
+                  <div key="3" className="flex flex-col items-center justify-center gap-1 p-2 text-center text-slate-800">
+                    <Scissors className="w-5 h-5 text-emerald-700" />
+                    <span className="text-[9px] font-bold tracking-tight">Laser Cutlines</span>
+                  </div>
+                ]}
+              />
+              <span className="text-xs font-semibold text-white/80 mt-2 select-none">
+                {isAr ? 'نماذج وتكسير العلب' : 'Packaging & Boxes'}
+              </span>
+            </div>
+
+            {/* Folder 3: PREPRESS */}
+            <div className="flex flex-col items-center gap-3">
+              <InteractiveFolder 
+                size={1.15}
+                color="#00D1FF"
+                label={isAr ? 'الطباعة' : 'PREPRESS'}
+                darkPapers={false}
+                items={[
+                  <div key="1" className="flex flex-col items-center justify-center gap-1 p-2 text-center text-slate-800">
+                    <Printer className="w-5 h-5 text-cyan-600" />
+                    <span className="text-[9px] font-bold tracking-tight">CMYK Plates</span>
+                  </div>,
+                  <div key="2" className="flex flex-col items-center justify-center gap-1 p-2 text-center text-slate-800">
+                    <FileCheck className="w-5 h-5 text-sky-600" />
+                    <span className="text-[9px] font-bold tracking-tight">PDF/X-1a</span>
+                  </div>,
+                  <div key="3" className="flex flex-col items-center justify-center gap-1 p-2 text-center text-slate-800">
+                    <Layers className="w-5 h-5 text-cyan-700" />
+                    <span className="text-[9px] font-bold tracking-tight">Spot UV & Foil</span>
+                  </div>
+                ]}
+              />
+              <span className="text-xs font-semibold text-white/80 mt-2 select-none">
+                {isAr ? 'ملفات ما قبل الطباعة' : 'Prepress & Print'}
+              </span>
+            </div>
+
+            {/* Folder 4: CAMPAIGNS */}
+            <div className="flex flex-col items-center gap-3">
+              <InteractiveFolder 
+                size={1.15}
+                color="#FF3366"
+                label={isAr ? 'الحملات' : 'CAMPAIGNS'}
+                darkPapers={false}
+                items={[
+                  <div key="1" className="flex flex-col items-center justify-center gap-1 p-2 text-center text-slate-800">
+                    <ImageIcon className="w-5 h-5 text-pink-600" />
+                    <span className="text-[9px] font-bold tracking-tight">Key Visuals</span>
+                  </div>,
+                  <div key="2" className="flex flex-col items-center justify-center gap-1 p-2 text-center text-slate-800">
+                    <Layout className="w-5 h-5 text-rose-600" />
+                    <span className="text-[9px] font-bold tracking-tight">Social Grid</span>
+                  </div>,
+                  <div key="3" className="flex flex-col items-center justify-center gap-1 p-2 text-center text-slate-800">
+                    <Megaphone className="w-5 h-5 text-pink-700" />
+                    <span className="text-[9px] font-bold tracking-tight">Ad Banners</span>
+                  </div>
+                ]}
+              />
+              <span className="text-xs font-semibold text-white/80 mt-2 select-none">
+                {isAr ? 'إعلانات وحملات السوشيال' : 'Campaigns & Ads'}
+              </span>
+            </div>
+
+          </div>
         </div>
 
       </div>
