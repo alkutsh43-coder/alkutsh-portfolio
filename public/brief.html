@@ -692,54 +692,55 @@
           <div class="section-header">
             <div class="section-title-wrap">
               <span class="sec-number">01</span>
-              <h2 class="sec-title">بيانات العميل والعلامة التجارية</h2>
+              <h2 class="sec-title">أولاً: بيانات العميل</h2>
             </div>
           </div>
           <p class="sec-desc">أدخل المعلومات الأساسية للتواصل وتحديد هوية المنشأة أو المشروع:</p>
 
           <div class="form-grid">
             <div class="form-group">
-              <label>اسم المسؤول / صاحب المشروع <span class="req">*</span></label>
+              <label>اسم العميل <span class="req">*</span></label>
               <input type="text" id="clientName" placeholder="مثال: أ. عبد العزيز الشمري" required>
             </div>
 
             <div class="form-group">
-              <label>المسمى الوظيفي</label>
-              <input type="text" id="clientRole" placeholder="مثال: الرئيس التنفيذي / مدير التسويق">
-            </div>
-
-            <div class="form-group">
-              <label>اسم الشركة أو العلامة التجارية <span class="req">*</span></label>
+              <label>اسم الشركة / البراند <span class="req">*</span></label>
               <input type="text" id="brandName" placeholder="مثال: شركة نبتة / مصنع كيميت" required>
             </div>
 
             <div class="form-group">
-              <label>مجال النشاط التجاري والصناعة <span class="req">*</span></label>
-              <select id="industry">
-                <option value="صناعي وهندسي">صناعي، هندسي وتصنيع قطاعات</option>
-                <option value="أغذية ومشروبات وسلع FMCG" selected>أغذية ومشروبات وسلع استهلاكية (FMCG)</option>
-                <option value="تطوير عقاري ومقاولات">تطوير عقاري، استثمار ومقاولات</option>
-                <option value="عطور ومستحضرات تجميل">عطور، تجميل ومستحضرات راقية</option>
-                <option value="نباتات وزراعة ديكورية">نباتات داخلية، حدائق وزراعة</option>
-                <option value="أدوية وتغليف طبي">أدوية ومستلزمات طبية</option>
-                <option value="تقنية معلومات وسيرفرات">تقنية معلومات، شبكات ومتاجر</option>
-                <option value="نشاط تجاري / خدمي آخر">نشاط تجاري / خدمي آخر</option>
-              </select>
+              <label>مجال النشاط <span class="req">*</span></label>
+              <input type="text" id="industry" list="industriesList" placeholder="مثال: عطور، أغذية ومشروبات، مقاولات..." required>
+              <datalist id="industriesList">
+                <option value="أغذية ومشروبات وسلع FMCG">
+                <option value="عطور ومستحضرات تجميل فاخرة">
+                <option value="صناعي، هندسي وتصنيع قطاعات">
+                <option value="تطوير عقاري، استثمار ومقاولات">
+                <option value="نباتات داخلية، حدائق وزراعة">
+                <option value="أدوية ومستلزمات طبية">
+                <option value="تقنية معلومات ومتاجر إلكترونية">
+                <option value="نشاط تجاري / خدمي آخر">
+              </datalist>
             </div>
 
             <div class="form-group">
-              <label>رقم الواتساب للتواصل المباشر <span class="req">*</span></label>
+              <label>رقم الهاتف <span class="req">*</span></label>
               <input type="tel" id="whatsappNumber" placeholder="+20... أو +966..." dir="ltr" required>
             </div>
 
             <div class="form-group">
-              <label>البريد الإلكتروني الرسمي</label>
+              <label>البريد الإلكتروني</label>
               <input type="email" id="emailAddress" placeholder="contact@company.com" dir="ltr">
             </div>
 
+            <div class="form-group">
+              <label>الدولة / المدينة <span class="req">*</span></label>
+              <input type="text" id="projectLocation" placeholder="مثال: السعودية (الرياض) أو مصر (القاهرة)">
+            </div>
+
             <div class="form-group full">
-              <label>الموقع الجغرافي للمشروع أو المصنع</label>
-              <input type="text" id="projectLocation" placeholder="مثال: مصر (العاشر من رمضان) / السعودية (الرياض - جدة) / الإمارات">
+              <label>رابط الموقع أو صفحات التواصل الاجتماعي</label>
+              <input type="text" id="socialLinks" placeholder="مثال: https://instagram.com/... أو رابط الموقع الإلكتروني" dir="ltr">
             </div>
           </div>
         </section>
@@ -1314,15 +1315,18 @@
     // Live Summary Updater
     function updateLiveSummary() {
       const name = document.getElementById('clientName').value.trim();
-      const role = document.getElementById('clientRole').value.trim();
       const brand = document.getElementById('brandName').value.trim();
-      const industry = document.getElementById('industry').value;
+      const industry = document.getElementById('industry').value.trim();
+      const location = document.getElementById('projectLocation').value.trim();
 
       // 1. Client & Brand
-      let clientText = name ? name : 'اسم المسؤول لم يحدد';
-      if (role) clientText += ` (${role})`;
-      let brandText = brand ? brand : 'العلامة التجارية لم تحدد';
-      document.getElementById('sumClientBrand').innerText = `${brandText} - ${clientText} [${industry}]`;
+      let clientText = name ? name : 'اسم العميل لم يحدد';
+      let brandText = brand ? brand : 'الشركة / البراند لم يحدد';
+      let meta = [];
+      if (industry) meta.push(industry);
+      if (location) meta.push(location);
+      const metaStr = meta.length > 0 ? ` [${meta.join(' - ')}]` : '';
+      document.getElementById('sumClientBrand').innerText = `${brandText} - ${clientText}${metaStr}`;
 
       // 2. Services
       const isBrand = document.querySelector('#servicesGrid .option-card[data-service="brand"]')?.classList.contains('selected');
@@ -1394,12 +1398,12 @@
     // Compile clean, organized WhatsApp message with ZERO emojis or exotic symbols
     function compileBriefText() {
       const name = document.getElementById('clientName').value.trim() || 'غير محدد';
-      const role = document.getElementById('clientRole').value.trim();
       const brand = document.getElementById('brandName').value.trim() || 'غير محدد';
-      const industry = document.getElementById('industry').value || 'غير محدد';
+      const industry = document.getElementById('industry').value.trim() || 'غير محدد';
       const phone = document.getElementById('whatsappNumber').value.trim() || 'غير مدون';
       const email = document.getElementById('emailAddress').value.trim() || 'غير مدون';
       const location = document.getElementById('projectLocation').value.trim() || 'غير مدون';
+      const socialLinks = document.getElementById('socialLinks').value.trim() || 'لا يوجد';
 
       // Services & Details
       const isBrandSelected = document.querySelector('#servicesGrid .option-card[data-service="brand"]')?.classList.contains('selected');
@@ -1503,13 +1507,14 @@
       return `*استمارة بريف مشروع ومواصفات فنية*
 ${line}
 
-*أولاً: بيانات العميل والمشروع*
-- اسم العميل: ${name}${role ? ` (${role})` : ''}
-- العلامة التجارية: ${brand}
+*أولاً: بيانات العميل*
+- اسم العميل: ${name}
+- اسم الشركة / البراند: ${brand}
 - مجال النشاط: ${industry}
-- رقم الواتساب: ${phone}
+- رقم الهاتف: ${phone}
 - البريد الإلكتروني: ${email}
-- الدولة والمدينة: ${location}
+- الدولة / المدينة: ${location}
+- رابط الموقع أو صفحات التواصل الاجتماعي: ${socialLinks}
 
 ${line}
 
@@ -1553,7 +1558,7 @@ ${line}
       const name = document.getElementById('clientName').value.trim();
       const brand = document.getElementById('brandName').value.trim();
       if (!name || !brand) {
-        alert('يرجى ملء اسم المسؤول واسم العلامة التجارية في القسم الأول للمتابعة.');
+        alert('يرجى كتابة اسم العميل واسم الشركة / البراند للمتابعة.');
         document.getElementById('clientName').focus();
         return;
       }
