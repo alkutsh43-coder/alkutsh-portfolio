@@ -218,34 +218,30 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
 
   const ribbonContainerRef = useRef(null);
   const [centerShift, setCenterShift] = useState(0);
-  const [isCentering, setIsCentering] = useState(false);
-  const [centeredInstanceKey, setCenteredInstanceKey] = useState(null);
-  const glideTimerRef = useRef(null);
 
   // Client Logos Ribbon Pointer, Touch & Mouse Drag Physics
   const [isRibbonDragging, setIsRibbonDragging] = useState(false);
   const [ribbonDragOffset, setRibbonDragOffset] = useState(0);
-  const ribbonDragStartRef = useRef({ x: 0, y: 0, time: 0, isHorizontal: null });
+  const ribbonDragStartRef = useRef(null);
   const ribbonHasDraggedFarRef = useRef(false);
 
   const handleRibbonPointerDown = (e) => {
     if (e.button !== undefined && e.button !== 0) return;
-    try { e.currentTarget.setPointerCapture(e.pointerId); } catch (_) {}
+    // Record start position without capturing pointer immediately so child clicks work reliably
     ribbonDragStartRef.current = {
       x: e.clientX,
       y: e.clientY,
       time: Date.now(),
       isHorizontal: null,
+      pointerId: e.pointerId,
+      target: e.currentTarget,
     };
     ribbonHasDraggedFarRef.current = false;
-    setIsRibbonDragging(true);
     setRibbonDragOffset(0);
-    setIsCentering(true);
-    if (glideTimerRef.current) clearTimeout(glideTimerRef.current);
   };
 
   const handleRibbonPointerMove = (e) => {
-    if (!ribbonDragStartRef.current || !isRibbonDragging) return;
+    if (!ribbonDragStartRef.current) return;
     const dx = e.clientX - ribbonDragStartRef.current.x;
     const dy = e.clientY - ribbonDragStartRef.current.y;
 
@@ -258,87 +254,56 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
     if (ribbonDragStartRef.current.isHorizontal) {
       if (Math.abs(dx) > 8) {
         ribbonHasDraggedFarRef.current = true;
+        if (!isRibbonDragging) {
+          setIsRibbonDragging(true);
+          try {
+            ribbonDragStartRef.current.target?.setPointerCapture(ribbonDragStartRef.current.pointerId);
+          } catch (_) {}
+        }
+        setRibbonDragOffset(dx);
       }
-      setRibbonDragOffset(dx);
     }
   };
 
   const handleRibbonPointerUp = (e) => {
-    try { e.currentTarget.releasePointerCapture(e.pointerId); } catch (_) {}
-    setIsRibbonDragging(false);
-    const offset = ribbonDragOffset;
-    const dt = Date.now() - (ribbonDragStartRef.current?.time || Date.now());
-    setRibbonDragOffset(0);
-
-    if (ribbonHasDraggedFarRef.current) {
-      // Apply smooth inertia velocity fling
-      const velocity = dt > 0 ? offset / dt : 0;
-      let inertia = 0;
-      if (Math.abs(velocity) > 0.3) {
-        inertia = Math.max(Math.min(velocity * 160, 450), -450);
-      }
-      const totalShift = offset + inertia;
-      setCenterShift((prev) => prev + totalShift);
-      setCenteredInstanceKey(null);
-      setTimeout(() => {
-        ribbonHasDraggedFarRef.current = false;
-      }, 60);
+    if (isRibbonDragging) {
+      try {
+        ribbonDragStartRef.current?.target?.releasePointerCapture(e.pointerId);
+      } catch (_) {}
+      setIsRibbonDragging(false);
+      const offset = ribbonDragOffset;
+      setRibbonDragOffset(0);
+      setCenterShift((prev) => prev + offset);
     }
+    ribbonDragStartRef.current = null;
+    setTimeout(() => {
+      ribbonHasDraggedFarRef.current = false;
+    }, 80);
   };
 
   const handleRibbonWheel = (e) => {
     // Horizontal wheel / precision trackpad support
     const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
     if (Math.abs(delta) > 2) {
-      setIsCentering(true);
       setCenterShift((prev) => prev - delta);
     }
   };
 
-  const handleResumeMarquee = () => {
-    if (glideTimerRef.current) clearTimeout(glideTimerRef.current);
-    setCenteredInstanceKey(null);
-    setIsCentering(false);
-  };
-
-  const handleClientLogoClick = (e, clientId, instanceKey) => {
+  const handleClientLogoClick = (e, clientId) => {
     // Suppress click if the user was dragging the ribbon
     if (ribbonHasDraggedFarRef.current) return;
-    if (!e || !e.currentTarget || !ribbonContainerRef.current) return;
-
-    // Toggle: clicking the currently centered logo resumes marquee
-    if (centeredInstanceKey === instanceKey) {
-      handleResumeMarquee();
-      return;
+    if (e) {
+      try { e.preventDefault(); } catch (_) {}
     }
 
-    // 1. Immediately pause the continuous marquee at its exact current location
-    setIsCentering(true);
-
-    // 2. Clear any pending glide timer
-    if (glideTimerRef.current) clearTimeout(glideTimerRef.current);
-
-    // 3. Keep all logos at normal scale during transit so none grows off-center
-    setCenteredInstanceKey(null);
-
-    // 4. Calculate exact viewport delta to dead center of container
-    const rect = e.currentTarget.getBoundingClientRect();
-    const containerRect = ribbonContainerRef.current.getBoundingClientRect();
-
-    const elementCenter = rect.left + rect.width / 2;
-    const containerCenter = containerRect.left + containerRect.width / 2;
-    const diff = containerCenter - elementCenter;
-
-    // 5. Shift track smoothly to center the clicked logo
-    setCenterShift((prev) => prev + diff);
-
-    // 6. Update stage designs below
+    // 1. Immediately switch client designs below
     handleSelectClient(clientId);
 
-    // 7. Magnify ONLY when the logo arrives in the dead center
-    glideTimerRef.current = setTimeout(() => {
-      setCenteredInstanceKey(instanceKey);
-    }, 420);
+    // 2. Smoothly scroll into the focal stage so the user instantly sees the portfolio update
+    const stageEl = document.getElementById('portfolio-stage');
+    if (stageEl) {
+      stageEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
   };
 
   // Continuous Auto-Advance: Automatically swaps the Stage & Carousel every 5.5s
@@ -566,22 +531,23 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
             >
               {/* Infinite Gliding Track: Pure Logos to Infinity */}
               <div 
-                className={`client-marquee-track flex items-center ${(isCentering || isRibbonDragging) ? 'client-marquee-paused' : ''}`}
+                className={`client-marquee-track flex items-center ${isRibbonDragging ? 'client-marquee-paused' : ''}`}
                 style={{ direction: 'ltr' }}
               >
                 {infiniteClients.map((client, idx) => {
                   const instanceKey = `client-pure-logo-${client.id}-${idx}`;
-                  const isCentered = centeredInstanceKey === instanceKey;
+                  const isSelected = selectedClientId === client.id;
                   return (
                     <button
                       key={instanceKey}
-                      onClick={(e) => handleClientLogoClick(e, client.id, instanceKey)}
+                      type="button"
+                      onClick={(e) => handleClientLogoClick(e, client.id)}
                       draggable={false}
                       onDragStart={(e) => e.preventDefault()}
-                      className={`group/client relative flex-shrink-0 flex items-center justify-center select-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                        isCentered
-                          ? 'mx-4 sm:mx-12 z-30 scale-[1.28] sm:scale-[1.7] opacity-100 cursor-pointer'
-                          : 'mx-3 sm:mx-7 z-10 scale-[0.85] sm:scale-[0.92] opacity-45 hover:opacity-100 hover:scale-[1.05] cursor-pointer'
+                      className={`group/client relative flex-shrink-0 flex items-center justify-center select-none transition-all duration-300 ${
+                        isSelected
+                          ? 'mx-4 sm:mx-8 z-20 scale-[1.12] opacity-100 cursor-pointer'
+                          : 'mx-3 sm:mx-6 z-10 scale-[0.92] opacity-50 hover:opacity-100 hover:scale-105 cursor-pointer'
                       }`}
                       style={{
                         minWidth: isMobile ? '95px' : '130px',
@@ -594,18 +560,18 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
                         src={client.logoUrl}
                         alt={client.name[lang] || client.name.ar}
                         draggable={false}
-                        className={`h-11 sm:h-17 md:h-20 w-auto max-w-[150px] sm:max-w-[260px] object-contain transition-all duration-500 pointer-events-none select-none ${
-                          isCentered
-                            ? 'filter drop-shadow-[0_0_30px_rgba(130,225,107,0.95)] brightness-125'
-                            : 'filter drop-shadow-sm grayscale-[15%] hover:grayscale-0'
+                        className={`h-11 sm:h-17 md:h-20 w-auto max-w-[150px] sm:max-w-[260px] object-contain transition-all duration-300 pointer-events-none select-none ${
+                          isSelected
+                            ? 'filter drop-shadow-[0_0_24px_rgba(130,225,107,0.85)] brightness-115'
+                            : 'filter drop-shadow-sm grayscale-[20%] hover:grayscale-0'
                         }`}
                         loading="lazy"
                       />
 
                       {/* Active Glowing Emerald Accent below the selected logo */}
-                      {isCentered && (
-                        <span className="absolute -bottom-3 sm:-bottom-5 left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-none animate-fadeIn">
-                          <span className="w-10 sm:w-16 h-1 sm:h-1.5 bg-[#82E16B] rounded-full shadow-[0_0_16px_rgba(130,225,107,1)] animate-pulse"></span>
+                      {isSelected && (
+                        <span className="absolute -bottom-2.5 sm:-bottom-4 left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-none">
+                          <span className="w-8 sm:w-14 h-1 sm:h-1.5 bg-[#82E16B] rounded-full shadow-[0_0_14px_rgba(130,225,107,1)] animate-pulse"></span>
                         </span>
                       )}
                     </button>
@@ -616,19 +582,6 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
 
           </div>
 
-          {/* Resume stream pill when centered */}
-          {isCentering && (
-            <div className="flex justify-center -mt-1 mb-1">
-              <button
-                onClick={handleResumeMarquee}
-                className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0E2C1E]/90 border border-[#82E16B]/40 text-[#82E16B] hover:text-white hover:bg-[#82E16B]/20 text-xs font-bold transition-all shadow-md cursor-pointer"
-                style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'inherit' }}
-              >
-                <span>↻</span>
-                <span>{isAr ? 'استئناف حركة الشريط التلقائية' : 'Resume Auto Stream'}</span>
-              </button>
-            </div>
-          )}
         </div>
 
         {/* ======================================================== */}
@@ -647,6 +600,7 @@ export const EditorialProjects = ({ lang, onSelectProject }) => {
         {/* 3. TOP STAGE CONTAINER (Visual Left, Narrative & Buttons Right) */}
         {/* ======================================================== */}
         <div 
+          id="portfolio-stage"
           className="relative rounded-[24px] sm:rounded-[44px] bg-[#0A1D15]/85 border border-[#1A4031] shadow-2xl p-4 sm:p-10 lg:p-12 transition-all duration-500 overflow-hidden"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}

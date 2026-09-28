@@ -187,7 +187,6 @@
   will-change: transform;
 }
 
-.client-marquee-track:hover,
 .client-marquee-paused {
   animation-play-state: paused !important;
 }
