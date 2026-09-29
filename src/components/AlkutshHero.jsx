@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowDown, Globe, Menu, X, FileText, ArrowLeft } from 'lucide-react';
 import { AlkutshLogo } from './AlkutshLogo';
+import { GoogleAuthButton } from './GoogleAuthButton';
 
 export const AlkutshHero = ({ lang, setLang, scrollToSection, onOpenBrief }) => {
   const isAr = lang === 'ar';
@@ -112,6 +113,9 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection, onOpenBrief }) => 
             </button>
           </nav>
 
+          {/* Google Sign In Button */}
+          <GoogleAuthButton lang={lang} />
+
           {/* Language Pill Switcher: (🌐 EN) */}
           <button
             onClick={() => setLang(isAr ? 'en' : 'ar')}
@@ -187,6 +191,11 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection, onOpenBrief }) => 
               <span>{isAr ? 'التواصل' : 'Contact'}</span>
             </button>
           </nav>
+
+          {/* Mobile Google Sign In Button */}
+          <div className="pt-2 border-t border-[#143224]">
+            <GoogleAuthButton lang={lang} isMobile={true} />
+          </div>
         </div>
       )}
 
