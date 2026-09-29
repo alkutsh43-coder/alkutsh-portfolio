@@ -7,3 +7,8 @@
 //    - http://localhost:5173
 // 4. الصق المعرّف (Client ID) هنا:
 export const GOOGLE_CLIENT_ID = "";
+
+// رابط إرسال بيانات المسجلين إلى شيت إكسل / Google Sheet تلقائياً (Webhook URL):
+// عند تجهيز الـ Google Apps Script، الصق الرابط هنا ليتم تسجيل كل عميل في الشيت فوراً:
+export const GOOGLE_SHEET_WEBHOOK_URL = "";
+

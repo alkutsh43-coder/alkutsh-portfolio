@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { LogOut, User, Check, ChevronDown, X, Sparkles, ExternalLink } from 'lucide-react';
-import { GOOGLE_CLIENT_ID } from '../config/authConfig';
+import { LogOut, User, Check, ChevronDown, X, Sparkles, ExternalLink, Mail, Loader2, CheckCircle2, FileSpreadsheet } from 'lucide-react';
+import { GOOGLE_CLIENT_ID, GOOGLE_SHEET_WEBHOOK_URL } from '../config/authConfig';
 
 // Helper to decode JWT token from Google Identity Services
 const parseJwt = (token) => {
@@ -32,6 +32,10 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [nameInput, setNameInput] = useState('');
+  const [emailInput, setEmailInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [successMsg, setSuccessMsg] = useState('');
   const dropdownRef = useRef(null);
 
   // Close dropdown on outside click
@@ -44,6 +48,45 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // Sync client sign-in data with Google Analytics 4 and Google Sheet Webhook
+  const syncUserData = async (userData) => {
+    // 1. Google Analytics Event tracking (GA4 compliant)
+    if (typeof window !== 'undefined' && window.gtag) {
+      try {
+        window.gtag('event', 'login', {
+          method: 'Google',
+        });
+      } catch (e) {
+        console.warn('GA4 login event error:', e);
+      }
+    }
+
+    // 2. Google Sheet / Excel Webhook (Appends real lead info to your Google Sheet)
+    if (GOOGLE_SHEET_WEBHOOK_URL && GOOGLE_SHEET_WEBHOOK_URL.trim() !== '') {
+      try {
+        const payload = {
+          name: userData.name || (isAr ? 'عميل جديد' : 'New Client'),
+          email: userData.email || '',
+          signedAt: new Date().toLocaleString('ar-EG', { timeZone: 'Africa/Cairo' }),
+          device: /Mobi|Android|iPhone/i.test(navigator.userAgent) ? 'هاتف محمول (Mobile)' : 'كمبيوتر (Desktop)',
+          page: window.location.href,
+        };
+
+        await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+        console.log('✅ Client data sent to Google Sheet webhook');
+      } catch (err) {
+        console.warn('Google Sheet Webhook sync error:', err);
+      }
+    }
+  };
 
   // Initialize official Google Identity Services if client ID is configured
   useEffect(() => {
@@ -77,7 +120,7 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
     loadGoogleScript();
   }, []);
 
-  const handleCredentialResponse = (response) => {
+  const handleCredentialResponse = async (response) => {
     if (response?.credential) {
       const payload = parseJwt(response.credential);
       if (payload) {
@@ -91,6 +134,7 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
         try {
           localStorage.setItem('alkutsh_user', JSON.stringify(userData));
         } catch {}
+        await syncUserData(userData);
         setIsModalOpen(false);
       }
     }
@@ -105,7 +149,7 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
         console.warn('Google prompt fallback:', e);
       }
     }
-    // If Client ID is not configured or prompt fails, show the interactive sign-in modal
+    // If Client ID is not configured or prompt fails, show interactive sign-in modal
     setIsModalOpen(true);
   };
 
@@ -120,19 +164,39 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
     } catch {}
   };
 
-  // One-click interactive mock sign in for testing when Client ID is empty
-  const handleSimulatedGoogleSignIn = (customEmail = '', customName = '') => {
-    const mockUser = {
-      name: customName || (isAr ? 'عميل مميز' : 'Valued Client'),
-      email: customEmail || 'client@gmail.com',
-      picture: 'https://lh3.googleusercontent.com/a/default-user',
-      sub: 'mock-12345',
+  // Process sign in and send data to Google Sheet
+  const handleFormSignIn = async (e) => {
+    if (e) e.preventDefault();
+    setIsLoading(true);
+    setSuccessMsg('');
+
+    const finalName = nameInput.trim() || (isAr ? 'عميل مميز' : 'Valued Client');
+    const finalEmail = emailInput.trim() || 'client@gmail.com';
+
+    const newUser = {
+      name: finalName,
+      email: finalEmail,
+      picture: '',
+      sub: 'user-' + Date.now(),
     };
-    setUser(mockUser);
+
+    setUser(newUser);
     try {
-      localStorage.setItem('alkutsh_user', JSON.stringify(mockUser));
+      localStorage.setItem('alkutsh_user', JSON.stringify(newUser));
     } catch {}
-    setIsModalOpen(false);
+
+    // Send to Google Sheet & GA4
+    await syncUserData(newUser);
+
+    setSuccessMsg(isAr ? 'تم تسجيل الدخول وحفظ بياناتك بنجاح! 🎉' : 'Signed in & data saved successfully! 🎉');
+    setIsLoading(false);
+
+    setTimeout(() => {
+      setIsModalOpen(false);
+      setSuccessMsg('');
+      setNameInput('');
+      setEmailInput('');
+    }, 1200);
   };
 
   // Google SVG Icon (4 Colors)
@@ -243,7 +307,7 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
         </div>
       )}
 
-      {/* 3. Interactive Modal (For Google Sign-In Setup & Instant Login) */}
+      {/* 3. Interactive Modal (Google Sign-In & Direct Client Data Sync to Sheet) */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-fadeIn">
           <div 
@@ -253,7 +317,7 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
             {/* Close button */}
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 left-4 sm:top-5 sm:left-5 text-white/50 hover:text-white transition-colors cursor-pointer p-1 rounded-full bg-[#071610]"
+              className="absolute top-4 left-4 sm:top-5 sm:left-5 text-white/50 hover:text-white transition-colors cursor-pointer p-1.5 rounded-full bg-[#071610] border border-[#143224]"
             >
               <X className="w-5 h-5" />
             </button>
@@ -267,35 +331,102 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
                 className="text-xl sm:text-2xl font-black text-white"
                 style={{ fontFamily: isAr ? '"Zain Length 1", "Cairo", sans-serif' : 'inherit' }}
               >
-                {isAr ? 'تسجيل الدخول بحساب Google' : 'Sign in with Google'}
+                {isAr ? 'تسجيل الدخول والتواصل' : 'Sign in & Connect'}
               </h3>
               <p className="text-xs sm:text-sm text-white/70 leading-relaxed">
                 {isAr 
-                  ? 'سجّل دخولك لحفظ مشروعاتك، متابعة حالة طلبات التصميم، والتواصل المباشر مع استوديو الكوتش ديزاين.'
-                  : 'Sign in to save your design projects, track progress, and communicate directly with Alkutsh studio.'}
+                  ? 'سجّل دخولك لحفظ بياناتك، استلام نماذج التصميم، والتواصل المباشر مع استوديو الكوتش ديزاين.'
+                  : 'Sign in to save your design requests and connect directly with Alkutsh studio.'}
               </p>
             </div>
 
-            {/* Sign in Action Button */}
-            <div className="space-y-3 pt-2">
-              <button
-                onClick={() => handleSimulatedGoogleSignIn()}
-                className="w-full flex items-center justify-center gap-3 px-5 py-3.5 rounded-2xl bg-white hover:bg-gray-100 text-[#071610] font-extrabold text-sm sm:text-base transition-all shadow-lg hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-              >
-                <GoogleIcon className="w-5 h-5" />
-                <span>{isAr ? 'المتابعة بحساب Google' : 'Continue with Google'}</span>
-              </button>
-            </div>
+            {/* Feedback Message */}
+            {successMsg && (
+              <div className="p-3 bg-[#82E16B]/15 border border-[#82E16B]/50 rounded-xl flex items-center gap-2 text-xs sm:text-sm text-[#82E16B] font-bold animate-fadeIn">
+                <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
+                <span>{successMsg}</span>
+              </div>
+            )}
 
-            {/* Google Cloud Client ID Notice / Info */}
+            {/* Form for direct submission to Google Sheet */}
+            <form onSubmit={handleFormSignIn} className="space-y-3 pt-1">
+              <div>
+                <label className="block text-xs font-bold text-white/80 mb-1">
+                  {isAr ? 'الاسم الكامل أو اسم البراند:' : 'Full Name / Brand Name:'}
+                </label>
+                <div className="relative">
+                  <User className="w-4 h-4 text-white/40 absolute top-3.5 right-3 pointer-events-none" />
+                  <input
+                    type="text"
+                    value={nameInput}
+                    onChange={(e) => setNameInput(e.target.value)}
+                    placeholder={isAr ? 'مثال: محمد أحمد' : 'e.g. Mohamed Ahmed'}
+                    className="w-full bg-[#071610] border border-[#143224] focus:border-[#82E16B] rounded-xl px-9 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-white/80 mb-1">
+                  {isAr ? 'البريد الإلكتروني (Gmail):' : 'Email Address (Gmail):'}
+                </label>
+                <div className="relative">
+                  <Mail className="w-4 h-4 text-white/40 absolute top-3.5 right-3 pointer-events-none" />
+                  <input
+                    type="email"
+                    value={emailInput}
+                    onChange={(e) => setEmailInput(e.target.value)}
+                    placeholder={isAr ? 'مثال: client@gmail.com' : 'e.g. client@gmail.com'}
+                    className="w-full bg-[#071610] border border-[#143224] focus:border-[#82E16B] rounded-xl px-9 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none transition-colors"
+                  />
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full flex items-center justify-center gap-2.5 px-5 py-3 rounded-xl bg-white hover:bg-gray-100 text-[#071610] font-extrabold text-sm sm:text-base transition-all shadow-lg hover:scale-[1.02] active:scale-[0.98] cursor-pointer mt-2 disabled:opacity-50"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <span>{isAr ? 'جارٍ تسجيل البيانات...' : 'Saving...'}</span>
+                  </>
+                ) : (
+                  <>
+                    <GoogleIcon className="w-4 h-4" />
+                    <span>{isAr ? 'تسجيل الدخول وحفظ البيانات' : 'Sign in & Save Details'}</span>
+                  </>
+                )}
+              </button>
+
+              {/* Quick One-Click Demo Login */}
+              <button
+                type="button"
+                onClick={() => {
+                  setNameInput(isAr ? 'عميل زائر' : 'Guest Client');
+                  setEmailInput('guest@alkutsh.com');
+                  setTimeout(() => {
+                    handleFormSignIn();
+                  }, 50);
+                }}
+                className="w-full text-center text-xs text-[#82E16B] hover:text-[#9cf288] py-1 transition-colors cursor-pointer font-semibold underline underline-offset-4"
+              >
+                {isAr ? 'أو تجربة تسجيل سريع بضغطة واحدة (Guest)' : 'Or quick 1-click test login'}
+              </button>
+            </form>
+
+            {/* Google Sheet Sync Indicator Notice */}
             <div className="bg-[#071610] border border-[#143224] rounded-2xl p-3.5 space-y-1.5 text-start">
-              <span className="text-[11px] font-mono text-[#82E16B] font-bold block">
-                // {isAr ? 'ملاحظة المطورين (Google OAuth)' : 'Developer Notice'}
-              </span>
+              <div className="flex items-center gap-2 text-[11px] font-bold text-[#82E16B]">
+                <FileSpreadsheet className="w-3.5 h-3.5" />
+                <span>{isAr ? 'ربط تلقائي مع Google Sheets / Excel' : 'Auto-Sync with Google Sheets'}</span>
+              </div>
               <p className="text-[11px] text-white/60 leading-relaxed">
                 {isAr
-                  ? 'لتفعيل نافذة جوجل الرسمية المنبثقة مباشرة، يمكنك وضع المعرّف (Client ID) داخل ملف: src/config/authConfig.js'
-                  : 'To enable Google’s live production popup, paste your Client ID in src/config/authConfig.js'}
+                  ? 'يتم إرسال بيانات المسجلين (الاسم، البريد، الوقت، الجهاز) مباشرة إلى ملف Google Sheet الخاص بك فور تسجيل الدخول.'
+                  : 'Client credentials (Name, Email, Time, Device) are dispatched automatically to your Google Sheet webhook.'}
               </p>
             </div>
           </div>
@@ -304,3 +435,4 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
     </div>
   );
 };
+
