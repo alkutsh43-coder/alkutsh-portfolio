@@ -95,6 +95,14 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection, onOpenBrief }) => 
               {isAr ? 'الخدمات' : 'Services'}
             </button>
 
+            {/* مقالات */}
+            <a
+              href="./articles.html"
+              className="text-white/90 hover:text-[#82E16B] transition-colors py-1 cursor-pointer no-underline"
+            >
+              {isAr ? 'مقالات' : 'Articles'}
+            </a>
+
             {/* التواصل */}
             <button
               onClick={() => handleNavClick('contact')}
@@ -165,6 +173,13 @@ export const AlkutshHero = ({ lang, setLang, scrollToSection, onOpenBrief }) => 
             >
               <span>{isAr ? 'الخدمات' : 'Services'}</span>
             </button>
+            <a
+              href="./articles.html"
+              className="flex items-center justify-between text-base font-bold text-white/90 hover:text-[#82E16B] py-2 border-b border-[#143224] text-start transition-colors cursor-pointer no-underline"
+            >
+              <span>{isAr ? 'مقالات' : 'Articles'}</span>
+              <span className="text-[11px] text-[#82E16B] font-mono px-2 py-0.5 rounded bg-[#071610] border border-[#1A4031]">{isAr ? 'دليل المطبوعات' : 'Print Guide'}</span>
+            </a>
             <button
               onClick={() => handleNavClick('contact')}
               className="flex items-center justify-between text-base font-bold text-white/90 hover:text-[#82E16B] py-2 text-start transition-colors cursor-pointer"
