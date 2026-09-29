@@ -29,6 +29,21 @@
   </head>
   <body class="bg-[#071610] text-white font-sans selection:bg-[#4EBA6F] selection:text-[#071610] antialiased">
     <div id="root"></div>
+    <script>
+      if (window.location.hostname.includes('github.io')) {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.crossOrigin = 'anonymous';
+        link.href = '/alkutsh-portfolio/assets/index-CLf7gPMb.css';
+        document.head.appendChild(link);
+
+        var s = document.createElement('script');
+        s.type = 'module';
+        s.crossOrigin = 'anonymous';
+        s.src = '/alkutsh-portfolio/assets/index-0FK-Wuap.js';
+        document.head.appendChild(s);
+      }
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
