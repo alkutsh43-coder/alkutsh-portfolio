@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { LogOut, User, Check, ChevronDown, X, Sparkles, ExternalLink, Mail, Loader2, CheckCircle2, FileSpreadsheet } from 'lucide-react';
+import { LogOut, User, Check, ChevronDown, X, Sparkles, ExternalLink, KeyRound, CheckCircle2, FileSpreadsheet, AlertCircle } from 'lucide-react';
 import { GOOGLE_CLIENT_ID, GOOGLE_SHEET_WEBHOOK_URL } from '../config/authConfig';
 
 // Helper to decode JWT token from Google Identity Services
@@ -21,6 +21,8 @@ const parseJwt = (token) => {
 
 export const GoogleAuthButton = ({ lang, isMobile = false }) => {
   const isAr = lang === 'ar';
+
+  // Read saved user session
   const [user, setUser] = useState(() => {
     try {
       const saved = localStorage.getItem('alkutsh_user');
@@ -30,13 +32,19 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
     }
   });
 
+  // Client ID (from config or saved locally for instant live testing)
+  const [clientId, setClientId] = useState(() => {
+    return GOOGLE_CLIENT_ID || localStorage.getItem('alkutsh_google_client_id') || '';
+  });
+
+  const [inputClientId, setInputClientId] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [nameInput, setNameInput] = useState('');
-  const [emailInput, setEmailInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [successMsg, setSuccessMsg] = useState('');
+  const [isGisReady, setIsGisReady] = useState(false);
+  const [authError, setAuthError] = useState('');
+
   const dropdownRef = useRef(null);
+  const officialGoogleBtnRef = useRef(null);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -49,9 +57,9 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Sync client sign-in data with Google Analytics 4 and Google Sheet Webhook
+  // Sync real authenticated user data to Google Sheets & GA4
   const syncUserData = async (userData) => {
-    // 1. Google Analytics Event tracking (GA4 compliant)
+    // 1. Google Analytics Event tracking
     if (typeof window !== 'undefined' && window.gtag) {
       try {
         window.gtag('event', 'login', {
@@ -62,12 +70,13 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
       }
     }
 
-    // 2. Google Sheet / Excel Webhook (Appends real lead info to your Google Sheet)
+    // 2. Google Sheet / Excel Webhook
     if (GOOGLE_SHEET_WEBHOOK_URL && GOOGLE_SHEET_WEBHOOK_URL.trim() !== '') {
       try {
         const payload = {
-          name: userData.name || (isAr ? 'عميل جديد' : 'New Client'),
+          name: userData.name || '',
           email: userData.email || '',
+          picture: userData.picture || '',
           signedAt: new Date().toLocaleString('ar-EG', { timeZone: 'Africa/Cairo' }),
           device: /Mobi|Android|iPhone/i.test(navigator.userAgent) ? 'هاتف محمول (Mobile)' : 'كمبيوتر (Desktop)',
           page: window.location.href,
@@ -81,78 +90,100 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
           },
           body: JSON.stringify(payload),
         });
-        console.log('✅ Client data sent to Google Sheet webhook');
+        console.log('✅ Real client data dispatched to Google Sheet webhook');
       } catch (err) {
         console.warn('Google Sheet Webhook sync error:', err);
       }
     }
   };
 
-  // Initialize official Google Identity Services if client ID is configured
-  useEffect(() => {
-    if (!GOOGLE_CLIENT_ID) return;
-
-    const loadGoogleScript = () => {
-      if (window.google?.accounts?.id) {
-        initGIS();
-        return;
-      }
-      const script = document.createElement('script');
-      script.src = 'https://accounts.google.com/gsi/client';
-      script.async = true;
-      script.defer = true;
-      script.onload = initGIS;
-      document.body.appendChild(script);
-    };
-
-    const initGIS = () => {
-      try {
-        window.google.accounts.id.initialize({
-          client_id: GOOGLE_CLIENT_ID,
-          callback: handleCredentialResponse,
-          auto_select: false,
-        });
-      } catch (err) {
-        console.error('GIS init error:', err);
-      }
-    };
-
-    loadGoogleScript();
-  }, []);
-
+  // Google credential callback (receives real Google user data)
   const handleCredentialResponse = async (response) => {
     if (response?.credential) {
       const payload = parseJwt(response.credential);
       if (payload) {
-        const userData = {
-          name: payload.name || payload.given_name || 'User',
+        const realUserData = {
+          name: payload.name || payload.given_name || 'Google User',
           email: payload.email,
           picture: payload.picture,
           sub: payload.sub,
         };
-        setUser(userData);
+        setUser(realUserData);
         try {
-          localStorage.setItem('alkutsh_user', JSON.stringify(userData));
+          localStorage.setItem('alkutsh_user', JSON.stringify(realUserData));
         } catch {}
-        await syncUserData(userData);
+        await syncUserData(realUserData);
         setIsModalOpen(false);
       }
     }
   };
 
-  const handleSignInClick = () => {
-    if (GOOGLE_CLIENT_ID && window.google?.accounts?.id) {
+  // Initialize official Google Identity Services whenever clientId is available
+  useEffect(() => {
+    if (!clientId) {
+      setIsGisReady(false);
+      return;
+    }
+
+    const initGIS = () => {
+      if (!window.google?.accounts?.id) return;
       try {
+        window.google.accounts.id.initialize({
+          client_id: clientId,
+          callback: handleCredentialResponse,
+          auto_select: false,
+          cancel_on_tap_outside: true,
+        });
+
+        setIsGisReady(true);
+
+        // Mount the official Google button if container exists
+        if (officialGoogleBtnRef.current) {
+          officialGoogleBtnRef.current.innerHTML = '';
+          window.google.accounts.id.renderButton(officialGoogleBtnRef.current, {
+            theme: 'filled_blue',
+            size: 'large',
+            text: 'signin_with',
+            shape: 'pill',
+            width: 280,
+            logo_alignment: 'left',
+          });
+        }
+      } catch (err) {
+        console.error('GIS initialization error:', err);
+        setAuthError(err.message || 'Error initializing Google sign-in');
+      }
+    };
+
+    if (window.google?.accounts?.id) {
+      initGIS();
+    } else {
+      // Check every 200ms until script loads
+      const timer = setInterval(() => {
+        if (window.google?.accounts?.id) {
+          clearInterval(timer);
+          initGIS();
+        }
+      }, 200);
+      return () => clearInterval(timer);
+    }
+  }, [clientId, isModalOpen]);
+
+  // Handle click on top navbar sign in button
+  const handleSignInClick = () => {
+    if (clientId && window.google?.accounts?.id) {
+      try {
+        // Trigger Google One-Tap or open official sign in modal
         window.google.accounts.id.prompt();
-        return;
       } catch (e) {
-        console.warn('Google prompt fallback:', e);
+        console.warn('GIS prompt error:', e);
       }
     }
-    // If Client ID is not configured or prompt fails, show interactive sign-in modal
+    // Always open modal to ensure official Google button is directly clickable
     setIsModalOpen(true);
   };
 
+  // Logout
   const handleLogout = () => {
     setUser(null);
     setIsDropdownOpen(false);
@@ -164,42 +195,20 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
     } catch {}
   };
 
-  // Process sign in and send data to Google Sheet
-  const handleFormSignIn = async (e) => {
-    if (e) e.preventDefault();
-    setIsLoading(true);
-    setSuccessMsg('');
-
-    const finalName = nameInput.trim() || (isAr ? 'عميل مميز' : 'Valued Client');
-    const finalEmail = emailInput.trim() || 'client@gmail.com';
-
-    const newUser = {
-      name: finalName,
-      email: finalEmail,
-      picture: '',
-      sub: 'user-' + Date.now(),
-    };
-
-    setUser(newUser);
+  // Save manual Client ID if entered by user
+  const handleSaveClientId = (e) => {
+    e.preventDefault();
+    if (!inputClientId.trim()) return;
+    const cleanId = inputClientId.trim();
+    setClientId(cleanId);
     try {
-      localStorage.setItem('alkutsh_user', JSON.stringify(newUser));
+      localStorage.setItem('alkutsh_google_client_id', cleanId);
     } catch {}
-
-    // Send to Google Sheet & GA4
-    await syncUserData(newUser);
-
-    setSuccessMsg(isAr ? 'تم تسجيل الدخول وحفظ بياناتك بنجاح! 🎉' : 'Signed in & data saved successfully! 🎉');
-    setIsLoading(false);
-
-    setTimeout(() => {
-      setIsModalOpen(false);
-      setSuccessMsg('');
-      setNameInput('');
-      setEmailInput('');
-    }, 1200);
+    setInputClientId('');
+    setAuthError('');
   };
 
-  // Google SVG Icon (4 Colors)
+  // Google 4-Color SVG Icon
   const GoogleIcon = ({ className = "w-4 h-4" }) => (
     <svg className={className} viewBox="0 0 24 24">
       <path
@@ -231,7 +240,7 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
             isMobile ? 'w-full justify-center py-2.5' : ''
           }`}
           style={{ fontFamily: isAr ? '"Noto Sans Arabic", "Cairo", sans-serif' : 'sans-serif' }}
-          title={isAr ? 'تسجيل الدخول باستخدام Google' : 'Sign in with Google'}
+          title={isAr ? 'تسجيل الدخول الحقيقي بحساب Google' : 'Sign in with Google'}
         >
           <div className="w-4 h-4 rounded-full bg-white flex items-center justify-center p-0.5">
             <GoogleIcon className="w-3.5 h-3.5" />
@@ -239,7 +248,7 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
           <span>{isAr ? 'تسجيل الدخول بجوجل' : 'Sign in with Google'}</span>
         </button>
       ) : (
-        /* 2. When Logged in: User Avatar & Name Pill */
+        /* 2. When Logged in: User Real Profile & Name */
         <div className="relative">
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -252,6 +261,7 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
               <img
                 src={user.picture}
                 alt={user.name}
+                referrerPolicy="no-referrer"
                 className="w-5 h-5 rounded-full object-cover border border-[#82E16B]"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
@@ -278,9 +288,18 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
               <div className="space-y-3">
                 {/* Profile Header */}
                 <div className="flex items-center gap-3 border-b border-[#143224] pb-3">
-                  <div className="w-10 h-10 rounded-full bg-[#82E16B]/20 border border-[#82E16B] flex items-center justify-center text-[#82E16B] font-bold">
-                    {user.name?.charAt(0) || 'U'}
-                  </div>
+                  {user.picture ? (
+                    <img
+                      src={user.picture}
+                      alt={user.name}
+                      referrerPolicy="no-referrer"
+                      className="w-10 h-10 rounded-full object-cover border border-[#82E16B]"
+                    />
+                  ) : (
+                    <div className="w-10 h-10 rounded-full bg-[#82E16B]/20 border border-[#82E16B] flex items-center justify-center text-[#82E16B] font-bold">
+                      {user.name?.charAt(0) || 'U'}
+                    </div>
+                  )}
                   <div className="space-y-0.5 overflow-hidden">
                     <p className="text-sm font-bold text-white truncate">{user.name}</p>
                     <p className="text-xs text-white/60 truncate">{user.email}</p>
@@ -290,7 +309,7 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
                 {/* Status Badge */}
                 <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-[#0B1E16] border border-[#143224] text-[11px] text-[#82E16B] font-medium">
                   <GoogleIcon className="w-3 h-3 flex-shrink-0" />
-                  <span>{isAr ? 'حساب Google متصل' : 'Connected with Google'}</span>
+                  <span>{isAr ? 'حساب Google حقيقي متصل' : 'Verified Google Account'}</span>
                 </div>
 
                 {/* Logout Button */}
@@ -307,9 +326,9 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
         </div>
       )}
 
-      {/* 3. Interactive Modal (Google Sign-In & Direct Client Data Sync to Sheet) */}
+      {/* 3. Official Google Sign-In Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-fadeIn">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 animate-fadeIn">
           <div 
             className="w-full max-w-md bg-[#0B1E16] border border-[#1A4031] rounded-3xl p-6 sm:p-7 shadow-2xl relative space-y-5"
             dir={isAr ? 'rtl' : 'ltr'}
@@ -331,102 +350,85 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
                 className="text-xl sm:text-2xl font-black text-white"
                 style={{ fontFamily: isAr ? '"Zain Length 1", "Cairo", sans-serif' : 'inherit' }}
               >
-                {isAr ? 'تسجيل الدخول والتواصل' : 'Sign in & Connect'}
+                {isAr ? 'تسجيل الدخول الحقيقي بحساب Google' : 'Sign in with Google'}
               </h3>
               <p className="text-xs sm:text-sm text-white/70 leading-relaxed">
                 {isAr 
-                  ? 'سجّل دخولك لحفظ بياناتك، استلام نماذج التصميم، والتواصل المباشر مع استوديو الكوتش ديزاين.'
-                  : 'Sign in to save your design requests and connect directly with Alkutsh studio.'}
+                  ? 'اختر حسابك الرسمي في Google بضغطة زر واحدة بدون كتابة أي بيانات يدوياً.'
+                  : 'Select your verified Google account with a single click — no manual typing required.'}
               </p>
             </div>
 
-            {/* Feedback Message */}
-            {successMsg && (
-              <div className="p-3 bg-[#82E16B]/15 border border-[#82E16B]/50 rounded-xl flex items-center gap-2 text-xs sm:text-sm text-[#82E16B] font-bold animate-fadeIn">
-                <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
-                <span>{successMsg}</span>
+            {/* CASE 1: When Client ID is ACTIVE -> Show Official Google Rendered Button */}
+            {clientId ? (
+              <div className="space-y-4 py-3 flex flex-col items-center justify-center">
+                <div className="w-full flex justify-center py-2" ref={officialGoogleBtnRef}>
+                  {/* Official Google Button renders here */}
+                </div>
+
+                <div className="flex items-center gap-2 text-xs text-[#82E16B] bg-[#071610] border border-[#143224] px-3 py-2 rounded-xl">
+                  <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+                  <span>{isAr ? 'نافذة جوجل الرسمية جاهزة ومفعلة' : 'Official Google Sign-in Ready'}</span>
+                </div>
+              </div>
+            ) : (
+              /* CASE 2: When Client ID is NOT yet set -> Explain the requirement and allow 1-click paste */
+              <div className="space-y-4 pt-1">
+                <div className="bg-[#071610] border border-amber-500/30 rounded-2xl p-4 space-y-2.5 text-start">
+                  <div className="flex items-center gap-2 text-xs font-bold text-amber-400">
+                    <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                    <span>{isAr ? 'لتشغيل نافذة جوجل الحقيقية المنبثقة:' : 'To enable real Google popup:'}</span>
+                  </div>
+                  <p className="text-xs text-white/80 leading-relaxed">
+                    {isAr
+                      ? 'تفرض شركة Google شرطاً أمنياً إلزاميًا: أن يكون لدى الموقع معرّف رسمي مجاني (Google Client ID) حتى تفتح لك نافذة اختيار حساباتك بدون كتابة.'
+                      : 'Google strictly requires a registered free Google Client ID to open the official account chooser.'}
+                  </p>
+                  <a
+                    href="https://console.cloud.google.com/apis/credentials"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs text-[#82E16B] hover:text-[#9cf288] font-bold underline underline-offset-4"
+                  >
+                    <span>{isAr ? 'إنشاء المعرّف مجاناً في دقيقتين من Google Cloud' : 'Create free Client ID on Google Cloud'}</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+
+                {/* Instant paste & test field */}
+                <form onSubmit={handleSaveClientId} className="space-y-2">
+                  <label className="block text-xs font-bold text-white/80">
+                    {isAr ? 'إذا كان لديك المعرّف، الصقه هنا لتفعيله فوراً:' : 'Paste your Client ID here to activate:'}
+                  </label>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={inputClientId}
+                      onChange={(e) => setInputClientId(e.target.value)}
+                      placeholder="xxxxxxxx.apps.googleusercontent.com"
+                      className="flex-1 bg-[#071610] border border-[#143224] focus:border-[#82E16B] rounded-xl px-3 py-2 text-xs text-white placeholder-white/30 focus:outline-none"
+                    />
+                    <button
+                      type="submit"
+                      className="px-4 py-2 bg-[#82E16B] hover:bg-[#9cf288] text-[#071610] font-bold text-xs rounded-xl transition-all cursor-pointer whitespace-nowrap"
+                    >
+                      {isAr ? 'تفعيل الآن' : 'Activate'}
+                    </button>
+                  </div>
+                </form>
               </div>
             )}
 
-            {/* Form for direct submission to Google Sheet */}
-            <form onSubmit={handleFormSignIn} className="space-y-3 pt-1">
-              <div>
-                <label className="block text-xs font-bold text-white/80 mb-1">
-                  {isAr ? 'الاسم الكامل أو اسم البراند:' : 'Full Name / Brand Name:'}
-                </label>
-                <div className="relative">
-                  <User className="w-4 h-4 text-white/40 absolute top-3.5 right-3 pointer-events-none" />
-                  <input
-                    type="text"
-                    value={nameInput}
-                    onChange={(e) => setNameInput(e.target.value)}
-                    placeholder={isAr ? 'مثال: محمد أحمد' : 'e.g. Mohamed Ahmed'}
-                    className="w-full bg-[#071610] border border-[#143224] focus:border-[#82E16B] rounded-xl px-9 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none transition-colors"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-white/80 mb-1">
-                  {isAr ? 'البريد الإلكتروني (Gmail):' : 'Email Address (Gmail):'}
-                </label>
-                <div className="relative">
-                  <Mail className="w-4 h-4 text-white/40 absolute top-3.5 right-3 pointer-events-none" />
-                  <input
-                    type="email"
-                    value={emailInput}
-                    onChange={(e) => setEmailInput(e.target.value)}
-                    placeholder={isAr ? 'مثال: client@gmail.com' : 'e.g. client@gmail.com'}
-                    className="w-full bg-[#071610] border border-[#143224] focus:border-[#82E16B] rounded-xl px-9 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none transition-colors"
-                  />
-                </div>
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full flex items-center justify-center gap-2.5 px-5 py-3 rounded-xl bg-white hover:bg-gray-100 text-[#071610] font-extrabold text-sm sm:text-base transition-all shadow-lg hover:scale-[1.02] active:scale-[0.98] cursor-pointer mt-2 disabled:opacity-50"
-              >
-                {isLoading ? (
-                  <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>{isAr ? 'جارٍ تسجيل البيانات...' : 'Saving...'}</span>
-                  </>
-                ) : (
-                  <>
-                    <GoogleIcon className="w-4 h-4" />
-                    <span>{isAr ? 'تسجيل الدخول وحفظ البيانات' : 'Sign in & Save Details'}</span>
-                  </>
-                )}
-              </button>
-
-              {/* Quick One-Click Demo Login */}
-              <button
-                type="button"
-                onClick={() => {
-                  setNameInput(isAr ? 'عميل زائر' : 'Guest Client');
-                  setEmailInput('guest@alkutsh.com');
-                  setTimeout(() => {
-                    handleFormSignIn();
-                  }, 50);
-                }}
-                className="w-full text-center text-xs text-[#82E16B] hover:text-[#9cf288] py-1 transition-colors cursor-pointer font-semibold underline underline-offset-4"
-              >
-                {isAr ? 'أو تجربة تسجيل سريع بضغطة واحدة (Guest)' : 'Or quick 1-click test login'}
-              </button>
-            </form>
-
-            {/* Google Sheet Sync Indicator Notice */}
-            <div className="bg-[#071610] border border-[#143224] rounded-2xl p-3.5 space-y-1.5 text-start">
+            {/* Automatic Google Sheet Sync Note */}
+            <div className="bg-[#071610] border border-[#143224] rounded-2xl p-3.5 space-y-1 text-start">
               <div className="flex items-center gap-2 text-[11px] font-bold text-[#82E16B]">
                 <FileSpreadsheet className="w-3.5 h-3.5" />
-                <span>{isAr ? 'ربط تلقائي مع Google Sheets / Excel' : 'Auto-Sync with Google Sheets'}</span>
+                <span>{isAr ? 'ربط مباشر مع شيت الإكسل (Google Sheets)' : 'Direct Sync to Google Sheets'}</span>
               </div>
               <p className="text-[11px] text-white/60 leading-relaxed">
                 {isAr
-                  ? 'يتم إرسال بيانات المسجلين (الاسم، البريد، الوقت، الجهاز) مباشرة إلى ملف Google Sheet الخاص بك فور تسجيل الدخول.'
-                  : 'Client credentials (Name, Email, Time, Device) are dispatched automatically to your Google Sheet webhook.'}
+                  ? 'بمجرد اختيار العميل لحسابه الحقيقي في جوجل، يتم سحب اسمه وإيميله تلقائياً وتسجيلهما فوراً في شيت الإكسل الخاص بك.'
+                  : 'Once a client selects their Google account, their verified name and email are logged automatically to your Sheet.'}
               </p>
             </div>
           </div>
@@ -435,4 +437,3 @@ export const GoogleAuthButton = ({ lang, isMobile = false }) => {
     </div>
   );
 };
-
