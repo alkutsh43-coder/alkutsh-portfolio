@@ -5,8 +5,7 @@
 // 3. أضف روابط موقعك في Authorized JavaScript origins:
 //    - https://alkutsh43-coder.github.io
 //    - http://localhost:5173
-// 4. الصق المعرّف (Client ID) هنا:
-export const GOOGLE_CLIENT_ID = "";
+export const GOOGLE_CLIENT_ID = "659927754180-kv9m4gv994scm8jng8gjvnc3l3h2ca6p.apps.googleusercontent.com";
 
 // رابط إرسال بيانات المسجلين إلى شيت إكسل / Google Sheet تلقائياً (Webhook URL):
 // عند تجهيز الـ Google Apps Script، الصق الرابط هنا ليتم تسجيل كل عميل في الشيت فوراً:
