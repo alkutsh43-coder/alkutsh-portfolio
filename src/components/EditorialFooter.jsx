@@ -126,14 +126,43 @@ export const EditorialFooter = ({ lang }) => {
 
         </div>
 
-        {/* Bottom Bar with Clear Readable Font */}
-        <div className="pt-8 sm:pt-10 border-t border-[#1A4031] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-base text-white/80 text-center sm:text-start" style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'inherit' }}>
+        {/* Legal & Google OAuth Compliance Statement */}
+        <div className="pt-6 pb-2 border-t border-[#143224] text-xs text-white/60 leading-relaxed space-y-2" style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'inherit' }}>
+          <p>
+            {isAr 
+              ? 'استوديو Alkutsh Designs (أحمد ماهر): بورتفوليو مفتوح للعامة لخدمات تصميم الهويات البصرية، التغليف، وتجهيز المطبوعات التجارية. تسجيل الدخول عبر حساب Google اختياري ويهدف فقط لحفظ وتتبع طلبات التصميم وتسهيل التواصل المباشر مع العميل، مع الالتزام التام بعدم مشاركة أي بيانات مع أطراف ثالثة وفقاً لسياسة الخصوصية المعتمدة.'
+              : 'Alkutsh Designs Studio (Ahmed Maher): Public portfolio for brand identity, packaging, and print production. Signing in with Google is optional and solely used to track design requests and facilitate communication, with strict commitment to privacy and zero third-party data sharing.'}
+          </p>
+        </div>
+
+        {/* Bottom Bar with Links to Privacy Policy & Terms */}
+        <div className="pt-6 border-t border-[#1A4031] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-white/80 text-center sm:text-start" style={{ fontFamily: isAr ? '"Noto Sans Arabic", sans-serif' : 'inherit' }}>
           <div>
             © {new Date().getFullYear()} {name[lang] || name.ar} ({nickname[lang] || nickname.ar}). {isAr ? 'جميع الحقوق محفوظة' : 'All rights reserved.'}
           </div>
 
-          <div className="flex items-center gap-5 sm:gap-6">
-            <span className="font-semibold">{isAr ? 'مصر / العاشر من رمضان' : 'Egypt / 10th Of Ramadan'}</span>
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm font-semibold">
+            <a 
+              href="./privacy.html" 
+              className="text-white/70 hover:text-[#82E16B] transition-colors underline underline-offset-4"
+            >
+              {isAr ? 'سياسة الخصوصية (Privacy Policy)' : 'Privacy Policy'}
+            </a>
+            <span className="text-white/20">|</span>
+            <a 
+              href="./terms.html" 
+              className="text-white/70 hover:text-[#82E16B] transition-colors underline underline-offset-4"
+            >
+              {isAr ? 'شروط الخدمة (Terms of Service)' : 'Terms of Service'}
+            </a>
+            <span className="text-white/20">|</span>
+            <a 
+              href="./articles.html" 
+              className="text-white/70 hover:text-[#82E16B] transition-colors underline underline-offset-4"
+            >
+              {isAr ? 'المقالات' : 'Articles'}
+            </a>
+            <span className="text-white/20">|</span>
             <button
               onClick={scrollToTop}
               className="hover:text-[#82E16B] text-white transition-colors flex items-center gap-1.5 cursor-pointer font-bold"
