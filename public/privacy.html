@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سياسة الخصوصية وحماية البيانات | استوديو الكوتش ديزاين</title>
+  <meta name="description" content="سياسة الخصوصية الرسمية لاستوديو الكوتش ديزاين (المصمم أحمد ماهر) - التزامنا بحماية بياناتك وخصوصيتك عند استخدام الموقع وتسجيل الدخول بحساب Google.">
+  <link rel="icon" type="image/svg+xml" href="./assets/alkutsh_logo.svg">
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PJ7B102FP8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PJ7B102FP8');
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #071610;
+      --card-bg: #0B1E16;
+      --card-hover: #0f2b20;
+      --surface: #040e0a;
+      --accent: #82E16B;
+      --accent-hover: #9cf288;
+      --accent-glow: rgba(130, 225, 107, 0.22);
+      --accent-dim: rgba(130, 225, 107, 0.1);
+      --text-main: #FFFFFF;
+      --text-muted: #D8F3DC;
+      --text-body: #E2ECE5;
+      --text-dim: #74C69D;
+      --border-subtle: #143224;
+      --border-accent: rgba(130, 225, 107, 0.35);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Noto Sans Arabic', 'Cairo', sans-serif;
+      line-height: 1.85;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background-color: var(--accent);
+      color: #071610;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px 80px 20px;
+    }
+
+    /* Top Navigation Header */
+    .top-header {
+      padding: 24px 0 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 35px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-item {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      color: var(--accent);
+    }
+
+    .back-home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      transition: all 0.25s ease;
+    }
+
+    .back-home-btn:hover {
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent);
+      transform: translateX(3px);
+    }
+
+    /* Content Card */
+    .policy-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 640px) {
+      .policy-card {
+        padding: 24px;
+      }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: var(--accent-dim);
+      border: 1px solid var(--border-accent);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-family: 'Cairo', sans-serif;
+      font-size: 30px;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+
+    .last-updated {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-bottom: 30px;
+      display: block;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 16px;
+    }
+
+    .policy-section {
+      margin-bottom: 32px;
+    }
+
+    .policy-section h2 {
+      font-family: 'Cairo', sans-serif;
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .policy-section h2::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .policy-section p {
+      color: var(--text-body);
+      font-size: 15px;
+      margin-bottom: 14px;
+      line-height: 1.85;
+    }
+
+    .policy-section ul {
+      list-style: none;
+      margin: 12px 0 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .policy-section ul li {
+      position: relative;
+      padding-right: 22px;
+      color: var(--text-muted);
+      font-size: 14.5px;
+    }
+
+    .policy-section ul li::before {
+      content: "✔";
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    .contact-box {
+      background: #040e0a;
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      margin-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #071610;
+      padding: 10px 22px;
+      border-radius: var(--radius-full);
+      font-weight: 800;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .contact-btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--accent-glow);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      font-size: 13px;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Top Header -->
+    <header class="top-header">
+      <a href="./index.html" class="brand-link" title="الرئيسية - الكوتش ديزاين">
+        <img src="./assets/alkutsh_logo.svg" alt="Al Kutsh Designs" class="brand-logo" onerror="this.style.display='none'">
+        <span style="font-family: 'Cairo', sans-serif; font-weight: 800; font-size: 18px; color: var(--accent);">ALKUTSH DESIGNS</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="./index.html" class="nav-item">الرئيسية</a>
+        <a href="./articles.html" class="nav-item">المقالات</a>
+        <a href="./privacy.html" class="nav-item active">الخصوصية</a>
+        <a href="./terms.html" class="nav-item">شروط الخدمة</a>
+      </nav>
+
+      <a href="./index.html" class="back-home-btn">
+        <span>العودة للرئيسية</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </a>
+    </header>
+
+    <!-- Policy Content Card -->
+    <main class="policy-card">
+      <div class="badge">وثيقة حماية البيانات الرسمية</div>
+      <h1>سياسة الخصوصية وحماية بيانات المستخدمين</h1>
+      <span class="last-updated">آخر تحديث: 30 مارس 2026 | سارية ومطبقة في موقع استوديو الكوتش ديزاين</span>
+
+      <div class="policy-section">
+        <h2>1. مقدمة والتزام بالخصوصية</h2>
+        <p>
+          نحن في استوديو <strong>الكوتش ديزاين (Alkutsh Designs)</strong> للمصمم أحمد ماهر نولي خصوصية زوارنا وعملائنا أعلى درجات الاهتمام والاحترام. توضح هذه الوثيقة بوضوح وشفافية كيفية جمع واستخدام وتأمين وحماية البيانات الشخصية التي تشاركها معنا عند تصفح الموقع أو تسجيل الدخول باستخدام حساب Google.
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2>2. البيانات التي نقوم بجمعها</h2>
+        <p>نحرص على جمع الحد الأدنى الضروري من البيانات فقط لتقديم تجربة تصفح مميزة وتسهيل متابعة طلبات التصميم:</p>
+        <ul>
+          <li><strong>بيانات تسجيل الدخول عبر Google:</strong> الاسم الكامل، عنوان البريد الإلكتروني (Gmail)، وصورة الملف الشخصي المعرف عبر Google Identity Services. لا نصل مطلقاً إلى كلمات مرورك أو أي بيانات خاصة أخرى.</li>
+          <li><strong>بيانات طلبات التصميم:</strong> التفاصيل والملفات والمتطلبات التي تزودنا بها طواعية عبر استمارة طلب التصميم (البريف) أو عبر المحادثة المباشرة.</li>
+          <li><strong>بيانات التصفح التقنية العامة:</strong> نوع الجهاز، المتصفح، الصفحات التي قمت بزيارتها، وذلك عبر خدمة Google Analytics الرسمية دون ربطها بهويتك الشخصية.</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h2>3. الغرض من استخدام البيانات</h2>
+        <p>نستخدم البيانات التي نجمعها حصرياً للأغراض التالية:</p>
+        <ul>
+          <li>التعرف على العميل وتوفير تجربة مخصصة عند تسجيل الدخول في الموقع.</li>
+          <li>التواصل معك بخصوص مشروعاتك وطلبات التصميم والطباعة وتقديم الاستشارات.</li>
+          <li>حفظ وإرسال ملخص طلباتك ومتابعة مراحل العمل مع استوديو الكوتش ديزاين.</li>
+          <li>تحسين أداء وسرعة الموقع وتقديم تجربة استخدام سلسة وسريعة.</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h2>4. أمان البيانات وعدم مشاركتها مع أطراف ثالثة</h2>
+        <p>
+          نحن ملتزمون بعدم بيع أو تأجير أو مشاركة أو المتاجرة ببياناتك الشخصية مع أي طرف ثالث لأغراض إعلانية أو تجارية تحت أي ظرف.
+          تُنقل جميع البيانات عبر اتصالات مشفرة باستخدام بروتوكول الأمان القياسي <strong>HTTPS / SSL</strong>، وتُحفظ وفق أفضل الممارسات المعتمدة لحماية البيانات.
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2>5. خدمات الأطراف الثالثة الموثوقة</h2>
+        <p>يستخدم الموقع تقنيات موثوقة تابعة لشركة Google:</p>
+        <ul>
+          <li><strong>Google Identity Services:</strong> لتوفير تسجيل دخول موثوق وآمن بضغطة زر واحدة.</li>
+          <li><strong>Google Analytics 4:</strong> لقياس أداء الموقع وإحصائيات الزيارات العامة بصورة مجهولة الهوية.</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h2>6. حقوق المستخدم</h2>
+        <p>
+          يحق لك في أي وقت تسجيل الخروج، أو طلب الاطلاع على البيانات المحفوظة الخاصة بك، أو طلب حذف بيانات حسابك بالكامل من سجلاتنا فوراً ودون أي تعقيدات، بمجرد مراسلتنا.
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2>7. التواصل والاستفسارات</h2>
+        <p>
+          إذا كان لديك أي سؤال أو استفسار حول سياسة الخصوصية وحماية بياناتك، يمكنك التواصل معنا مباشرة:
+        </p>
+        <div class="contact-box">
+          <div>
+            <p style="font-weight: 700; color: #FFFFFF; margin-bottom: 4px;">استوديو الكوتش ديزاين — أحمد ماهر</p>
+            <p style="font-size: 13px; color: var(--text-dim); margin-bottom: 0;">البريد: am7349858@gmail.com | هاتف / واتساب متاح 24/7</p>
+          </div>
+          <a href="./index.html#contact" class="contact-btn">
+            <span>تواصل معنا الآن</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2026 جميع الحقوق محفوظة — استوديو الكوتش ديزاين (Alkutsh Designs).</p>
+    </footer>
+  </div>
+
+</body>
+</html>

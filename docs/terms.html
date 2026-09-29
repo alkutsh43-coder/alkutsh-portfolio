@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>شروط الاستخدام والخدمة | استوديو الكوتش ديزاين</title>
+  <meta name="description" content="شروط وأحكام استخدام موقع استوديو الكوتش ديزاين (المصمم أحمد ماهر) لخدمات التصميم الجرافيكي، الهويات البصرية، والتجهيز للطباعة.">
+  <link rel="icon" type="image/svg+xml" href="./assets/alkutsh_logo.svg">
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PJ7B102FP8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PJ7B102FP8');
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #071610;
+      --card-bg: #0B1E16;
+      --surface: #040e0a;
+      --accent: #82E16B;
+      --accent-hover: #9cf288;
+      --accent-glow: rgba(130, 225, 107, 0.22);
+      --accent-dim: rgba(130, 225, 107, 0.1);
+      --text-main: #FFFFFF;
+      --text-muted: #D8F3DC;
+      --text-body: #E2ECE5;
+      --text-dim: #74C69D;
+      --border-subtle: #143224;
+      --border-accent: rgba(130, 225, 107, 0.35);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Noto Sans Arabic', 'Cairo', sans-serif;
+      line-height: 1.85;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px 80px 20px;
+    }
+
+    .top-header {
+      padding: 24px 0 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 35px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-item {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      color: var(--accent);
+    }
+
+    .back-home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      transition: all 0.25s ease;
+    }
+
+    .back-home-btn:hover {
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent);
+      transform: translateX(3px);
+    }
+
+    .policy-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 640px) {
+      .policy-card {
+        padding: 24px;
+      }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: var(--accent-dim);
+      border: 1px solid var(--border-accent);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-family: 'Cairo', sans-serif;
+      font-size: 30px;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+
+    .last-updated {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-bottom: 30px;
+      display: block;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 16px;
+    }
+
+    .policy-section {
+      margin-bottom: 32px;
+    }
+
+    .policy-section h2 {
+      font-family: 'Cairo', sans-serif;
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .policy-section h2::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .policy-section p {
+      color: var(--text-body);
+      font-size: 15px;
+      margin-bottom: 14px;
+      line-height: 1.85;
+    }
+
+    .policy-section ul {
+      list-style: none;
+      margin: 12px 0 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .policy-section ul li {
+      position: relative;
+      padding-right: 22px;
+      color: var(--text-muted);
+      font-size: 14.5px;
+    }
+
+    .policy-section ul li::before {
+      content: "✔";
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      font-size: 13px;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header class="top-header">
+      <a href="./index.html" class="brand-link" title="الرئيسية - الكوتش ديزاين">
+        <img src="./assets/alkutsh_logo.svg" alt="Al Kutsh Designs" class="brand-logo" onerror="this.style.display='none'">
+        <span style="font-family: 'Cairo', sans-serif; font-weight: 800; font-size: 18px; color: var(--accent);">ALKUTSH DESIGNS</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="./index.html" class="nav-item">الرئيسية</a>
+        <a href="./articles.html" class="nav-item">المقالات</a>
+        <a href="./privacy.html" class="nav-item">الخصوصية</a>
+        <a href="./terms.html" class="nav-item active">شروط الخدمة</a>
+      </nav>
+
+      <a href="./index.html" class="back-home-btn">
+        <span>العودة للرئيسية</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </a>
+    </header>
+
+    <main class="policy-card">
+      <div class="badge">وثيقة شروط وأحكام الاستخدام</div>
+      <h1>شروط الخدمة والاستخدام (Terms of Service)</h1>
+      <span class="last-updated">آخر تحديث: 30 مارس 2026 | استوديو الكوتش ديزاين</span>
+
+      <div class="policy-section">
+        <h2>1. شروط الاستخدام العامة</h2>
+        <p>
+          مرحباً بكم في موقع <strong>استوديو الكوتش ديزاين</strong>. إن استخدامك لهذا الموقع أو تسجيل دخولك بحساب Google يعني موافقتك الكاملة على هذه الشروط والأحكام.
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2>2. خدمات التصميم الجرافيكي والمطبوعات</h2>
+        <p>يقدم الاستوديو خدمات التصميم المتخصصة بما في ذلك:</p>
+        <ul>
+          <li>تصميم الهويات البصرية الكاملة والشعارات الاحترافية.</li>
+          <li>تصميم المطبوعات التجارية (كروت، فلاير، بروشور، بوسترات، بروفايلات شركات).</li>
+          <li>تصميم عبوات المنتجات والتغليف (Packaging) وتجهيز ملفات ما قبل الطباعة (Prepress).</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h2>3. الملكية الفكرية وحقوق التصاميم</h2>
+        <p>
+          جميع الأعمال والتصاميم المعتمدة التي تُسلّم للعميل بعد سداد مستحقاتها تصبح ملكاً له لاستخدامها التجاري والتسويقي، ويحتفظ الاستوديو بحق عرض النماذج والأعمال المنفذة في معرض أعماله (البورتفوليو) كجزء من سجل إنجازاته المهنية ما لم يتم الاتفاق كتابياً على غير ذلك.
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2>4. حسابات المستخدمين وتسجيل الدخول</h2>
+        <p>
+          يتم تسجيل الدخول عبر واجهة Google الموثوقة لتسهيل حفظ ومتابعة طلباتك. يلتزم المستخدم بتقديم بيانات اتصال صحيحة عند طلب عروض الأسعار أو الاستشارات الفنية.
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2>5. التواصل والدعم</h2>
+        <p>
+          لأي استفسارات حول شروط الخدمة أو طلبات التصميم، يرجى التواصل عبر البريد الرسمي <strong>am7349858@gmail.com</strong> أو عبر صفحة التواصل بالموقع.
+        </p>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2026 جميع الحقوق محفوظة — استوديو الكوتش ديزاين (Alkutsh Designs).</p>
+    </footer>
+  </div>
+
+</body>
+</html>
